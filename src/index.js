@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/react-grid-layout/css/styles.css'
+import '../node_modules/react-resizable/css/styles.css'
 
 ReactDOM.render(
   <React.StrictMode>
