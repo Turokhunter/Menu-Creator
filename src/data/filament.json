@@ -1,0 +1,175 @@
+{
+  "filament" :[
+    {
+      "id":"atm-neongreen",
+      "color":"#53F04D",
+      "name":"Atomic Trans Neon Green",
+      "tier":"Standard",
+      "src": "atomic-transneongreen.jpg",
+      "zoom": "atomic-transneongreen-zoom.png",
+      "opacity": 0.95
+    },
+    {
+      "id":"hb-black",
+      "color":"#252724",
+      "name":"HatchBox Black",
+      "tier":"Standard",
+      "src": "hatchbox-black.jpg",
+      "zoom": "hatchbox-black-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-blue",
+      "color":"#011CAE",
+      "name":"HatchBox Blue",
+      "tier":"Standard",
+      "src": "hatchbox-blue.jpg",
+      "zoom": "hatchbox-blue-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-gold",
+      "color":"#E8A932",
+      "name":"HatchBox Gold",
+      "tier":"Standard",
+      "src": "hatchbox-gold.jpg",
+      "zoom": "hatchbox-gold-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-green",
+      "color":"#0FC069",
+      "name":"HatchBox Green",
+      "tier":"Standard",
+      "src": "hatchbox-green.jpg",
+      "zoom": "hatchbox-green-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-orange",
+      "color":"#FF7320",
+      "name":"HatchBox Orange",
+      "tier":"Standard",
+      "src": "hatchbox-orange.jpg",
+      "zoom": "hatchbox-orange-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-pink",
+      "color":"#FF7478",
+      "name":"HatchBox Pink",
+      "tier":"Standard",
+      "src": "hatchbox-pink.jpg",
+      "zoom": "hatchbox-pink-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-red",
+      "color":"#EF1021",
+      "name":"HatchBox Red",
+      "tier":"Standard",
+      "src": "hatchbox-red.jpg",
+      "zoom": "hatchbox-red-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-silver",
+      "color":"#B5B7B1",
+      "name":"HatchBox Silver",
+      "tier":"Standard",
+      "src": "hatchbox-silver.jpg",
+      "zoom": "hatchbox-silver-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-white",
+      "color":"#E6E5DE",
+      "name":"HatchBox White",
+      "tier":"Standard",
+      "src": "hatchbox-white.jpg",
+      "zoom": "hatchbox-white-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"hb-yellow",
+      "color":"#FDE506",
+      "name":"HatchBox Yellow",
+      "tier":"Standard",
+      "src": "hatchbox-yellow.jpg",
+      "zoom": "hatchbox-yellow-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"php-oceanblue",
+      "color":"#3BADD3",
+      "name":"Push Ocean Blue",
+      "tier":"Standard",
+      "src": "push-oceanblue.jpg",
+      "zoom": "push-oceanblue-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-azureblue",
+      "color":"#008CD6",
+      "name":"Prusa Azure Blue",
+      "tier":"Premium",
+      "src": "prusa-azureblue.jpg",
+      "zoom": "prusa-azureblue-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-galaxyblack",
+      "color":"#4F4C46",
+      "name":"Prusa Galaxy Black",
+      "tier":"Premium",
+      "src": "prusa-galaxyblack.jpg",
+      "zoom": "prusa-galaxyblack-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-galaxysilver",
+      "color":"#B8B8B5",
+      "name":"Prusa Galaxy Silver",
+      "tier":"Premium",
+      "src": "prusa-galaxysilver.jpg",
+      "zoom": "prusa-galaxysilver-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-galaxypurple",
+      "color":"#412B7C",
+      "name":"Prusa Galaxy Purple",
+      "tier":"Premium",
+      "src": "prusa-galaxypurple.jpg",
+      "zoom": "prusa-galaxyspurple-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-gentlemengrey",
+      "color":"#2D4C4D",
+      "name":"Prusa Gentlemen Grey",
+      "tier":"Premium",
+      "src": "prusa-gentlemensgrey.jpg",
+      "zoom": "prusa-gentlemansgrey-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"pru-opalgreen",
+      "color":"#085C4E",
+      "name":"Prusa Opal Green",
+      "tier":"Premium",
+      "src": "prusa-opalgreen.jpg",
+      "zoom": "prusa-opalgreen-zoom.png",
+      "opacity": 1
+    },
+    {
+      "id":"ptp-protonpurple",
+      "color":"#964861",
+      "name":"ProtoPasta Proton Purple",
+      "tier":"Ultra Premium",
+      "src": "protopasta-protonpurple.jpg",
+      "zoom": "protopasta-protonpurple-zoom.png",
+      "opacity": 1
+    }
+  ]
+}

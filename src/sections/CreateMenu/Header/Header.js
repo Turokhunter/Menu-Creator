@@ -24,6 +24,7 @@ const Header = ({handleAdd}) => {
       onClick={handleAdd} >
       Color Picker
     </Button>{' '}
+    <hr/>
     </>
   )
 }
