@@ -4,10 +4,8 @@ import {MyHeader,MyH5} from "./style";
 import { GrClose } from 'react-icons/gr';
 import { FiCopy } from 'react-icons/fi';
 
-//Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-
-const Header = ({option}) => {
-  const type = option.type.charAt(0).toUpperCase() + option.type.slice(1)
+const Header = ({option, handleClickDeleteOption, handleClickDuplicateOption}) => {
+  const type = option.type.charAt(0).toUpperCase() + option.type.slice(1);
   // console.log(option);
   return (
     <MyHeader>
@@ -18,10 +16,10 @@ const Header = ({option}) => {
           </div>
         </Col>
         <Col>
-          <Button variant="light">
+          <Button variant="light" onClick={(e) => handleClickDuplicateOption(option)} >
             <FiCopy />
           </Button>
-          <Button variant="light">
+          <Button variant="light" onClick={(e) => handleClickDeleteOption(option)}>
             <GrClose />
           </Button>
         </Col>

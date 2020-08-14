@@ -12,6 +12,11 @@ export const MyH5 = styled.h5 `
   padding-top: 6px;
 `;
 
+
+export const MyRadioPos = styled.div `
+  padding-top: 6px;
+`;
+
 export const MyHeader = styled.div `
     border-bottom: 2px solid;
     border-color: gray;

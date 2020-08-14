@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Col, Button, InputGroup} from 'react-bootstrap';
 import deleteBtn from '../img/delete.png';
 import {DraggableArea} from 'react-draggable-tags';
-import {AddAndDelete, DeleteIcon, Tag} from "./style";
+import {AddAndDelete, DeleteIcon, MyRadioPos, Tag} from "./style";
 import colorData from "../../data/filament.json"
 import Autosuggest from 'react-autosuggest';
 
@@ -124,35 +124,37 @@ class ColorPicker extends React.Component {
                 <InputGroup.Prepend>
                   <InputGroup.Text id="colorEnclusion">Color Enclusion:</InputGroup.Text>
                 </InputGroup.Prepend>
-                <Col sm={8}>
-                  <Form.Check
-                    inline
-                    type="radio"
-                    label="All"
-                    name="colorEnclusion"
-                    value = "all"
-                    checked={this.props.option.colorEnclusion === "all"}
-                    onChange={this.props.handleUpdate}
-                  />
-                  <Form.Check
-                    inline
-                    type="radio"
-                    label="Include"
-                    name="colorEnclusion"
-                    value = "include"
-                    checked={this.props.option.colorEnclusion === "include"}
-                    onChange={this.props.handleUpdate}
-                  />
-                  <Form.Check
-                    inline
-                    type="radio"
-                    label="Exclude"
-                    name="colorEnclusion"
-                    value = "exclude"
-                    checked={this.props.option.colorEnclusion === "exclude"}
-                    onChange={this.props.handleUpdate}
-                  />
-                </Col>
+                <MyRadioPos>
+                  <Col sm={12}>
+                    <Form.Check
+                      inline
+                      type="radio"
+                      label="All"
+                      name="colorEnclusion"
+                      value = "all"
+                      checked={this.props.option.colorEnclusion === "all"}
+                      onChange={this.props.handleUpdate}
+                    />
+                    <Form.Check
+                      inline
+                      type="radio"
+                      label="Include"
+                      name="colorEnclusion"
+                      value = "include"
+                      checked={this.props.option.colorEnclusion === "include"}
+                      onChange={this.props.handleUpdate}
+                    />
+                    <Form.Check
+                      inline
+                      type="radio"
+                      label="Exclude"
+                      name="colorEnclusion"
+                      value = "exclude"
+                      checked={this.props.option.colorEnclusion === "exclude"}
+                      onChange={this.props.handleUpdate}
+                    />
+                  </Col>
+                </MyRadioPos>
               </InputGroup>
             </Form.Group>
           </Form.Row>

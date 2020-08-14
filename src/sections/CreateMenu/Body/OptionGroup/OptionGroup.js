@@ -30,10 +30,15 @@ const RenderBasedOnType = ({option, handleUpdate,
 
 const OptionGroup = ({option, handleUpdate,
                       handleUpdatingTagOrder, handleClickDeleteTag,
-                      handleClickAddTag}) => {
+                      handleClickAddTag, handleClickDeleteOption,
+                      handleClickDuplicateOption}) => {
+
   return (
     <div className="panel">
-      <Header option={option}/>
+      <Header option = {option}
+        handleClickDeleteOption = {handleClickDeleteOption}
+        handleClickDuplicateOption = {handleClickDuplicateOption}
+      />
       <Container style={{paddingTop:"6px"}}>
         <BasicInfo option={option} handleUpdate={handleUpdate}/>
         <RenderBasedOnType option = {option}

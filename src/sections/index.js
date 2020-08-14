@@ -6,14 +6,14 @@ class Sections extends React.Component {
     mapping : {},
     options : [
       {
-        id : "cb1",
+        id : "cb0",
         name : "",
         type : "checkbox",
         priceDiff : false,
         selected : false
       },
       {
-        id : "dd1",
+        id : "dd0",
         name : "",
         type : "dropdown",
         priceDiff : false,
@@ -21,7 +21,7 @@ class Sections extends React.Component {
         items : []
       },
       {
-        id : "cp1",
+        id : "cp0",
         name : "",
         type : "colorpicker",
         priceDiff : false,
@@ -32,7 +32,7 @@ class Sections extends React.Component {
   ]
   }
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 0, dd: 0, cp: 0};
+  counter = {cb: 1, dd: 1, cp: 1};
 
   handleAddingNewOptions = (event) => {
     const options = this.state.options.slice();
@@ -100,6 +100,29 @@ class Sections extends React.Component {
     this.setState({options : options})
   }
 
+  handleClickDeleteOption = (panelInfo) => {
+    const options = this.state.options.slice();
+    const newOptions = options.filter(t => panelInfo.id !== t.id);
+    this.setState({options: newOptions});
+  }
+  handleUpdatingOptionOrder = (panels) => {
+
+    // this.setState({options: panels});
+  }
+  handleClickDuplicateOption = (panel) => {
+    const newPanel = JSON.parse(JSON.stringify(panel));
+    if(newPanel.type === "checkbox"){
+      newPanel.id = "cb" + this.counter.cb++;
+    } else if(newPanel.type === "dropdown"){
+      newPanel.id = "dd" + this.counter.dd++;
+    } else if(newPanel.type === "colorpicker"){
+      newPanel.id = "cp" + this.counter.cp++;
+    }
+    const options = this.state.options.slice();
+    options.push(newPanel);
+    this.setState({options: options});
+  }
+
   render(){
     return (
       <CreateMenu
@@ -109,6 +132,9 @@ class Sections extends React.Component {
         handleUpdatingTagOrder = {this.handleUpdatingTagOrder}
         handleClickDeleteTag = {this.handleClickDeleteTag}
         handleClickAddTag = {this.handleClickAddTag}
+        handleClickDeleteOption = {this.handleClickDeleteOption}
+        handleUpdatingOptionOrder = {this.handleUpdatingOptionOrder}
+        handleClickDuplicateOption = {this.handleClickDuplicateOption}
       />
     );
   }

@@ -9,7 +9,10 @@ const CreateMenu = ({data,
                      handleUpdate,
                      handleUpdatingTagOrder,
                      handleClickDeleteTag,
-                     handleClickAddTag }) => {
+                     handleClickAddTag,
+                     handleClickDeleteOption,
+                     handleUpdatingOptionOrder,
+                     handleClickDuplicateOption}) => {
   return (
     <>
       <Header handleAdd = {handleAdd}/>
@@ -19,6 +22,9 @@ const CreateMenu = ({data,
         handleUpdatingTagOrder = {handleUpdatingTagOrder}
         handleClickDeleteTag = {handleClickDeleteTag}
         handleClickAddTag = {handleClickAddTag}
+        handleClickDeleteOption = {handleClickDeleteOption}
+        handleUpdatingOptionOrder = {handleUpdatingOptionOrder}
+        handleClickDuplicateOption = {handleClickDuplicateOption}
       />
       <Footer data = {data}/>
     </>

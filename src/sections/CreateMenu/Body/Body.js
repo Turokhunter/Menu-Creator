@@ -4,7 +4,8 @@ import OptionGroup from './OptionGroup'
 
 const Body = ({options, handleUpdate,
                handleUpdatingTagOrder, handleClickDeleteTag,
-               handleClickAddTag}) => {
+               handleClickAddTag, handleClickDeleteOption,
+               handleUpdatingOptionOrder, handleClickDuplicateOption}) => {
   //Create layout variable
   const layout = []
   var currPos = 0;
@@ -22,7 +23,6 @@ const Body = ({options, handleUpdate,
     layout.push({i:i.toString(), x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
   }
-
   return (
      <GridLayout className="layout" layout={layout}
                  cols={1} rows = {12}
@@ -37,6 +37,8 @@ const Body = ({options, handleUpdate,
             handleUpdatingTagOrder = {(e) => handleUpdatingTagOrder(index, e)}
             handleClickDeleteTag = {(e) => handleClickDeleteTag(index, e)}
             handleClickAddTag = {(e) => handleClickAddTag(index, e)}
+            handleClickDeleteOption = {handleClickDeleteOption}
+            handleClickDuplicateOption = {handleClickDuplicateOption}
            />
         </div>
       ))}
