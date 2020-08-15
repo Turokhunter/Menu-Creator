@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button} from 'react-bootstrap'
+import {Button, Navbar} from 'react-bootstrap'
 
 const Header = ({handleAdd}) => {
   return (
@@ -24,7 +24,6 @@ const Header = ({handleAdd}) => {
       onClick={handleAdd} >
       Color Picker
     </Button>{' '}
-    <hr/>
     </>
   )
 }

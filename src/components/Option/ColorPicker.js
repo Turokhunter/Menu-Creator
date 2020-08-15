@@ -21,13 +21,24 @@ function escapeRegexCharacters(str) {
 class ColorPicker extends React.Component {
   constructor(props){
     super(props);
+    const tag = this.updateSelectchoice(props, colorData.filament);
     this.state = {
       color: '',
       suggestions:[],
-      filament: colorData.filament
+      filament: colorData.filament,
+      choices: tag
     }
+
   }
 
+updateSelectchoice(props, filaments){
+  if(props.option.colorEnclusion === "all"){
+    return filaments;
+  } else if(props.option.colorEnclusion === "include"){
+    return props.options.items;
+  } else if(props.option.colorEnclusion === "exclude"){
+  }
+}
   getSuggestions = value => {
     const escapedValue = escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
@@ -63,6 +74,7 @@ class ColorPicker extends React.Component {
       });
     }
   }
+
 
   setColor = (event, { newValue, method }) => {
     this.setState({
@@ -103,14 +115,14 @@ class ColorPicker extends React.Component {
       <>
         <Form>
           <Form.Row>
-            <Form.Group as={Col} md="8" controlId="validColorID">
+            <Form.Group as={Col} md="8">
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text id="selectedLabel">Selected:</InputGroup.Text>
+                  <InputGroup.Text>Selected:</InputGroup.Text>
                 </InputGroup.Prepend>
                   <Form.Control as="select" name ="colorId" onChange={this.props.handleUpdate}>
                     <option  key="-1" value ="-1">{" "}</option>
-                    {this.state.filament.map((item) =>(
+                    {this.state.choices.map((item) =>(
                        <option key={item.id}  value={item.id} >{item.name}</option>
                      ))}
                   </Form.Control>
@@ -122,7 +134,7 @@ class ColorPicker extends React.Component {
             <Form.Group as={Col}>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text id="colorEnclusion">Color Enclusion:</InputGroup.Text>
+                  <InputGroup.Text>Color Enclusion:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <MyRadioPos>
                   <Col sm={12}>

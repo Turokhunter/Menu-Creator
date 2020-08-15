@@ -1,38 +1,52 @@
 import React from 'react';
 import CreateMenu from './CreateMenu'
+import GridLayout from 'react-grid-layout';
+import {LeftPanel, RightPanel, Panels} from './style.js'
 
 class Sections extends React.Component {
+  //TODO:Deal with a file being loaded with exisiting counters
+  counter = {cb: 0, dd: 0, cp: 0};
+
   state = {
     mapping : {},
-    options : [
-      {
-        id : "cb0",
-        name : "",
-        type : "checkbox",
-        priceDiff : false,
-        selected : false
-      },
-      {
-        id : "dd0",
-        name : "",
-        type : "dropdown",
-        priceDiff : false,
-        selected : "",
-        items : []
-      },
-      {
-        id : "cp0",
-        name : "",
-        type : "colorpicker",
-        priceDiff : false,
-        colorId : "",
-        colorEnclusion:"all",
-        items : []
-      }
-  ]
+    options : [{
+      id : "cb" + this.counter.cb++,
+      name : "",
+      type : "checkbox",
+      priceDiff : false,
+      selected : false
+    },{
+      id : "cp" + this.counter.cp++,
+      name : "",
+      type : "colorpicker",
+      priceDiff : false,
+      colorId : "",
+      colorEnclusion:"all",
+      items : []
+      //Optional: includeColor : []
+      //Optional: excludeColor : []
+    },{
+      id : "cp" + this.counter.cp++,
+      name : "",
+      type : "colorpicker",
+      priceDiff : false,
+      colorId : "",
+      colorEnclusion:"all",
+      items : []
+      //Optional: includeColor : []
+      //Optional: excludeColor : []
+    },{
+      id : "cp" + this.counter.cp++,
+      name : "",
+      type : "colorpicker",
+      priceDiff : false,
+      colorId : "",
+      colorEnclusion:"all",
+      items : []
+      //Optional: includeColor : []
+      //Optional: excludeColor : []
+    }]
   }
-  //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 1, dd: 1, cp: 1};
 
   handleAddingNewOptions = (event) => {
     const options = this.state.options.slice();
@@ -105,9 +119,15 @@ class Sections extends React.Component {
     const newOptions = options.filter(t => panelInfo.id !== t.id);
     this.setState({options: newOptions});
   }
-  handleUpdatingOptionOrder = (panels) => {
-
-    // this.setState({options: panels});
+  handleUpdatingOptionOrder = (layout) => {
+    layout.sort((a,b)=>{return a.y - b.y});
+    const layoutOrder = layout.map(l => l.i);
+    const newOption = this.state.options.slice().sort((a,b) =>
+                                      {
+                                        var A = a["id"], B = b["id"]
+                                        return layoutOrder.indexOf(A) - layoutOrder.indexOf(B)
+                                      });
+    this.setState({options: newOption});
   }
   handleClickDuplicateOption = (panel) => {
     const newPanel = JSON.parse(JSON.stringify(panel));
@@ -125,17 +145,31 @@ class Sections extends React.Component {
 
   render(){
     return (
-      <CreateMenu
-        data = {this.state}
-        handleAdd = {this.handleAddingNewOptions}
-        handleUpdate = {this.handleUpdateingOptions}
-        handleUpdatingTagOrder = {this.handleUpdatingTagOrder}
-        handleClickDeleteTag = {this.handleClickDeleteTag}
-        handleClickAddTag = {this.handleClickAddTag}
-        handleClickDeleteOption = {this.handleClickDeleteOption}
-        handleUpdatingOptionOrder = {this.handleUpdatingOptionOrder}
-        handleClickDuplicateOption = {this.handleClickDuplicateOption}
-      />
+      <Panels>
+      <LeftPanel>
+        <CreateMenu
+          data = {this.state}
+          handleAdd = {this.handleAddingNewOptions}
+          handleUpdate = {this.handleUpdateingOptions}
+          handleUpdatingTagOrder = {this.handleUpdatingTagOrder}
+          handleClickDeleteTag = {this.handleClickDeleteTag}
+          handleClickAddTag = {this.handleClickAddTag}
+          handleClickDeleteOption = {this.handleClickDeleteOption}
+          handleUpdatingOptionOrder = {this.handleUpdatingOptionOrder}
+          handleClickDuplicateOption = {this.handleClickDuplicateOption}
+        />
+      </LeftPanel>
+      <RightPanel>
+        <GridLayout className="layout"
+                    cols={1} rows = {12}
+                    rowHeight={35} width={1000}
+                    autoSize={true}
+                    >
+          <div key="MenuVisualization" data-grid={{x: 0, y: 0, w: 1, h: 2}}>b</div>
+          <div key="PriceSetVis" data-grid={{x: 0, y: 2, w: 1, h: 2}}>b</div>
+        </GridLayout>
+      </RightPanel>
+    </Panels>
     );
   }
 }

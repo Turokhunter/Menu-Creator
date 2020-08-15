@@ -38,10 +38,10 @@ class Dropdown extends React.Component {
       <>
         <Form>
           <Form.Row>
-            <Form.Group as={Col} md="8" controlId="validSelected">
+            <Form.Group as={Col} md="8">
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text id="selectedLabel">Selected:</InputGroup.Text>
+                  <InputGroup.Text >Selected:</InputGroup.Text>
                 </InputGroup.Prepend>
                   <Form.Control as="select" name="selected" onChange={this.props.handleUpdate}>
                     <option key="-1" value ="-1">{" "}</option>

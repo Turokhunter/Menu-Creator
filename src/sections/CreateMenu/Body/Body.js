@@ -20,29 +20,32 @@ const Body = ({options, handleUpdate,
     } else if(option.type === "colorpicker"){
       hSize = 10;
     }
-    layout.push({i:i.toString(), x:0, y:currPos, w:1, h:hSize});
+    layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
   }
   return (
-     <GridLayout className="layout" layout={layout}
-                 cols={1} rows = {12}
-                 rowHeight={35} width={500}
-                 isResizable={false}
-                 autoSize={true}
-                 draggableHandle=".MyDragHandleClassName">
-     {layout.map((row, index) =>(
-        <div key={row.i}>
-          <OptionGroup option={options[index]}
-            handleUpdate={(e) => handleUpdate(index, e)}
-            handleUpdatingTagOrder = {(e) => handleUpdatingTagOrder(index, e)}
-            handleClickDeleteTag = {(e) => handleClickDeleteTag(index, e)}
-            handleClickAddTag = {(e) => handleClickAddTag(index, e)}
-            handleClickDeleteOption = {handleClickDeleteOption}
-            handleClickDuplicateOption = {handleClickDuplicateOption}
-           />
-        </div>
-      ))}
-     </GridLayout>
+    <div>
+       <GridLayout className="layout" layout={layout}
+                   cols={1} rows = {12}
+                   rowHeight={35} width={500}
+                   isResizable={false}
+                   autoSize={true}
+                   onLayoutChange= {handleUpdatingOptionOrder}
+                   draggableHandle=".MyDragHandleClassName">
+       {layout.map((row, index) =>(
+          <div key={row.i}>
+            <OptionGroup option={options[index]}
+              handleUpdate={(e) => handleUpdate(index, e)}
+              handleUpdatingTagOrder = {(e) => handleUpdatingTagOrder(index, e)}
+              handleClickDeleteTag = {(e) => handleClickDeleteTag(index, e)}
+              handleClickAddTag = {(e) => handleClickAddTag(index, e)}
+              handleClickDeleteOption = {handleClickDeleteOption}
+              handleClickDuplicateOption = {handleClickDuplicateOption}
+             />
+          </div>
+        ))}
+       </GridLayout>
+     </div>
   )
 }
 

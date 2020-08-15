@@ -1,5 +1,6 @@
 
 import styled from 'styled-components';
+import {Button} from 'react-bootstrap'
 
 export const AddAndDelete = styled.div `
     border: 1px solid #E9E9E9;
@@ -15,6 +16,11 @@ export const MyH5 = styled.h5 `
 
 export const MyRadioPos = styled.div `
   padding-top: 6px;
+`;
+
+export const MyMenuButton = styled(Button)`
+  background-color: transparent;
+  border: 0px;
 `;
 
 export const MyHeader = styled.div `

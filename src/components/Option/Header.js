@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Row, Col} from 'react-bootstrap'
-import {MyHeader,MyH5} from "./style";
+import {Row, Col} from 'react-bootstrap'
+import {MyHeader, MyH5, MyMenuButton} from "./style";
 import { GrClose } from 'react-icons/gr';
 import { FiCopy } from 'react-icons/fi';
 
@@ -16,12 +16,14 @@ const Header = ({option, handleClickDeleteOption, handleClickDuplicateOption}) =
           </div>
         </Col>
         <Col>
-          <Button variant="light" onClick={(e) => handleClickDuplicateOption(option)} >
+          {'  '}
+          <MyMenuButton variant="light" onClick={(e) => handleClickDuplicateOption(option)} >
             <FiCopy />
-          </Button>
-          <Button variant="light" onClick={(e) => handleClickDeleteOption(option)}>
+          </MyMenuButton>
+          {' '}
+          <MyMenuButton variant="light" onClick={(e) => handleClickDeleteOption(option)}>
             <GrClose />
-          </Button>
+          </MyMenuButton>
         </Col>
       </Row>
     </MyHeader>
