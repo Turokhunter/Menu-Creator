@@ -6,11 +6,9 @@ export const Panels = styled.div `
   display: flex;
 `;
 export const LeftPanel = styled.div `
-  width : 510px;
+  width : 520px;
 `;
 
 export const RightPanel = styled.div `
-  width : 600px;
   min-width: 600px;
-  height: 100%;
 `;

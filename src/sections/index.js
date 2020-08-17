@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateMenu from './CreateMenu'
-import GridLayout from 'react-grid-layout';
+import SplitPane, { Pane } from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels} from './style.js'
 
 class Sections extends React.Component {
@@ -8,7 +8,8 @@ class Sections extends React.Component {
   counter = {cb: 0, dd: 0, cp: 0};
 
   state = {
-    mapping : {},
+    mapping : [],
+    numVarients : 0,
     options : [{
       id : "cb" + this.counter.cb++,
       name : "",
@@ -48,6 +49,24 @@ class Sections extends React.Component {
     }]
   }
 
+  determineNumberofVarients = (options) => {
+    var res = options.reduce((sum, option) => {
+      if(option.priceDiff){
+        if(option.type === "colorpicker"){
+          return sum * 3;
+        } else if(option.type === "dropdown"){
+          return sum * ((option.items.length === 0) ? 1 : option.items.length);
+        } else if(option.type === "checkbox"){
+          return sum * 2;
+        } else {
+          console.log("Type not implemented for Counting")
+          return sum;
+        }
+      }
+      return sum;
+    }, 1);
+    return res;
+  }
   handleAddingNewOptions = (event) => {
     const options = this.state.options.slice();
     var optiontype = event.target.value;
@@ -80,8 +99,12 @@ class Sections extends React.Component {
         //Optional: includeColor : []
         //Optional: excludeColor : []
       });
+    } else {
+      console.log("Option type is not implemented for Add");
     }
-    this.setState({options : options})
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)});
+    ;
   }
 
   handleUpdateingOptions = (idx, event) => {
@@ -92,42 +115,48 @@ class Sections extends React.Component {
     } else {
       options[idx][name] = value;
     }
-    this.setState({options : options})
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)});
   }
 
   handleUpdatingTagOrder = (idx, tags) => {
     const options = this.state.options.slice();
     options[idx].items = tags;
-    this.setState({options : options})
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)});
   }
 
   handleClickDeleteTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
     const tags = options[idx].items.filter(t => tagInfo.id !== t.id);
     options[idx].items = tags;
-    this.setState({options : options})
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)})
   }
 
   handleClickAddTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
     options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
-    this.setState({options : options})
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)})
   }
 
   handleClickDeleteOption = (panelInfo) => {
     const options = this.state.options.slice();
     const newOptions = options.filter(t => panelInfo.id !== t.id);
-    this.setState({options: newOptions});
+    this.setState({options: newOptions,
+                   numVarients : this.determineNumberofVarients(newOptions)});
   }
   handleUpdatingOptionOrder = (layout) => {
     layout.sort((a,b)=>{return a.y - b.y});
     const layoutOrder = layout.map(l => l.i);
-    const newOption = this.state.options.slice().sort((a,b) =>
+    const newOptions = this.state.options.slice().sort((a,b) =>
                                       {
                                         var A = a["id"], B = b["id"]
                                         return layoutOrder.indexOf(A) - layoutOrder.indexOf(B)
                                       });
-    this.setState({options: newOption});
+    this.setState({options: newOptions,
+                   numVarients : this.determineNumberofVarients(newOptions)});
   }
   handleClickDuplicateOption = (panel) => {
     const newPanel = JSON.parse(JSON.stringify(panel));
@@ -137,6 +166,8 @@ class Sections extends React.Component {
       newPanel.id = "dd" + this.counter.dd++;
     } else if(newPanel.type === "colorpicker"){
       newPanel.id = "cp" + this.counter.cp++;
+    } else {
+      console.log("Duplicate is not implement for this type");
     }
     const options = this.state.options.slice();
     options.push(newPanel);
@@ -160,14 +191,10 @@ class Sections extends React.Component {
         />
       </LeftPanel>
       <RightPanel>
-        <GridLayout className="layout"
-                    cols={1} rows = {12}
-                    rowHeight={35} width={1000}
-                    autoSize={true}
-                    >
-          <div key="MenuVisualization" data-grid={{x: 0, y: 0, w: 1, h: 2}}>b</div>
-          <div key="PriceSetVis" data-grid={{x: 0, y: 2, w: 1, h: 2}}>b</div>
-        </GridLayout>
+        <SplitPane split="horizontal" defaultSize="50%" >
+          <div>A</div>
+          <div>B</div>
+        </SplitPane>
       </RightPanel>
     </Panels>
     );

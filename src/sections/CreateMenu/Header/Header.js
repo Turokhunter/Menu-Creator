@@ -24,6 +24,12 @@ const Header = ({handleAdd}) => {
       onClick={handleAdd} >
       Color Picker
     </Button>{' '}
+    <Button
+      variant="primary"
+      value = "preview"
+      >
+      Preview
+    </Button>{' '}
     </>
   )
 }

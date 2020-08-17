@@ -16,13 +16,12 @@ const CreateMenu = ({data,
                      handleUpdatingOptionOrder,
                      handleClickDuplicateOption}) => {
    const { height, width } = useWindowDimensions();
-   console.log(height);
   return (
     <>
       <HeaderSizing>
         <Header handleAdd = {handleAdd}/>
       </HeaderSizing>
-      <BodySizing height={height+"px"}>
+      <BodySizing height={(height - 125)+"px"}>
         <Body
           options = {data.options}
           handleUpdate = {handleUpdate}

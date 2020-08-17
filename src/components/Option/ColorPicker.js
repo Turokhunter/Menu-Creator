@@ -98,9 +98,10 @@ updateSelectchoice(props, filaments){
   render(){
     const { color, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'color',
+      placeholder: 'Color',
       value:color,
-      onChange: this.setColor
+      onChange: this.setColor,
+      disabled : this.props.option.colorEnclusion === "all"
     };
     const theme = {
       container: 'autosuggest',

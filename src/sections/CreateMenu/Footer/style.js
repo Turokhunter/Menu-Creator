@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import {Button} from 'react-bootstrap';
 
 export const MyFooter = styled.div `
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: rgb(235, 195, 64);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+`;
+
+export const MyFooterButton = styled(Button)`
+  position: relative;
+  right: 10px;
+`;
+
+export const MyText = styled.div `
+  padding-top: 8px;
 `;
