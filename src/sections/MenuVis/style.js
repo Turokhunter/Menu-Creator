@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const MenuSwatch = styled.img `
+  width: 50px;
+  border-radius: 10%;
+  cursor: pointer;
+  padding: 1px;
+  border: 2px solid;
 `;
 
 export const MenuH3 = styled.h3 `

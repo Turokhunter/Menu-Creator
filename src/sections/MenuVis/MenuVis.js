@@ -42,7 +42,7 @@ const ColorPickerMenu =  ({option, filament}) => {
       <Row>
         {filament.map((item) => (
           <MenuColumnSpacing>
-            <MenuSwatch src={item.src}>
+            <MenuSwatch src={item.zoom}>
             </MenuSwatch>
           </MenuColumnSpacing>
         ))}
