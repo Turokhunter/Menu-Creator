@@ -10,5 +10,6 @@ export const LeftPanel = styled.div `
 `;
 
 export const RightPanel = styled.div `
-  min-width: 600px;
+  // min-width: 600px;
+  width:100%;
 `;

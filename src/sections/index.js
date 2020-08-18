@@ -2,7 +2,7 @@ import React from 'react';
 import CreateMenu from './CreateMenu'
 import SplitPane, { Pane } from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels} from './style.js'
-
+import MenuVis from './MenuVis';
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
   counter = {cb: 0, dd: 0, cp: 0};
@@ -12,40 +12,38 @@ class Sections extends React.Component {
     numVarients : 0,
     options : [{
       id : "cb" + this.counter.cb++,
-      name : "",
+      name : "Fully Assembled",
       type : "checkbox",
       priceDiff : false,
       selected : false
     },{
-      id : "cp" + this.counter.cp++,
-      name : "",
-      type : "colorpicker",
-      priceDiff : false,
-      colorId : "",
-      colorEnclusion:"all",
-      items : []
-      //Optional: includeColor : []
-      //Optional: excludeColor : []
+      id : "dd" + this.counter.dd++,
+        name : "Holder",
+        type : "dropdown",
+        priceDiff : false,
+        selected : "",
+        items : [{id:"dd1", name:"One Holder"},{id:"dd2", name:"Two Holder"}]
     },{
       id : "cp" + this.counter.cp++,
-      name : "",
+      name : "Color",
       type : "colorpicker",
       priceDiff : false,
       colorId : "",
       colorEnclusion:"all",
-      items : []
-      //Optional: includeColor : []
-      //Optional: excludeColor : []
+      items : [{id: "atm-neongreen", name: "Atomic Trans Neon Green"},
+              {id: "hb-green", name: "HatchBox Green"},
+              {id: "hb-gold", name: "HatchBox Gold"},
+              {id: "pru-opalgreen", name: "Prusa Opal Green"},
+              {id: "hb-blue", name: "HatchBox Blue"},
+              {id: "php-oceanblue", name: "Push Ocean Blue"}]
     },{
       id : "cp" + this.counter.cp++,
-      name : "",
+      name : "Color2",
       type : "colorpicker",
       priceDiff : false,
       colorId : "",
       colorEnclusion:"all",
       items : []
-      //Optional: includeColor : []
-      //Optional: excludeColor : []
     }]
   }
 
@@ -192,7 +190,7 @@ class Sections extends React.Component {
       </LeftPanel>
       <RightPanel>
         <SplitPane split="horizontal" defaultSize="50%" >
-          <div>A</div>
+          <MenuVis data = {this.state}/>          
           <div>B</div>
         </SplitPane>
       </RightPanel>
