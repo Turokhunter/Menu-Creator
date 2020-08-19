@@ -1,8 +1,10 @@
 import React from 'react';
 import CreateMenu from './CreateMenu'
-import SplitPane, { Pane } from 'react-split-pane';
-import {LeftPanel, RightPanel, Panels} from './style.js'
+import SplitPane from 'react-split-pane';
+import {LeftPanel, RightPanel, Panels, ResizerPanel} from './style.js'
 import MenuVis from './MenuVis';
+import PriceSetVis from './PriceSetVis';
+
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
   counter = {cb: 0, dd: 0, cp: 0};
@@ -189,10 +191,12 @@ class Sections extends React.Component {
         />
       </LeftPanel>
       <RightPanel>
-        <SplitPane split="horizontal" defaultSize="50%" >
-          <MenuVis data = {this.state}/>          
-          <div>B</div>
-        </SplitPane>
+        <ResizerPanel>
+          <SplitPane split="horizontal" paneStyle={{overflow:"auto", display:"inline"}} defaultSize="0%" >
+            <MenuVis data = {this.state} />          
+            <PriceSetVis/>
+          </SplitPane>
+        </ResizerPanel>
       </RightPanel>
     </Panels>
     );

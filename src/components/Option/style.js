@@ -13,6 +13,9 @@ export const MyH5 = styled.h5 `
   padding-top: 6px;
 `;
 
+export const RadioLabel = styled.label `
+  padding-left : 30px;
+`;
 
 export const MyRadioPos = styled.div `
   padding-top: 6px;

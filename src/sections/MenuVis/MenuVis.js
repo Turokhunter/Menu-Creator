@@ -1,18 +1,23 @@
 import React from 'react';
-import {Container, Row, Form} from 'react-bootstrap';
-import {MenuColumnSpacing, Menulabel, MenuH3, MenuSwatch} from './style';
+import {Row} from 'react-bootstrap';
+import {MenuColumnSpacing, Menulabel, MenuH3, MenuSwatch, MenuLabel, MenuContainer} from './style';
 import colorData from "../../data/filament.json"
+import {getColors} from "../../components/getColors.js";
 
 const CheckBoxMenu =  ({option}) => {
   return (
     <Row>
-      <Form.Check type="checkbox" label={option.name} />
+      <div className="form-check">
+        <MenuLabel className="form-chech-label">
+          <input type="checkbox" className="form-check-input" />
+          {option.name}
+        </MenuLabel>
+      </div>
     </Row>
   );
 }
 
 const DropdownMenu =  ({option}) => {
-  console.log(option);
   return (
     <>
       <Row>
@@ -20,7 +25,7 @@ const DropdownMenu =  ({option}) => {
       </Row>
       <Row>
         {option.items.map((item) => (
-          <MenuColumnSpacing>
+          <MenuColumnSpacing key={item.id} >
             <Menulabel className={option.selected === item.id && "is-selected"}>{item.name}</Menulabel>
           </MenuColumnSpacing>
         ))}
@@ -30,19 +35,19 @@ const DropdownMenu =  ({option}) => {
 
 }
 
-
-const ColorPickerMenu =  ({option, filament}) => {
+const ColorPickerMenu = ({option, filament}) => {
+  var selectedFilament = getColors(option, filament);
+  
   //Have to figure out what is shown and what won't be
-  console.log(filament);
   return (
     <>
       <Row>
-        <h3>{option.name}</h3>
+        <MenuH3>{option.name}</MenuH3>
       </Row>
       <Row>
-        {filament.map((item) => (
-          <MenuColumnSpacing>
-            <MenuSwatch src={item.zoom}>
+        {selectedFilament.map((item) => (
+          <MenuColumnSpacing key={item.id} style={{padding:"3.2px"}}>
+            <MenuSwatch className={option.colorId === item.id && "is-selected"} src={item.zoom}>
             </MenuSwatch>
           </MenuColumnSpacing>
         ))}
@@ -68,11 +73,11 @@ const RenderBasedOnType = ({option, filament}) => {
 const MenuVis = ({data}) => {
     const filament = colorData.filament;
     return (
-      <Container>
+      <MenuContainer>
       {data.options.map((option) =>(
-        <RenderBasedOnType option={option} filament={filament}/>
+        <RenderBasedOnType key={option.id} option={option} filament={filament}/>
       ))}
-      </Container>
+      </MenuContainer>
     )
 }
 

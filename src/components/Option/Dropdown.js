@@ -21,9 +21,9 @@ class Dropdown extends React.Component {
   }
 
   handleClickAddTag = () => {
-      this.props.handleClickAddTag({tagId: this.tagId, tagName:this.tagName.value});
-      this.tagId += 1;
-      this.tagName.value = "";
+    this.props.handleClickAddTag({tagId: this.tagId, tagName:this.tagName.value});
+    this.tagId += 1;
+    this.tagName.value = "";
   }
 
   handleEnterAddTag = (e) => {

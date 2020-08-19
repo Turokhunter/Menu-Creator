@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Navbar} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 const Header = ({handleAdd}) => {
   return (

@@ -1,4 +1,22 @@
 import styled from 'styled-components';
+import {Container} from 'react-bootstrap';
+
+export const MenuContainer = styled(Container)`
+  padding-top: 40px;
+  width: 560px;
+  overflow:hidden;
+`;
+
+export const MenuLabel = styled.label `
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.25;
+  position: relative;
+  font-size: 20px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 0.75rem;
+`;
 
 export const MenuSwatch = styled.img `
   width: 50px;
@@ -6,6 +24,10 @@ export const MenuSwatch = styled.img `
   cursor: pointer;
   padding: 1px;
   border: 2px solid;
+  &.is-selected {
+    box-shadow: 1px 4px 5px rgba(0,0,0,0.8);
+    background-color: #b5c8da;
+  }
 `;
 
 export const MenuH3 = styled.h3 `
@@ -14,6 +36,7 @@ export const MenuH3 = styled.h3 `
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.125;
+  font-family: "Work Sans","HelveticaNeue","Helvetica Neue",sans-serif;
 `;
 
 export const MenuColumnSpacing = styled.div `

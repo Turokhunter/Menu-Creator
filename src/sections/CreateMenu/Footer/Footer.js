@@ -1,6 +1,6 @@
 import React from 'react';
-import {MyFooterButton, MyText, MyFooter} from './style';
-import {Button, Row, Col, Container} from 'react-bootstrap';
+import {MyFooterButton, MyText} from './style';
+import { Row, Col, Container} from 'react-bootstrap';
 
 const Footer = ({data}) => {
   return (

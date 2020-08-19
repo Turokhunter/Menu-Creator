@@ -2,7 +2,8 @@ import React from 'react';
 import {Form, Col, Button, InputGroup} from 'react-bootstrap';
 import deleteBtn from '../img/delete.png';
 import {DraggableArea} from 'react-draggable-tags';
-import {AddAndDelete, DeleteIcon, MyRadioPos, Tag} from "./style";
+import {AddAndDelete, DeleteIcon, MyRadioPos, Tag, RadioLabel} from "./style";
+import {getColors} from "../getColors";
 import colorData from "../../data/filament.json"
 import Autosuggest from 'react-autosuggest';
 
@@ -21,24 +22,17 @@ function escapeRegexCharacters(str) {
 class ColorPicker extends React.Component {
   constructor(props){
     super(props);
-    const tag = this.updateSelectchoice(props, colorData.filament);
     this.state = {
       color: '',
       suggestions:[],
-      filament: colorData.filament,
-      choices: tag
+      filament: colorData.filament
     }
-
   }
 
-updateSelectchoice(props, filaments){
-  if(props.option.colorEnclusion === "all"){
-    return filaments;
-  } else if(props.option.colorEnclusion === "include"){
-    return props.options.items;
-  } else if(props.option.colorEnclusion === "exclude"){
+  updateSelectchoice(option, filament){
+    return getColors(option, filament);
   }
-}
+
   getSuggestions = value => {
     const escapedValue = escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
@@ -68,6 +62,7 @@ updateSelectchoice(props, filaments){
       const matchItems = items.filter(item => item.name === filament[0].name);
       if(matchItems.length === 0){
         this.props.handleClickAddTag({tagId: filament[0].id, tagName:filament[0].name});
+        this.setState({choices : getColors(this.props.option, this.state.filament)});
       }
       this.setState({
         color: ""
@@ -88,10 +83,12 @@ updateSelectchoice(props, filaments){
       tags.push({id: this.state.filament[i].id, name:this.state.filament[i].name});
     }
     this.props.handleUpdatingTagOrder(tags);
+    this.setState({choices : getColors(this.props.option, this.state.filament)});
   }
 
   handleClickClearAllColor= () => {
     this.props.handleUpdatingTagOrder([]);
+    this.setState({choices : getColors(this.props.option, this.state.filament)});
   }
 
 
@@ -112,6 +109,8 @@ updateSelectchoice(props, filaments){
       suggestionHighlighted: 'active'
     };
 
+    const choices = this.updateSelectchoice(this.props.option, this.state.filament);
+
     return (
       <>
         <Form>
@@ -123,7 +122,7 @@ updateSelectchoice(props, filaments){
                 </InputGroup.Prepend>
                   <Form.Control as="select" name ="colorId" onChange={this.props.handleUpdate}>
                     <option  key="-1" value ="-1">{" "}</option>
-                    {this.state.choices.map((item) =>(
+                    {choices.map((item) =>(
                        <option key={item.id}  value={item.id} >{item.name}</option>
                      ))}
                   </Form.Control>
@@ -138,35 +137,39 @@ updateSelectchoice(props, filaments){
                   <InputGroup.Text>Color Enclusion:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <MyRadioPos>
-                  <Col sm={12}>
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="All"
-                      name="colorEnclusion"
-                      value = "all"
-                      checked={this.props.option.colorEnclusion === "all"}
-                      onChange={this.props.handleUpdate}
-                    />
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="Include"
-                      name="colorEnclusion"
-                      value = "include"
-                      checked={this.props.option.colorEnclusion === "include"}
-                      onChange={this.props.handleUpdate}
-                    />
-                    <Form.Check
-                      inline
-                      type="radio"
-                      label="Exclude"
-                      name="colorEnclusion"
-                      value = "exclude"
-                      checked={this.props.option.colorEnclusion === "exclude"}
-                      onChange={this.props.handleUpdate}
-                    />
-                  </Col>
+                    <RadioLabel className="radio-inline">
+                      <input
+                        type="radio"
+                        name="colorEnclusion"
+                        value="all"
+                        checked={this.props.option.colorEnclusion === "all"}
+                        onChange={this.props.handleUpdate}
+                        className="form-check-input"
+                      />
+                      All
+                    </RadioLabel>
+                    <RadioLabel className="radio-inline">
+                      <input
+                        type="radio"
+                        name="colorEnclusion"
+                        value="include"
+                        className="form-check-input"
+                        checked={this.props.option.colorEnclusion === "include"}
+                        onChange={this.props.handleUpdate}
+                      />
+                      Include
+                    </RadioLabel>
+                    <RadioLabel className="radio-inline">
+                      <input
+                        type="radio"
+                        name="colorEnclusion"
+                        value="exclude"
+                        className="form-check-input"
+                        checked={this.props.option.colorEnclusion === "exclude"}
+                        onChange={this.props.handleUpdate}
+                      />
+                      Exclude
+                    </RadioLabel>
                 </MyRadioPos>
               </InputGroup>
             </Form.Group>

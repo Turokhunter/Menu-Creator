@@ -15,7 +15,7 @@ const CreateMenu = ({data,
                      handleClickDeleteOption,
                      handleUpdatingOptionOrder,
                      handleClickDuplicateOption}) => {
-   const { height, width } = useWindowDimensions();
+   const { height } = useWindowDimensions();
   return (
     <>
       <HeaderSizing>
