@@ -2,7 +2,7 @@ import React from 'react';
 import CreateMenu from './CreateMenu'
 import SplitPane from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels, ResizerPanel} from './style.js'
-import {createMapping} from './util';
+import {createMapping, createJsonFile} from './util';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
@@ -179,6 +179,9 @@ class Sections extends React.Component {
     const newMapping = createMapping(this.state.options);
     this.setState({mapping: newMapping});
   }
+  exportJson = (tasks, columns) => {
+    createJsonFile(this.state, tasks, columns);
+  }
 
   render(){
     return (
@@ -199,9 +202,9 @@ class Sections extends React.Component {
       </LeftPanel>
       <RightPanel>
         <ResizerPanel>
-          <SplitPane split="horizontal" paneStyle={{overflow:"auto", display:"inline"}} defaultSize="0%" >
-            <MenuVis data = {this.state} />          
-            <PriceSetVis />
+          <SplitPane split="horizontal" style={{position:"relative"}} paneStyle={{overflow:"auto", display:"inline"}} defaultSize="0%" >
+            <MenuVis data={this.state} />          
+            <PriceSetVis mapping={this.state.mapping} exportJson={this.exportJson} />
           </SplitPane>
         </ResizerPanel>
       </RightPanel>

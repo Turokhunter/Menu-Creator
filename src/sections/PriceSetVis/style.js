@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const HeaderSizing = styled.div `
-  padding-top:10px;  
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
   z-index: 10;
-  height: 50px;
+  height: 55px;
   border-radius: 3px;
   border-bottom: 2px solid lightgray;
   border-right: 2px solid lightgray;

@@ -1,5 +1,8 @@
 import React from 'react';
 import {Button, InputGroup, FormControl, Container, Row, Col} from 'react-bootstrap'
+import {Text, VariantAdd} from './sytle'
+import {BsArrowsExpand, BsArrowsCollapse} from 'react-icons/bs';
+
 
 class Header extends React.Component {
   constructor(props){
@@ -7,9 +10,16 @@ class Header extends React.Component {
     this.variantName = "";
   }
 
+
+  addVarient = () => {
+    if(this.variantName.value !== ""){
+      this.props.addColumns(this.variantName.value);
+      this.variantName.value = "";
+    }
+  }
   handleEnterAddVarient = (e) => {
-    if(e.key === 'Enter' && this.tagName.value !== ""){
-      // this.handleClickAddTag();
+    if(e.key === 'Enter'){
+      this.addVarient();
       e.preventDefault();
     }
   }
@@ -20,24 +30,30 @@ class Header extends React.Component {
 
   render(){
     return (
-      <Container fluid>
-        <Row>
-          Add a Varient:
-          <Col sm={3}>
-          
-            <InputGroup>
-                <FormControl
-                  placeholder="Varient Name"
-                  onKeyDown={this.handleEnterAddVarient}
-                  ref={this.setVariantText}
-                />
-                <InputGroup.Append>
-                  <Button variant="info">Add</Button>
-                </InputGroup.Append>
-              </InputGroup>
-          </Col>
-        </Row>
-      </Container>
+    <>
+      <Text>Add a Varient:</Text> 
+      <VariantAdd>
+        <InputGroup>
+          <FormControl
+            placeholder="Varient Name"
+            onKeyDown={this.handleEnterAddVarient}
+            ref={this.setVariantText}
+          />
+          <InputGroup.Append>
+            <Button onClick={this.addVarient} variant="info">Add</Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </VariantAdd>
+      <Button onClick={this.props.exportJson}>
+        Export
+      </Button>  
+      <Button>
+        <BsArrowsExpand/>
+      </Button>         
+      <Button>
+        <BsArrowsCollapse/>
+      </Button>
+    </>
     )
   }
 }

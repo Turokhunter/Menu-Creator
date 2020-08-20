@@ -1,6 +1,3 @@
-
-
-
 export function createMapping(options){
     var newMapping = {};
     var arr1 = [], arr2 = [];
@@ -58,4 +55,8 @@ export function createMapping(options){
         newMapping[lst.join("&")] = "";
     });
     return newMapping;
+}
+
+export function createJsonFile(state, tasks, columns){
+  console.log("Working to here");
 }
