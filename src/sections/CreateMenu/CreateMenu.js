@@ -14,7 +14,9 @@ const CreateMenu = ({data,
                      handleClickAddTag,
                      handleClickDeleteOption,
                      handleUpdatingOptionOrder,
-                     handleClickDuplicateOption}) => {
+                     handleClickDuplicateOption,
+                     handleSetPrice,
+                    }) => {
    const { height } = useWindowDimensions();
   return (
     <>
@@ -34,7 +36,7 @@ const CreateMenu = ({data,
         />
       </BodySizing>
       <FootSizing>
-        <Footer data = {data}/>
+        <Footer data = {data} handleSetPrice = {handleSetPrice}/>
       </FootSizing>
     </>
   )

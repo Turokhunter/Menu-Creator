@@ -2,6 +2,7 @@ import React from 'react';
 import CreateMenu from './CreateMenu'
 import SplitPane from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels, ResizerPanel} from './style.js'
+import {createMapping} from './util';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
@@ -24,7 +25,7 @@ class Sections extends React.Component {
         type : "dropdown",
         priceDiff : false,
         selected : "",
-        items : [{id:"dd1", name:"One Holder"},{id:"dd2", name:"Two Holder"}]
+        items : [{id:"dd0t1", name:"One Holder"},{id:"dd0t2", name:"Two Holder"}]
     },{
       id : "cp" + this.counter.cp++,
       name : "Color",
@@ -136,7 +137,7 @@ class Sections extends React.Component {
 
   handleClickAddTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
-    options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
+    options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)})
   }
@@ -174,6 +175,11 @@ class Sections extends React.Component {
     this.setState({options: options});
   }
 
+  handleSetPrice = () => {
+    const newMapping = createMapping(this.state.options);
+    this.setState({mapping: newMapping});
+  }
+
   render(){
     return (
       <Panels>
@@ -188,13 +194,14 @@ class Sections extends React.Component {
           handleClickDeleteOption = {this.handleClickDeleteOption}
           handleUpdatingOptionOrder = {this.handleUpdatingOptionOrder}
           handleClickDuplicateOption = {this.handleClickDuplicateOption}
+          handleSetPrice = {this.handleSetPrice}
         />
       </LeftPanel>
       <RightPanel>
         <ResizerPanel>
           <SplitPane split="horizontal" paneStyle={{overflow:"auto", display:"inline"}} defaultSize="0%" >
             <MenuVis data = {this.state} />          
-            <PriceSetVis/>
+            <PriceSetVis />
           </SplitPane>
         </ResizerPanel>
       </RightPanel>

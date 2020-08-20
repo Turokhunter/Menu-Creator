@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
-// import PriceVis from './PriceVis';
-import {HeaderSizing, BodySizing, FootSizing} from './style';
+import PriceVis from './PriceVis';
+import {HeaderSizing, BodySizing} from './style';
 import useWindowDimensions from '../getWindow';
 
 
@@ -13,7 +13,7 @@ const PriceSetVis = ({mapping}) => {
         <Header/>
       </HeaderSizing>
       <BodySizing height={(height - 125)+"px"}>
-        {/* <PriceVis mapping={mapping} /> */}
+        <PriceVis mapping={mapping} />
       </BodySizing>
     </>
   )

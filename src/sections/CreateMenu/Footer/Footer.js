@@ -2,7 +2,7 @@ import React from 'react';
 import {MyFooterButton, MyText} from './style';
 import { Row, Col, Container} from 'react-bootstrap';
 
-const Footer = ({data}) => {
+const Footer = ({data, handleSetPrice}) => {
   return (
     <Container>
       <Row className="d-flex justify-content-between">
@@ -11,7 +11,7 @@ const Footer = ({data}) => {
             Number of Varients: {data.numVarients}
           </MyText>
         </Col>
-          <MyFooterButton>Set Price</MyFooterButton>
+          <MyFooterButton onClick={handleSetPrice}>Set Price</MyFooterButton>
       </Row>
     </Container>
   )
