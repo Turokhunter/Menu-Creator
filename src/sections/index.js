@@ -32,7 +32,7 @@ class Sections extends React.Component {
       type : "colorpicker",
       priceDiff : false,
       colorId : "",
-      colorEnclusion:"all",
+      colorInclusion:"all",
       items : [{id: "atm-neongreen", name: "Atomic Trans Neon Green"},
               {id: "hb-green", name: "HatchBox Green"},
               {id: "hb-gold", name: "HatchBox Gold"},
@@ -45,7 +45,7 @@ class Sections extends React.Component {
       type : "colorpicker",
       priceDiff : false,
       colorId : "",
-      colorEnclusion:"all",
+      colorInclusion:"all",
       items : []
     }]
   }
@@ -95,7 +95,7 @@ class Sections extends React.Component {
         type : "colorpicker",
         priceDiff : false,
         colorId : "",
-        colorEnclusion:"all",
+        colorInclusion:"all",
         items : []
         //Optional: includeColor : []
         //Optional: excludeColor : []
@@ -179,8 +179,8 @@ class Sections extends React.Component {
     const newMapping = createMapping(this.state.options);
     this.setState({mapping: newMapping});
   }
-  exportJson = (tasks, columns) => {
-    createJsonFile(this.state, tasks, columns);
+  exportJson = (columns) => {
+    createJsonFile(this.state, columns);
   }
 
   render(){
@@ -202,7 +202,11 @@ class Sections extends React.Component {
       </LeftPanel>
       <RightPanel>
         <ResizerPanel>
-          <SplitPane split="horizontal" style={{position:"relative"}} paneStyle={{overflow:"auto", display:"inline"}} defaultSize="0%" >
+          <SplitPane split="horizontal" 
+            style={{position:"relative"}} 
+            paneStyle={{overflow:"auto", display:"inline"}} 
+            defaultSize="0%" 
+            >
             <MenuVis data={this.state} />          
             <PriceSetVis mapping={this.state.mapping} exportJson={this.exportJson} />
           </SplitPane>

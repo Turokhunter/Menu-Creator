@@ -37,12 +37,12 @@ const DropdownMenu =  ({option}) => {
 
 const ColorPickerMenu = ({option, filament}) => {
   var selectedFilament = getColors(option, filament);
-  
+  console.log(option);
   //Have to figure out what is shown and what won't be
   return (
     <>
       <Row>
-        <MenuH3>{option.name}</MenuH3>
+        <MenuH3>{option.name}{option.colorId !== "" ? ": " + option.colorId : ""}</MenuH3>
       </Row>
       <Row>
         {selectedFilament.map((item) => (

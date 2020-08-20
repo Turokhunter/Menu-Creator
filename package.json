@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.5.2",
+    "file-saver": "^2.0.2",
     "react": "^16.13.1",
     "react-autosuggest": "^10.0.2",
     "react-beautiful-dnd": "^13.0.0",
@@ -15,6 +16,7 @@
     "react-draggable-tags": "^1.0.1",
     "react-grid-layout": "^1.0.0",
     "react-icons": "^3.10.0",
+    "react-resize-detector": "^5.0.7",
     "react-scripts": "^3.4.3",
     "react-split-pane": "^0.1.92",
     "styled-components": "^5.1.1"

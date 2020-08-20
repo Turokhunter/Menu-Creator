@@ -1,6 +1,6 @@
 export const getColors = (option, filament) => {
     var selectedFilament = [];
-    if(option.colorEnclusion === "exclude"){
+    if(option.colorInclusion === "exclude"){
       selectedFilament = filament.filter(color => {
         for(const item of option.items){
           if(item.id === color.id){
@@ -9,7 +9,7 @@ export const getColors = (option, filament) => {
         }
         return true;
       });
-    } else if(option.colorEnclusion === "include"){
+    } else if(option.colorInclusion === "include"){
       selectedFilament = filament.filter( el =>{
         return option.items.some(f => {
             return el.id === f.id;

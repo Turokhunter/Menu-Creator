@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, InputGroup, FormControl, Container, Row, Col} from 'react-bootstrap'
-import {Text, VariantAdd} from './sytle'
+import {Button, InputGroup, FormControl} from 'react-bootstrap'
+import {Text, VariantAdd, LeftSideHeader, RightSideHeader, MyMenuButton} from './sytle'
 import {BsArrowsExpand, BsArrowsCollapse} from 'react-icons/bs';
 
 
@@ -31,28 +31,32 @@ class Header extends React.Component {
   render(){
     return (
     <>
-      <Text>Add a Varient:</Text> 
-      <VariantAdd>
-        <InputGroup>
-          <FormControl
-            placeholder="Varient Name"
-            onKeyDown={this.handleEnterAddVarient}
-            ref={this.setVariantText}
-          />
-          <InputGroup.Append>
-            <Button onClick={this.addVarient} variant="info">Add</Button>
-          </InputGroup.Append>
-        </InputGroup>
-      </VariantAdd>
-      <Button onClick={this.props.exportJson}>
-        Export
-      </Button>  
-      <Button>
-        <BsArrowsExpand/>
-      </Button>         
-      <Button>
-        <BsArrowsCollapse/>
-      </Button>
+      <LeftSideHeader>
+        <Text>Add a Varient:</Text> 
+        <VariantAdd>
+          <InputGroup>
+            <FormControl
+              placeholder="Varient Name"
+              onKeyDown={this.handleEnterAddVarient}
+              ref={this.setVariantText}
+            />
+            <InputGroup.Append>
+              <Button onClick={this.addVarient} variant="info">Add</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </VariantAdd>
+        <Button onClick={this.props.exportJson}>
+          Export
+        </Button>  
+      </LeftSideHeader>
+      <RightSideHeader>
+        <MyMenuButton variant="light">
+          <BsArrowsCollapse/>
+        </MyMenuButton>
+        <MyMenuButton variant="light">
+          <BsArrowsExpand/>
+        </MyMenuButton>  
+      </RightSideHeader>
     </>
     )
   }

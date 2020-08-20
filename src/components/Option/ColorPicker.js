@@ -98,7 +98,7 @@ class ColorPicker extends React.Component {
       placeholder: 'Color',
       value:color,
       onChange: this.setColor,
-      disabled : this.props.option.colorEnclusion === "all"
+      disabled : this.props.option.colorInclusion === "all"
     };
     const theme = {
       container: 'autosuggest',
@@ -140,9 +140,9 @@ class ColorPicker extends React.Component {
                     <RadioLabel className="radio-inline">
                       <input
                         type="radio"
-                        name="colorEnclusion"
+                        name="colorInclusion"
                         value="all"
-                        checked={this.props.option.colorEnclusion === "all"}
+                        checked={this.props.option.colorInclusion === "all"}
                         onChange={this.props.handleUpdate}
                         className="form-check-input"
                       />
@@ -151,10 +151,10 @@ class ColorPicker extends React.Component {
                     <RadioLabel className="radio-inline">
                       <input
                         type="radio"
-                        name="colorEnclusion"
+                        name="colorInclusion"
                         value="include"
                         className="form-check-input"
-                        checked={this.props.option.colorEnclusion === "include"}
+                        checked={this.props.option.colorInclusion === "include"}
                         onChange={this.props.handleUpdate}
                       />
                       Include
@@ -162,10 +162,10 @@ class ColorPicker extends React.Component {
                     <RadioLabel className="radio-inline">
                       <input
                         type="radio"
-                        name="colorEnclusion"
+                        name="colorInclusion"
                         value="exclude"
                         className="form-check-input"
-                        checked={this.props.option.colorEnclusion === "exclude"}
+                        checked={this.props.option.colorInclusion === "exclude"}
                         onChange={this.props.handleUpdate}
                       />
                       Exclude
@@ -187,10 +187,10 @@ class ColorPicker extends React.Component {
             theme={theme}
           />
           <InputGroup.Append>
-            <Button onClick={this.handleClickAddAllColor} variant="info" disabled={this.props.option.colorEnclusion === "all"}>Add All</Button>
+            <Button onClick={this.handleClickAddAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Add All</Button>
           </InputGroup.Append>
           <InputGroup.Append>
-            <Button onClick={this.handleClickClearAllColor} variant="info" disabled={this.props.option.colorEnclusion === "all"}>Clear All</Button>
+            <Button onClick={this.handleClickClearAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Clear All</Button>
           </InputGroup.Append>
         </InputGroup>
 

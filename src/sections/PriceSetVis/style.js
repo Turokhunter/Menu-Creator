@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const HeaderSizing = styled.div `
   display:flex;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:space-between;
   z-index: 10;
   height: 55px;
   border-radius: 3px;

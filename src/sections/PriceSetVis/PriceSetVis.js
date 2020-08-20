@@ -35,7 +35,7 @@ class PriceSetVis extends React.Component{
   }
 
   exportJson = () => {
-    this.props.exportJson(this.state.tasks, this.state.columns);
+    this.props.exportJson(this.state.columns);
   }
 
   addColumns = (variantName) => {

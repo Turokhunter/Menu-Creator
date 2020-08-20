@@ -1,3 +1,5 @@
+import { saveAs } from 'file-saver';
+
 export function createMapping(options){
     var newMapping = {};
     var arr1 = [], arr2 = [];
@@ -57,6 +59,55 @@ export function createMapping(options){
     return newMapping;
 }
 
-export function createJsonFile(state, tasks, columns){
-  console.log("Working to here");
+export function createJsonFile(state, columns){
+  var FileSaver = require('file-saver');
+  var newMapping = {};
+  var newOptions = [];
+
+  for(const [key, column] of Object.entries(columns)){
+    if(key === "unassigned"){
+      continue;
+    }
+    column.taskIds.forEach((id)=>{
+      newMapping[id] = column.id;
+    });
+  }
+
+  state.options.forEach((option)=>{
+    if(option.type === "colorpicker"){
+      let newOption  = {...option};
+      if(option.colorInclusion == "all"){
+        //do nothing
+      } else if (option.colorInclusion == "include"){
+        var color = [];
+        option.items.forEach((item)=>{
+          color.push(item.id);
+        });
+        newOption["includeColor"] = color;
+      } else if (option.colorInclusion == "exclude"){
+        var color = [];
+        option.items.forEach((item)=>{
+          color.push(item.id);
+        });
+        newOption["excludeColor"] = color;
+      }
+      delete newOption.colorInclusion;
+      delete newOption.items;
+      newOptions.push(newOption);
+    } else if(option.type === "dropdown"){
+      newOptions.push(option);
+    } else if(option.type === "checkbox"){
+      newOptions.push(option);
+    }
+  });
+
+
+
+  const jsonFile = {mapping: newMapping,
+                    options: newOptions}
+  console.log(jsonFile);
+  var jsonse = JSON.stringify(jsonFile, null, 2);
+
+  var blob = new Blob([jsonse], {type: "application/json"});
+  FileSaver.saveAs(blob, "file.json");
 }
