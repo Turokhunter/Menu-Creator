@@ -141,7 +141,13 @@ class Sections extends React.Component {
 
   handleClickAddTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
-    options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
+    if(options[idx].type === "colorpicker"){
+      options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
+    } else {
+      options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
+    }
+
+    console.log(options);
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)})
   }
