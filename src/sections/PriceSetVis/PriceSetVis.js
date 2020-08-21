@@ -3,35 +3,24 @@ import Header from './Header';
 import PriceVis from './PriceVis';
 import {HeaderSizing, BodySizing} from './style';
 
-
+// 'task-1': {id:'task-1', content: "First one"},
+//             'task-2': {id:'task-2', content: "Second one"},
+//             'task-3': {id:'task-3', content: "Thrid one"},
+//             'task-4': {id:'task-4', content: "Fourth one"},
+//             'task-5': {id:'task-5', content: "Fifth one"}
+//'task-1', 'task-2', 'task-3', 'task-4', 'task-5'
 class PriceSetVis extends React.Component{
 
   state = {
     mapping : this.props.mapping,
-    tasks : {
-            'task-1': {id:'task-1', content: "First one"},
-            'task-2': {id:'task-2', content: "Second one"},
-            'task-3': {id:'task-3', content: "Thrid one"},
-            'task-4': {id:'task-4', content: "Fourth one"},
-            'task-5': {id:'task-5', content: "Fifth one"}
-            },
+    tasks : {},
     columns: { 'unassigned':{
                 id: 'unassigned',
                 title: 'Unassigned Variants',
-                taskIds:['task-1', 'task-2', 'task-3', 'task-4', 'task-5']
-                },
-                'column-1':{
-                  id: 'column-1',
-                  title: 'Example 1',
-                  taskIds:[]
-                },
-                'column-2':{
-                  id: 'column-2',
-                  title: 'Example 2',
-                  taskIds:[]
-                },
+                taskIds:[]
+                }
               },
-    columnOrder: ['unassigned', 'column-1', 'column-2']
+    columnOrder: ['unassigned']
   }
 
   exportJson = () => {

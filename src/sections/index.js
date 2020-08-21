@@ -6,6 +6,43 @@ import {createMapping, createJsonFile} from './util';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
+// {
+//   id : "cb" + this.counter.cb++,
+//   name : "Fully Assembled",
+//   type : "checkbox",
+//   priceDiff : false,
+//   selected : false
+// },{
+//   id : "dd" + this.counter.dd++,
+//     name : "Holder",
+//     type : "dropdown",
+//     priceDiff : false,
+//     selected : "",
+//     items : [{id:"dd0t1", name:"One Holder"},{id:"dd0t2", name:"Two Holder"}]
+// },{
+//   id : "cp" + this.counter.cp++,
+//   name : "Color",
+//   type : "colorpicker",
+//   priceDiff : false,
+//   colorId : "",
+//   colorInclusion:"all",
+//   items : [{id: "atm-neongreen", name: "Atomic Trans Neon Green"},
+//           {id: "hb-green", name: "HatchBox Green"},
+//           {id: "hb-gold", name: "HatchBox Gold"},
+//           {id: "pru-opalgreen", name: "Prusa Opal Green"},
+//           {id: "hb-blue", name: "HatchBox Blue"},
+//           {id: "php-oceanblue", name: "Push Ocean Blue"}]
+// },{
+//   id : "cp" + this.counter.cp++,
+//   name : "Color2",
+//   type : "colorpicker",
+//   priceDiff : false,
+//   colorId : "",
+//   colorInclusion:"all",
+//   items : []
+// }
+
+
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
   counter = {cb: 0, dd: 0, cp: 0};
@@ -14,41 +51,7 @@ class Sections extends React.Component {
     height : window.innerHeight - 70,
     mapping : [],
     numVarients : 0,
-    options : [{
-      id : "cb" + this.counter.cb++,
-      name : "Fully Assembled",
-      type : "checkbox",
-      priceDiff : false,
-      selected : false
-    },{
-      id : "dd" + this.counter.dd++,
-        name : "Holder",
-        type : "dropdown",
-        priceDiff : false,
-        selected : "",
-        items : [{id:"dd0t1", name:"One Holder"},{id:"dd0t2", name:"Two Holder"}]
-    },{
-      id : "cp" + this.counter.cp++,
-      name : "Color",
-      type : "colorpicker",
-      priceDiff : false,
-      colorId : "",
-      colorInclusion:"all",
-      items : [{id: "atm-neongreen", name: "Atomic Trans Neon Green"},
-              {id: "hb-green", name: "HatchBox Green"},
-              {id: "hb-gold", name: "HatchBox Gold"},
-              {id: "pru-opalgreen", name: "Prusa Opal Green"},
-              {id: "hb-blue", name: "HatchBox Blue"},
-              {id: "php-oceanblue", name: "Push Ocean Blue"}]
-    },{
-      id : "cp" + this.counter.cp++,
-      name : "Color2",
-      type : "colorpicker",
-      priceDiff : false,
-      colorId : "",
-      colorInclusion:"all",
-      items : []
-    }]
+    options : []
   }
 
   determineNumberofVarients = (options) => {
