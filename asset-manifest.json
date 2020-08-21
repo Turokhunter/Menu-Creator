@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Turokhunter/Menu-Creator/static/css/main.96a3209a.chunk.css",
-    "main.js": "/Turokhunter/Menu-Creator/static/js/main.21d8b633.chunk.js",
-    "main.js.map": "/Turokhunter/Menu-Creator/static/js/main.21d8b633.chunk.js.map",
-    "runtime-main.js": "/Turokhunter/Menu-Creator/static/js/runtime-main.dab562b3.js",
-    "runtime-main.js.map": "/Turokhunter/Menu-Creator/static/js/runtime-main.dab562b3.js.map",
-    "static/css/2.ca784722.chunk.css": "/Turokhunter/Menu-Creator/static/css/2.ca784722.chunk.css",
-    "static/js/2.ec4d95fb.chunk.js": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js",
-    "static/js/2.ec4d95fb.chunk.js.map": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js.map",
-    "index.html": "/Turokhunter/Menu-Creator/index.html",
-    "precache-manifest.3511d0657234df254f471a8a831e51e5.js": "/Turokhunter/Menu-Creator/precache-manifest.3511d0657234df254f471a8a831e51e5.js",
-    "service-worker.js": "/Turokhunter/Menu-Creator/service-worker.js",
-    "static/css/2.ca784722.chunk.css.map": "/Turokhunter/Menu-Creator/static/css/2.ca784722.chunk.css.map",
-    "static/css/main.96a3209a.chunk.css.map": "/Turokhunter/Menu-Creator/static/css/main.96a3209a.chunk.css.map",
-    "static/js/2.ec4d95fb.chunk.js.LICENSE.txt": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js.LICENSE.txt",
-    "static/media/delete.png": "/Turokhunter/Menu-Creator/static/media/delete.3df96e6b.png"
+    "main.css": "/Menu-Creator/static/css/main.96a3209a.chunk.css",
+    "main.js": "/Menu-Creator/static/js/main.34db44e7.chunk.js",
+    "main.js.map": "/Menu-Creator/static/js/main.34db44e7.chunk.js.map",
+    "runtime-main.js": "/Menu-Creator/static/js/runtime-main.8168d109.js",
+    "runtime-main.js.map": "/Menu-Creator/static/js/runtime-main.8168d109.js.map",
+    "static/css/2.ca784722.chunk.css": "/Menu-Creator/static/css/2.ca784722.chunk.css",
+    "static/js/2.eef0afb1.chunk.js": "/Menu-Creator/static/js/2.eef0afb1.chunk.js",
+    "static/js/2.eef0afb1.chunk.js.map": "/Menu-Creator/static/js/2.eef0afb1.chunk.js.map",
+    "index.html": "/Menu-Creator/index.html",
+    "precache-manifest.decdfe561c9a65dcaba36314225e4bcc.js": "/Menu-Creator/precache-manifest.decdfe561c9a65dcaba36314225e4bcc.js",
+    "service-worker.js": "/Menu-Creator/service-worker.js",
+    "static/css/2.ca784722.chunk.css.map": "/Menu-Creator/static/css/2.ca784722.chunk.css.map",
+    "static/css/main.96a3209a.chunk.css.map": "/Menu-Creator/static/css/main.96a3209a.chunk.css.map",
+    "static/js/2.eef0afb1.chunk.js.LICENSE.txt": "/Menu-Creator/static/js/2.eef0afb1.chunk.js.LICENSE.txt",
+    "static/media/delete.png": "/Menu-Creator/static/media/delete.3df96e6b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.dab562b3.js",
+    "static/js/runtime-main.8168d109.js",
     "static/css/2.ca784722.chunk.css",
-    "static/js/2.ec4d95fb.chunk.js",
+    "static/js/2.eef0afb1.chunk.js",
     "static/css/main.96a3209a.chunk.css",
-    "static/js/main.21d8b633.chunk.js"
+    "static/js/main.34db44e7.chunk.js"
   ]
 }
