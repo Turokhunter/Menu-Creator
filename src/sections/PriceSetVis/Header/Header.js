@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, InputGroup, FormControl} from 'react-bootstrap'
-import {Text, VariantAdd, LeftSideHeader, RightSideHeader, MyMenuButton} from './sytle'
-import {BsArrowsExpand, BsArrowsCollapse} from 'react-icons/bs';
+import {Text, VariantAdd, LeftSideHeader, RightSideHeader, MyMenuButton,MyExport} from './sytle'
+import {MdExpandLess, MdExpandMore} from 'react-icons/md';
 
 
 class Header extends React.Component {
@@ -45,16 +45,16 @@ class Header extends React.Component {
             </InputGroup.Append>
           </InputGroup>
         </VariantAdd>
-        <Button onClick={this.props.exportJson}>
+        <MyExport onClick={this.props.exportJson}>
           Export
-        </Button>  
+        </MyExport>  
       </LeftSideHeader>
       <RightSideHeader>
-        <MyMenuButton variant="light">
-          <BsArrowsCollapse/>
+        <MyMenuButton onClick={(e)=>this.props.changeHeight("down")} variant="light">
+          <MdExpandMore/>
         </MyMenuButton>
-        <MyMenuButton variant="light">
-          <BsArrowsExpand/>
+        <MyMenuButton onClick={(e)=>this.props.changeHeight("up")}variant="light">
+          <MdExpandLess/>
         </MyMenuButton>  
       </RightSideHeader>
     </>

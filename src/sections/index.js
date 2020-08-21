@@ -11,6 +11,7 @@ class Sections extends React.Component {
   counter = {cb: 0, dd: 0, cp: 0};
 
   state = {
+    height : window.innerHeight - 70,
     mapping : [],
     numVarients : 0,
     options : [{
@@ -178,12 +179,27 @@ class Sections extends React.Component {
   handleSetPrice = () => {
     const newMapping = createMapping(this.state.options);
     this.setState({mapping: newMapping});
+    this.setState({height: window.innerHeight/2})
   }
   exportJson = (columns) => {
     createJsonFile(this.state, columns);
   }
 
+  changeHeight=(direction)=>{
+    if(direction ==="up"){
+      this.setState({height: 50});
+    } else {
+      this.setState({height: window.innerHeight-70});
+    }
+  }
+
+  updateHeight = (size)=>{
+    this.setState({height: size});
+  }
+  
+
   render(){
+    const height = window.innerHeight - this.state.height - 70;
     return (
       <Panels>
       <LeftPanel>
@@ -204,11 +220,17 @@ class Sections extends React.Component {
         <ResizerPanel>
           <SplitPane split="horizontal" 
             style={{position:"relative"}} 
-            paneStyle={{overflow:"auto", display:"inline"}} 
-            defaultSize="0%" 
+            paneStyle={{overflow:"auto", display:"inline"}}
+            size={this.state.height}
+            onDragFinished={this.updateHeight}
             >
             <MenuVis data={this.state} />          
-            <PriceSetVis mapping={this.state.mapping} exportJson={this.exportJson} />
+            <PriceSetVis 
+              mapping={this.state.mapping} 
+              exportJson={this.exportJson} 
+              changeHeight={this.changeHeight}
+              height={height}
+              />
           </SplitPane>
         </ResizerPanel>
       </RightPanel>

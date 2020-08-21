@@ -65,4 +65,10 @@ export const ResizerPanel = styled.div`
 .Resizer.disabled:hover {
   border-color: transparent;
 }
+// .Pane {
+//   -webkit-transition:height .6s ease-in-out;
+//   transition:height .6s ease-in-out;
+//   -moz-transition: height .6s ease-in-out;
+// }
+
 `;

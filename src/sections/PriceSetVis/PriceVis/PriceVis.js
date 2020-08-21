@@ -10,7 +10,7 @@ class PriceVis extends React.Component {
     if(!destination){
       return;
     }
-    console.log("after destination");
+    
     if(destination.droppableId === source.droppableId 
       && destination.index === source.index){
         return;
@@ -56,7 +56,11 @@ class PriceVis extends React.Component {
           const column = this.props.columns[columnId];
           const tasks = column.taskIds.map(taskId => this.props.tasks[taskId]);
 
-          return <Column key={column.id} column={column} tasks={tasks} />;
+          return <Column key={column.id} 
+                        column={column} 
+                        tasks={tasks} 
+                        deleteColumn={this.props.deleteColumn} 
+                        updateColumnName={this.props.updateColumnName}/>;
           })}
         </ColumnContainer>
       </DragDropContext>

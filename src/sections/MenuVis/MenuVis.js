@@ -37,7 +37,6 @@ const DropdownMenu =  ({option}) => {
 
 const ColorPickerMenu = ({option, filament}) => {
   var selectedFilament = getColors(option, filament);
-  console.log(option);
   //Have to figure out what is shown and what won't be
   return (
     <>

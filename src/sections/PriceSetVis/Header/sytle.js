@@ -27,3 +27,7 @@ export const MyMenuButton = styled(Button)`
   color: black;
   border-color: transparent;
 `;
+
+export const MyExport = styled(Button)`
+  margin-left:10px;
+`;

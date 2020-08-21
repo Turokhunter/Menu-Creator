@@ -1,0 +1,16 @@
+.VariantTitle {
+  padding: 8px;
+  padding-right: 40px;
+  font-size: 1.75rem;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+};
+
+.VariantInput{
+  padding: 8px;
+  padding-right: 40px;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+}

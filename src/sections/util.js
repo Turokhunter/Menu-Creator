@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+
 
 export function createMapping(options){
     var newMapping = {};
@@ -69,22 +69,22 @@ export function createJsonFile(state, columns){
       continue;
     }
     column.taskIds.forEach((id)=>{
-      newMapping[id] = column.id;
+      newMapping[id] = column.title;
     });
   }
 
   state.options.forEach((option)=>{
     if(option.type === "colorpicker"){
       let newOption  = {...option};
-      if(option.colorInclusion == "all"){
+      if(option.colorInclusion === "all"){
         //do nothing
-      } else if (option.colorInclusion == "include"){
+      } else if (option.colorInclusion === "include"){
         var color = [];
         option.items.forEach((item)=>{
           color.push(item.id);
         });
         newOption["includeColor"] = color;
-      } else if (option.colorInclusion == "exclude"){
+      } else if (option.colorInclusion === "exclude"){
         var color = [];
         option.items.forEach((item)=>{
           color.push(item.id);
@@ -105,7 +105,6 @@ export function createJsonFile(state, columns){
 
   const jsonFile = {mapping: newMapping,
                     options: newOptions}
-  console.log(jsonFile);
   var jsonse = JSON.stringify(jsonFile, null, 2);
 
   var blob = new Blob([jsonse], {type: "application/json"});

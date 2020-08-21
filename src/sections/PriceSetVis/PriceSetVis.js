@@ -35,6 +35,10 @@ class PriceSetVis extends React.Component{
   }
 
   exportJson = () => {
+    if(this.state.columns['unassigned'].taskIds.length > 0){
+      alert("There are still some prices not assigned.");
+      return;
+    }
     this.props.exportJson(this.state.columns);
   }
 
@@ -70,7 +74,20 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
-
+  updateColumnName = (name, columnId)=>{
+    const newColumn = {
+      ...this.state.columns[columnId],
+      title:name
+    }
+    const newState = {
+      ...this.state,
+      columns: {
+        ...this.state.columns,
+        [columnId]: newColumn,
+      },
+    };
+    this.setState(newState);
+  }
   updateColumns = (newColumn)=>{
     const newState = {
       ...this.state,
@@ -81,7 +98,19 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
-
+  deleteColumn =(columnId)=> {
+    const taskIds = Array.from(this.state.columns[columnId].taskIds);
+    const newColumnOrder = Array.from(this.state.columnOrder);
+    newColumnOrder.splice(newColumnOrder.indexOf(columnId), 1);
+    this.setState({columnOrder : newColumnOrder});
+    const newColumns = {...this.state.columns};
+    const unassigned = this.state.columns.unassigned;
+    const updateUnassigned = { ...unassigned,
+                                taskIds : unassigned.taskIds.concat(taskIds)};
+    delete newColumns[columnId];
+    newColumns.unassigned = updateUnassigned;
+    this.setState({columns: newColumns});
+  }
   componentDidUpdate(prevProps, prevState) {
     // Don't forget to compare states    
     if (this.props.mapping !== prevProps.mapping) {
@@ -93,30 +122,38 @@ class PriceSetVis extends React.Component{
       }
  
       this.setState({tasks: tasks});
-      this.setState(prevState => ({
-        columns: {
-          ...prevState.columns,
-          unassigned: {
+      var newColumns = {}
+      for(const [key, column] of Object.entries(prevState.columns)){
+        if(key === "unassigned"){
+          newColumns["unassigned"] =  {
             ...prevState.columns.unassigned,
             taskIds : lstTasks
           }
+        } else {
+          newColumns[key] = {
+            ...column,
+            taskIds : []
+          }
         }
-      }))
-
+      }
+      this.setState({columns: newColumns});
     }
   }
   render(){
     return (
       <>
         <HeaderSizing>
-          <Header addColumns={this.addColumns} exportJson={this.exportJson} />
+          <Header addColumns={this.addColumns} exportJson={this.exportJson} changeHeight={this.props.changeHeight}/>
         </HeaderSizing>
-        <BodySizing >
+        <BodySizing height={this.props.height+"px"}>
           <PriceVis tasks={this.state.tasks}
                     columns={this.state.columns}
                     columnOrder={this.state.columnOrder}
                     updateColumns = {this.updateColumns}
-                    updateLists ={this.updateLists} />
+                    updateLists ={this.updateLists} 
+                    deleteColumn ={this.deleteColumn}
+                    updateColumnName = {this.updateColumnName}
+                    />
         </BodySizing>
       </>
     )
