@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Turokhunter/Menu-Creator/precache-manifest.9a21a9b73bde752bc57cb2f896d33028.js"
+  "/Turokhunter/Menu-Creator/precache-manifest.3511d0657234df254f471a8a831e51e5.js"
 );
 
 self.addEventListener('message', (event) => {

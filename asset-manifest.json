@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/Turokhunter/Menu-Creator/static/css/main.96a3209a.chunk.css",
-    "main.js": "/Turokhunter/Menu-Creator/static/js/main.279cae3c.chunk.js",
-    "main.js.map": "/Turokhunter/Menu-Creator/static/js/main.279cae3c.chunk.js.map",
-    "runtime-main.js": "/Turokhunter/Menu-Creator/static/js/runtime-main.ba05d7d6.js",
-    "runtime-main.js.map": "/Turokhunter/Menu-Creator/static/js/runtime-main.ba05d7d6.js.map",
+    "main.js": "/Turokhunter/Menu-Creator/static/js/main.21d8b633.chunk.js",
+    "main.js.map": "/Turokhunter/Menu-Creator/static/js/main.21d8b633.chunk.js.map",
+    "runtime-main.js": "/Turokhunter/Menu-Creator/static/js/runtime-main.dab562b3.js",
+    "runtime-main.js.map": "/Turokhunter/Menu-Creator/static/js/runtime-main.dab562b3.js.map",
     "static/css/2.ca784722.chunk.css": "/Turokhunter/Menu-Creator/static/css/2.ca784722.chunk.css",
-    "static/js/2.0e38a8bb.chunk.js": "/Turokhunter/Menu-Creator/static/js/2.0e38a8bb.chunk.js",
-    "static/js/2.0e38a8bb.chunk.js.map": "/Turokhunter/Menu-Creator/static/js/2.0e38a8bb.chunk.js.map",
+    "static/js/2.ec4d95fb.chunk.js": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js",
+    "static/js/2.ec4d95fb.chunk.js.map": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js.map",
     "index.html": "/Turokhunter/Menu-Creator/index.html",
-    "precache-manifest.9a21a9b73bde752bc57cb2f896d33028.js": "/Turokhunter/Menu-Creator/precache-manifest.9a21a9b73bde752bc57cb2f896d33028.js",
+    "precache-manifest.3511d0657234df254f471a8a831e51e5.js": "/Turokhunter/Menu-Creator/precache-manifest.3511d0657234df254f471a8a831e51e5.js",
     "service-worker.js": "/Turokhunter/Menu-Creator/service-worker.js",
     "static/css/2.ca784722.chunk.css.map": "/Turokhunter/Menu-Creator/static/css/2.ca784722.chunk.css.map",
     "static/css/main.96a3209a.chunk.css.map": "/Turokhunter/Menu-Creator/static/css/main.96a3209a.chunk.css.map",
-    "static/js/2.0e38a8bb.chunk.js.LICENSE.txt": "/Turokhunter/Menu-Creator/static/js/2.0e38a8bb.chunk.js.LICENSE.txt",
+    "static/js/2.ec4d95fb.chunk.js.LICENSE.txt": "/Turokhunter/Menu-Creator/static/js/2.ec4d95fb.chunk.js.LICENSE.txt",
     "static/media/delete.png": "/Turokhunter/Menu-Creator/static/media/delete.3df96e6b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.ba05d7d6.js",
+    "static/js/runtime-main.dab562b3.js",
     "static/css/2.ca784722.chunk.css",
-    "static/js/2.0e38a8bb.chunk.js",
+    "static/js/2.ec4d95fb.chunk.js",
     "static/css/main.96a3209a.chunk.css",
-    "static/js/main.279cae3c.chunk.js"
+    "static/js/main.21d8b633.chunk.js"
   ]
 }
