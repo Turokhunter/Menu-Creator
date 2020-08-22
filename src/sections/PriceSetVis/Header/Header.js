@@ -1,6 +1,11 @@
 import React from 'react';
 import {Button, InputGroup, FormControl} from 'react-bootstrap'
-import {Text, VariantAdd, LeftSideHeader, RightSideHeader, MyMenuButton,MyExport} from './sytle'
+import {Text, 
+        VariantAdd,
+        LeftSideHeader,
+        RightSideHeader,
+        MyMenuButton,
+        MyExport} from './sytle'
 import {MdExpandLess, MdExpandMore} from 'react-icons/md';
 
 
@@ -45,6 +50,9 @@ class Header extends React.Component {
             </InputGroup.Append>
           </InputGroup>
         </VariantAdd>
+        <MyExport onClick={this.props.genereteOnetoOne}>
+          Create Variant for Each
+        </MyExport>
         <MyExport onClick={this.props.exportJson}>
           Export
         </MyExport>  

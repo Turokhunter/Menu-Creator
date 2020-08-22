@@ -40,3 +40,12 @@ export const ColCloseButton = styled(Button)`
   top: 0px;
   right: 0px;
 `;
+
+export const OverFlowText = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  :hover {
+    overflow:visible;
+  }
+`;

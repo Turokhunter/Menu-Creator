@@ -13,6 +13,5 @@ export const HeaderSizing = styled.div `
 
 export const BodySizing = styled.div `
   overflow: auto;
-  overflow-x:hidden;
   height: ${props => props.height};
 `;

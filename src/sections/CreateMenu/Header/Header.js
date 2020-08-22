@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Button} from 'react-bootstrap'
 
-const Header = ({handleAdd}) => {
+const Header = ({handleAdd, importJson}) => {
   return (
     <>
     Options:{' '}

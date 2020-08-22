@@ -2,7 +2,7 @@ import React from 'react';
 import Task from './task'
 import {Droppable} from 'react-beautiful-dnd';
 import { GrClose } from 'react-icons/gr';
-import {RowContainer, Title, TaskList, ColCloseButton} from './style';
+import {RowContainer, Title, TaskList, ColCloseButton, OverFlowText} from './style';
 import EditableLabel from 'react-inline-editing';
 import './style.css';
 
@@ -10,7 +10,7 @@ export default class Column extends React.Component {
   render(){
     return(
       <RowContainer>
-        <div>
+        <OverFlowText>
           {this.props.column.id !== 'unassigned'
             ? <EditableLabel 
                 text={this.props.column.title} 
@@ -25,7 +25,7 @@ export default class Column extends React.Component {
               <GrClose />
             </ColCloseButton>
           }
-        </div>
+        </OverFlowText>
         <Droppable droppableId={this.props.column.id }>
           {(provided, snapshot) => (
             <TaskList

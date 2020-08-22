@@ -54,7 +54,19 @@ export function createMapping(options){
         }
     });
     arr1.forEach((lst) =>{
-        newMapping[lst.join("&")] = "";
+      var easyRead = [];
+      lst.forEach((item) =>{
+        if(item.includes("dd")){
+          var keys = item.split("=")
+          const optionIdx = options.find(ele => ele.id === keys[0]);
+          const itemIdx = optionIdx.items.find(ele=>ele.id === keys[1]);
+          easyRead.push(keys[0] + "=" + itemIdx.name);
+        } else {
+          easyRead.push(item);
+        }        
+      });
+      const newLst = lst.join("&");
+      newMapping[newLst] = {id:newLst, easyRead: easyRead.join("&")};
     });
     return newMapping;
 }

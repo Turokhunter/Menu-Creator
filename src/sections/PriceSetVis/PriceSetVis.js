@@ -32,6 +32,10 @@ class PriceSetVis extends React.Component{
   }
 
   addColumns = (variantName) => {
+    if(this.state.columns.hasOwnProperty(variantName)){
+      alert("Can't use the same varient name.");
+      return;
+    }
     const newColumn = {
                         id: variantName,
                         title:variantName,
@@ -63,6 +67,34 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
+  genereteOnetoOne= () =>{
+    const unassigned = this.state.columns.unassigned;
+    if(unassigned.taskIds.length){
+      const newColumnOrder = this.state.columnOrder.slice();
+    
+      const newState = {
+        ...this.state,
+        columns: {
+          ...this.state.columns,          
+        },
+      };
+      unassigned.taskIds.forEach((taskId)=>{
+        var res = this.state.tasks[taskId].content.split("&");        
+        const listName = res.map((item)=>item.split("=")[1]);
+        const newColumn = {
+          id: this.state.tasks[taskId].content,
+          title: listName.join(" - "),
+          taskIds:[this.state.tasks[taskId].id]
+        };
+        newColumnOrder.push(newColumn.id);
+        newState.columns[newColumn.id] = newColumn;
+      });
+      newState.columns.unassigned.taskIds = [];
+      newState.columnOrder = newColumnOrder;
+      this.setState(newState);
+    }
+  }
+
   updateColumnName = (name, columnId)=>{
     const newColumn = {
       ...this.state.columns[columnId],
@@ -105,8 +137,8 @@ class PriceSetVis extends React.Component{
     if (this.props.mapping !== prevProps.mapping) {
       var tasks = {};
       var lstTasks = [];
-      for(let [key] of Object.entries(this.props.mapping)){
-        tasks[key] = {id:key, content:key};
+      for(const [key, column] of Object.entries(this.props.mapping)){
+        tasks[key] = {id:key, content:column.easyRead.replace(/ /g,"_")};
         lstTasks.push(key);
       }
  
@@ -132,7 +164,11 @@ class PriceSetVis extends React.Component{
     return (
       <>
         <HeaderSizing>
-          <Header addColumns={this.addColumns} exportJson={this.exportJson} changeHeight={this.props.changeHeight}/>
+          <Header addColumns={this.addColumns} 
+                  exportJson={this.exportJson} 
+                  changeHeight={this.props.changeHeight}
+                  genereteOnetoOne={this.genereteOnetoOne}
+                  />
         </HeaderSizing>
         <BodySizing height={this.props.height+"px"}>
           <PriceVis tasks={this.state.tasks}

@@ -49,7 +49,7 @@ class Sections extends React.Component {
 
   state = {
     height : window.innerHeight - 70,
-    mapping : [],
+    mapping : {},
     numVarients : 0,
     options : []
   }
@@ -147,7 +147,6 @@ class Sections extends React.Component {
       options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
     }
 
-    console.log(options);
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)})
   }
@@ -187,13 +186,28 @@ class Sections extends React.Component {
 
   handleSetPrice = () => {
     const newMapping = createMapping(this.state.options);
+    if(Object.keys(newMapping).length === Object.keys(this.state.mapping).length){
+      var match = true;
+      for(const [key, column] of Object.entries(this.state.mapping)){
+        if(newMapping.hasOwnProperty(key) === false){
+          console.log(key);
+          match = false;
+          break;
+        }
+      }
+      if(match){
+        return;
+      }
+    }
     this.setState({mapping: newMapping});
     this.setState({height: window.innerHeight/2})
   }
   exportJson = (columns) => {
     createJsonFile(this.state, columns);
   }
-
+  importJson = ()=>{
+    console.log("working");
+  }
   changeHeight=(direction)=>{
     if(direction ==="up"){
       this.setState({height: 50});
@@ -209,6 +223,7 @@ class Sections extends React.Component {
 
   render(){
     const height = window.innerHeight - this.state.height - 70;
+    const width = window.innerWidth - 505;
     return (
       <Panels>
       <LeftPanel>
@@ -223,13 +238,14 @@ class Sections extends React.Component {
           handleUpdatingOptionOrder = {this.handleUpdatingOptionOrder}
           handleClickDuplicateOption = {this.handleClickDuplicateOption}
           handleSetPrice = {this.handleSetPrice}
+          importJson = {this.importJson}
         />
       </LeftPanel>
       <RightPanel>
         <ResizerPanel>
           <SplitPane split="horizontal" 
             style={{position:"relative"}} 
-            paneStyle={{overflow:"auto", display:"inline"}}
+            paneStyle={{overflow:"auto", display:"inline", width:width}}
             size={this.state.height}
             onDragFinished={this.updateHeight}
             >
