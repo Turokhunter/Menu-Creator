@@ -75,13 +75,14 @@ export function createJsonFile(state, columns){
   var FileSaver = require('file-saver');
   var newMapping = {};
   var newOptions = [];
-
+  var csvVarient = [];
   for(const [key, column] of Object.entries(columns)){
     if(key === "unassigned"){
       continue;
     }
     column.taskIds.forEach((id)=>{
       newMapping[id] = column.title;
+      csvVarient.push(column.title);
     });
   }
 
@@ -119,6 +120,10 @@ export function createJsonFile(state, columns){
                     options: newOptions}
   var jsonse = JSON.stringify(jsonFile, null, 2);
 
+
   var blob = new Blob([jsonse], {type: "application/json"});
   FileSaver.saveAs(blob, "file.json");
+
+  var csvblob = new Blob([csvVarient.join(",")], {type: "text/plain;charset=utf-8"});
+  FileSaver.saveAs(csvblob, "Varients.csv");
 }

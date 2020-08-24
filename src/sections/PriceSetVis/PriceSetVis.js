@@ -80,7 +80,10 @@ class PriceSetVis extends React.Component{
       };
       unassigned.taskIds.forEach((taskId)=>{
         var res = this.state.tasks[taskId].content.split("&");        
-        const listName = res.map((item)=>item.split("=")[1]);
+        const listName = res.map((item)=>{
+          const name = item.split("=")[1];
+          return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        });
         const newColumn = {
           id: this.state.tasks[taskId].content,
           title: listName.join(" - "),
