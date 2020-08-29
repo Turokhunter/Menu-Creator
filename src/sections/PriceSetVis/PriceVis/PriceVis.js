@@ -47,6 +47,7 @@ class PriceVis extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return(
       <DragDropContext
         onDragEnd = {this.onDragEnd}

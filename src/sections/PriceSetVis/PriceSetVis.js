@@ -146,21 +146,43 @@ class PriceSetVis extends React.Component{
       }
  
       this.setState({tasks: tasks});
-      var newColumns = {}
-      for(const [key, column] of Object.entries(prevState.columns)){
-        if(key === "unassigned"){
-          newColumns["unassigned"] =  {
-            ...prevState.columns.unassigned,
-            taskIds : lstTasks
-          }
-        } else {
-          newColumns[key] = {
-            ...column,
-            taskIds : []
+      const mapping = this.props.mapping;
+      if(Object.keys(mapping).length 
+          && mapping[Object.keys(mapping)[0]].varient !== undefined){
+        var newColumns = { unassigned : {
+                                        id: 'unassigned',
+                                        title: 'Unassigned Variants',
+                                        taskIds:[]
+                                        }};
+        var columnOrder = ["unassigned"];
+        for(const [key, column] of Object.entries(this.props.mapping)){
+          const newColumn = {
+            id: column.easyRead,
+            title: column.varient,
+            taskIds:[key]
+          };
+          newColumns[column.easyRead] = newColumn;
+          columnOrder.push(column.easyRead);
+        }
+        this.setState({columns: newColumns,
+                      columnOrder: columnOrder});
+      } else {
+        var newColumns = {}
+        for(const [key, column] of Object.entries(prevState.columns)){
+          if(key === "unassigned"){
+            newColumns["unassigned"] =  {
+              ...prevState.columns.unassigned,
+              taskIds : lstTasks
+            }
+          } else {
+            newColumns[key] = {
+              ...column,
+              taskIds : []
+            }
           }
         }
+        this.setState({columns: newColumns});
       }
-      this.setState({columns: newColumns});
     }
   }
   render(){

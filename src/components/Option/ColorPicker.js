@@ -108,9 +108,7 @@ class ColorPicker extends React.Component {
       suggestion: 'dropdown-item',
       suggestionHighlighted: 'active'
     };
-
     const choices = this.updateSelectchoice(this.props.option, this.state.filament);
-
     return (
       <>
         <Form>
@@ -120,7 +118,11 @@ class ColorPicker extends React.Component {
                 <InputGroup.Prepend>
                   <InputGroup.Text>Selected:</InputGroup.Text>
                 </InputGroup.Prepend>
-                  <Form.Control as="select" name ="colorId" onChange={this.props.handleUpdate}>
+                  <Form.Control 
+                    as="select" 
+                    name="colorId" 
+                    onChange={this.props.handleUpdate} 
+                    value ={this.props.option.colorId}>
                     <option  key="-1" value ="-1">{" "}</option>
                     {choices.map((item) =>(
                        <option key={item.id}  value={item.id} >{item.name}</option>
@@ -134,7 +136,7 @@ class ColorPicker extends React.Component {
             <Form.Group as={Col}>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>Color Enclusion:</InputGroup.Text>
+                  <InputGroup.Text>Color Inclusion:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <MyRadioPos>
                     <RadioLabel className="radio-inline">

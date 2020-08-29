@@ -1,5 +1,69 @@
+import colorData from "../data/filament.json"
+import { FiUnderline } from "react-icons/fi";
 
+export function populateOptions(importFile){
+  const importedObject = JSON.parse(importFile);
+  var filaments = colorData.filament;
+  var colors = {};
+  filaments.forEach((color) =>{
+    colors[color.id] = color;
+  });
 
+  var optionObject = {}
+  var newState = { mapping: {},
+               options: []
+              };
+  importedObject.options.forEach((option)=>{
+    if(option.type === "colorpicker"){
+      let newOption  = {...option};
+      newOption.items = [];
+      if(option.includeColor !== undefined){
+        option.includeColor.forEach((color)=>{
+          newOption.items.push({id: colors[color].id, name: colors[color].name});
+        });
+        newOption.colorInclusion = "include";
+        
+        delete newOption.includeColor;
+      } else if(option.excludeColor !== undefined){
+        option.excludeColor.forEach((color)=>{
+          newOption.items.push({id: colors[color].id, name: colors[color].name});
+        });
+        newOption.colorInclusion = "exclude";
+        delete newOption.excludeColor;
+      } else {//has to be all
+        newOption.colorInclusion = "all";
+      }
+      
+      newState.options.push(newOption);
+    } else if(option.type === "dropdown"){
+      newState.options.push(option);
+      optionObject[option.id] = {};
+      option.items.forEach((item)=>{
+        optionObject[option.id][item.id] = item.name;
+      });
+    } else if(option.type === "checkbox"){
+      newState.options.push(option);
+    }
+  });
+
+  var newMapping = {};
+  for(const [key, element] of Object.entries(importedObject.mapping)){
+      var lstElements = key.split("&");
+      const easyRead = lstElements.map((ele)=>{
+        if(ele.type === "dropdown"){
+          const pair = ele.split("=");
+          return pair[0] + "=" + optionObject[pair[0]][pair[1]];
+        } else {
+          return ele;
+        }
+      });
+      newMapping[key] = {id:key, easyRead: easyRead.join("&"), varient: element};
+  }
+
+  newState.mapping = newMapping;
+  return newState;
+}
+//TODO::Combine easyRead into a function
 export function createMapping(options){
     var newMapping = {};
     var arr1 = [], arr2 = [];

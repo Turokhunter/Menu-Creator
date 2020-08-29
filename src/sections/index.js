@@ -2,7 +2,7 @@ import React from 'react';
 import CreateMenu from './CreateMenu'
 import SplitPane from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels, ResizerPanel} from './style.js'
-import {createMapping, createJsonFile} from './util';
+import {createMapping, createJsonFile, populateOptions} from './util';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
@@ -205,8 +205,10 @@ class Sections extends React.Component {
   exportJson = (columns) => {
     createJsonFile(this.state, columns);
   }
-  importJson = ()=>{
-    console.log("working");
+  importJson = (textArea)=>{
+    const newState = populateOptions(textArea);
+    this.setState({options: newState.options,
+                    mapping: newState.mapping});
   }
   changeHeight=(direction)=>{
     if(direction ==="up"){

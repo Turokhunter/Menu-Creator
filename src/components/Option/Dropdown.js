@@ -43,7 +43,7 @@ class Dropdown extends React.Component {
                 <InputGroup.Prepend>
                   <InputGroup.Text >Selected:</InputGroup.Text>
                 </InputGroup.Prepend>
-                  <Form.Control as="select" name="selected" onChange={this.props.handleUpdate}>
+                  <Form.Control as="select" name="selected" onChange={this.props.handleUpdate} value ={this.props.option.selected}>
                     <option key="-1" value ="-1">{" "}</option>
                     {this.props.option.items.map((item) =>(
                        <option key={item.id} value={item.id} >{item.name}</option>
