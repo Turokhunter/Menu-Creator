@@ -1,5 +1,27 @@
 import colorData from "../data/filament.json"
-import { FiUnderline } from "react-icons/fi";
+
+function generateEasyRead(lst, options){
+  var optionObject = {};
+  options.forEach((option)=>{
+    if(option.type === "dropdown"){
+      optionObject[option.id] = {};
+      option.items.forEach((item)=>{
+        optionObject[option.id][item.id] = item.name;
+      });
+    }
+  });
+
+  var easyRead = [];
+  lst.forEach((item) =>{
+    if(item.includes("dd")){
+      const pair = item.split("=");
+      easyRead.push(pair[0] + "=" + optionObject[pair[0]][pair[1]]);
+    } else {
+      easyRead.push(item);
+    }        
+  });
+  return easyRead;
+}
 
 export function populateOptions(importFile){
   const importedObject = JSON.parse(importFile);
@@ -8,11 +30,10 @@ export function populateOptions(importFile){
   filaments.forEach((color) =>{
     colors[color.id] = color;
   });
-
-  var optionObject = {}
+  
   var newState = { mapping: {},
-               options: []
-              };
+                   options: []
+                 };
   importedObject.options.forEach((option)=>{
     if(option.type === "colorpicker"){
       let newOption  = {...option};
@@ -37,10 +58,6 @@ export function populateOptions(importFile){
       newState.options.push(newOption);
     } else if(option.type === "dropdown"){
       newState.options.push(option);
-      optionObject[option.id] = {};
-      option.items.forEach((item)=>{
-        optionObject[option.id][item.id] = item.name;
-      });
     } else if(option.type === "checkbox"){
       newState.options.push(option);
     }
@@ -48,22 +65,15 @@ export function populateOptions(importFile){
 
   var newMapping = {};
   for(const [key, element] of Object.entries(importedObject.mapping)){
-      var lstElements = key.split("&");
-      const easyRead = lstElements.map((ele)=>{
-        if(ele.type === "dropdown"){
-          const pair = ele.split("=");
-          return pair[0] + "=" + optionObject[pair[0]][pair[1]];
-        } else {
-          return ele;
-        }
-      });
-      newMapping[key] = {id:key, easyRead: easyRead.join("&"), varient: element};
+    var lstElements = key.split("&");
+    const easyRead = generateEasyRead(lstElements, newState.options);
+    newMapping[key] = {id:key, easyRead: easyRead.join("&"), varient: element};
   }
 
   newState.mapping = newMapping;
   return newState;
 }
-//TODO::Combine easyRead into a function
+
 export function createMapping(options){
     var newMapping = {};
     var arr1 = [], arr2 = [];
@@ -118,17 +128,7 @@ export function createMapping(options){
         }
     });
     arr1.forEach((lst) =>{
-      var easyRead = [];
-      lst.forEach((item) =>{
-        if(item.includes("dd")){
-          var keys = item.split("=")
-          const optionIdx = options.find(ele => ele.id === keys[0]);
-          const itemIdx = optionIdx.items.find(ele=>ele.id === keys[1]);
-          easyRead.push(keys[0] + "=" + itemIdx.name);
-        } else {
-          easyRead.push(item);
-        }        
-      });
+      const easyRead = generateEasyRead(lst, options);
       const newLst = lst.join("&");
       newMapping[newLst] = {id:newLst, easyRead: easyRead.join("&")};
     });
@@ -177,8 +177,6 @@ export function createJsonFile(state, columns){
       newOptions.push(option);
     }
   });
-
-
 
   const jsonFile = {mapping: newMapping,
                     options: newOptions}

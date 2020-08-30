@@ -5,6 +5,7 @@ import {TaskContainer} from './style';
 
 export default class Task extends React.Component {
   render() {
+    const newContent = this.props.task.content.split("&");
     return (
       <Draggable draggableId={this.props.task.id} index={this.props.index} >
         {(provided, snapshot) => (
@@ -14,7 +15,7 @@ export default class Task extends React.Component {
             ref={provided.innerRef}
             isDragging={snapshot.isDragging}
           >
-            {this.props.task.content}
+            {newContent.map((line, index) => <>{index=== 0 ? '' : '&'}{line}<wbr key={index}/></>)}
           </TaskContainer>
         )}
       </Draggable>

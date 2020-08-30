@@ -190,7 +190,6 @@ class Sections extends React.Component {
       var match = true;
       for(const [key, column] of Object.entries(this.state.mapping)){
         if(newMapping.hasOwnProperty(key) === false){
-          console.log(key);
           match = false;
           break;
         }
