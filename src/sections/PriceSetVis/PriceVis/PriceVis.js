@@ -2,11 +2,11 @@
 import React from 'react';
 import Column from './column';
 import {ColumnContainer} from './style';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 class PriceVis extends React.Component {
   onDragEnd = result => {
-    const {destination, source, draggableId} = result;
+    const {destination, source, draggableId, type} = result;
     if(!destination){
       return;
     }
@@ -16,6 +16,14 @@ class PriceVis extends React.Component {
         return;
     }
     
+    if(type === 'column'){
+      const newColumnOrder = Array.from(this.props.columnOrder);
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+      this.props.updateColumnOrder(newColumnOrder);
+      return;
+    }
+
     const start = this.props.columns[source.droppableId];
     const finish = this.props.columns[destination.droppableId];
     if(start === finish){
@@ -51,18 +59,27 @@ class PriceVis extends React.Component {
       <DragDropContext
         onDragEnd = {this.onDragEnd}
       >
-        <ColumnContainer>
-          {this.props.columnOrder.map(columnId =>{
-          const column = this.props.columns[columnId];
-          const tasks = column.taskIds.map(taskId => this.props.tasks[taskId]);
+        <Droppable droppableId="all-columns" direction="horizontal" type="column">
+          {provided => (
+            <ColumnContainer
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {this.props.columnOrder.map((columnId, index) =>{
+              const column = this.props.columns[columnId];
+              const tasks = column.taskIds.map(taskId => this.props.tasks[taskId]);
 
-          return <Column key={column.id} 
-                        column={column} 
-                        tasks={tasks} 
-                        deleteColumn={this.props.deleteColumn} 
-                        updateColumnName={this.props.updateColumnName}/>;
-          })}
-        </ColumnContainer>
+              return <Column key={column.id} 
+                            column={column} 
+                            tasks={tasks}
+                            index={index}  
+                            deleteColumn={this.props.deleteColumn} 
+                            updateColumnName={this.props.updateColumnName}/>;
+              })}
+              {provided.placeholder}
+            </ColumnContainer>
+          )}
+        </Droppable>
       </DragDropContext>
     );
 }

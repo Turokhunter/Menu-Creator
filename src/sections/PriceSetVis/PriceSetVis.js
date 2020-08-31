@@ -112,6 +112,13 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
+  updateColumnOrder = (newColumnOrder)=>{
+    const newState = {
+      ...this.state,
+      columnOrder:newColumnOrder
+    };
+    this.setState(newState);
+  }
   updateColumns = (newColumn)=>{
     const newState = {
       ...this.state,
@@ -203,6 +210,7 @@ class PriceSetVis extends React.Component{
                     updateLists ={this.updateLists} 
                     deleteColumn ={this.deleteColumn}
                     updateColumnName = {this.updateColumnName}
+                    updateColumnOrder = {this.updateColumnOrder}
                     />
         </BodySizing>
       </>
