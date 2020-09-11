@@ -3,6 +3,7 @@ import CreateMenu from './CreateMenu'
 import SplitPane from 'react-split-pane';
 import {LeftPanel, RightPanel, Panels, ResizerPanel} from './style.js'
 import {createMapping, createJsonFile, populateOptions} from './util';
+import {addNewOption} from './addingNewOptions';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
@@ -50,6 +51,8 @@ class Sections extends React.Component {
   state = {
     height : window.innerHeight - 70,
     mapping : {},
+    stl: {},
+    models: [],
     numVarients : 0,
     options : []
   }
@@ -72,44 +75,32 @@ class Sections extends React.Component {
     }, 1);
     return res;
   }
-  handleAddingNewOptions = (event) => {
-    const options = this.state.options.slice();
-    var optiontype = event.target.value;
-    if(optiontype === 'checkbox'){
-      options.push({
-        id : "cb" + this.counter.cb++,
-        name : "",
-        type : "checkbox",
-        priceDiff : false,
-        selected : false
-      });
-    } else if(optiontype === 'dropdown'){
-      options.push({
-        id : "dd" + this.counter.dd++,
-        name : "",
-        type : "dropdown",
-        priceDiff : false,
-        selected : "",
-        items : []
-      });
-    } else if(optiontype === 'colorpicker'){
-      options.push({
-        id : "cp" + this.counter.cp++,
-        name : "",
-        type : "colorpicker",
-        priceDiff : false,
-        colorId : "",
-        colorInclusion:"all",
-        items : []
-        //Optional: includeColor : []
-        //Optional: excludeColor : []
-      });
+
+  handleAddingNewOptions = (optiontype) => {
+    if(optiontype === 'checkbox' || optiontype === 'dropdown'
+      || optiontype === 'colorpicker' || optiontype === 'section'){
+      const options = this.state.options.slice();
+      options.push(addNewOption(optiontype, this.counter));
+      this.setState({options : options,
+        numVarients : this.determineNumberofVarients(options)});
+    }  else if(optiontype === 'stl'){
+      const newStl = {
+        camera: {x:0, y:0, z:0},
+        position: {x:0, y:0, z:0},
+        scale: {x:1.0, y:1.0, z:1.0},
+        mindist: 20,
+        maxdist: 60,
+        type : "stl",
+      };
+      this.setState({stl : newStl});
+    } else if(optiontype === 'model'){
+      const models = this.state.models.slice();
+      models.push();
+      this.setState({models : models});      
     } else {
-      console.log("Option type is not implemented for Add");
+      console.log("Option type "+ optiontype + " is not implemented for Add");
     }
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)});
-    ;
+    
   }
 
   handleUpdateingOptions = (idx, event) => {
@@ -185,6 +176,15 @@ class Sections extends React.Component {
   }
 
   handleSetPrice = () => {
+
+    for(var i = 0; i < this.state.options.length; i++){
+      var option = this.state.options[i];
+      if(option.selected === "" || option.colorId === ""){
+        alert("Option " + option.name + " does not have default selected.");
+        return;
+      }
+    };
+
     const newMapping = createMapping(this.state.options);
     if(Object.keys(newMapping).length === Object.keys(this.state.mapping).length){
       var match = true;

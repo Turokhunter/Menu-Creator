@@ -98,7 +98,6 @@ export function createMapping(options){
               arr2.push([option.id + "=UltPrem"]);
             }
           } else if(option.type === "dropdown"){
-            
             if(arr1.length){
               arr1.forEach((el)=>{
                 option.items.forEach((item)=>{
@@ -127,6 +126,7 @@ export function createMapping(options){
           arr2 = [];
         }
     });
+
     arr1.forEach((lst) =>{
       const easyRead = generateEasyRead(lst, options);
       const newLst = lst.join("&");

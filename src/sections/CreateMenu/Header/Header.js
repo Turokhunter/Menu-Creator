@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Modal, Form} from 'react-bootstrap'
+import {Button, Modal, Form, Dropdown} from 'react-bootstrap'
+import {MyDropdown} from './style';
 
 function ImportModal({importJson}) {
   const [show, setShow] = React.useState(false);
@@ -45,25 +46,30 @@ function ImportModal({importJson}) {
 const Header = ({handleAdd, importJson}) => {
   return (
     <>
-    Options:{' '}
+    Opt:{' '}
     <Button
       variant="outline-primary"
       value = "checkbox"
-      onClick={handleAdd} >
+      onClick={(e)=>handleAdd(e.target.value)} >
         Checkbox
     </Button>{' '}
     <Button
       variant="outline-primary"
       value = "dropdown"
-      onClick={handleAdd} >
+      onClick={(e)=>handleAdd(e.target.value)} >
         Dropdown
     </Button>{' '}
     <Button
       variant="outline-primary"
       value = "colorpicker"
-      onClick={handleAdd} >
+      onClick={(e)=>handleAdd(e.target.value)} >
       Color Picker
     </Button>{' '}
+    <MyDropdown title="STL" onSelect={(value)=>(handleAdd(value))} variant="outline-primary">
+      <Dropdown.Item  eventKey="stl" >STL Setup</Dropdown.Item >
+      <Dropdown.Item  eventKey="section" >Section</Dropdown.Item >
+      <Dropdown.Item  eventKey="model" >Model</Dropdown.Item >
+    </MyDropdown>{' '}
     <ImportModal importJson={importJson}/>
     </>
   )
