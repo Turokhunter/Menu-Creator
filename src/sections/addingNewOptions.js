@@ -30,8 +30,19 @@ export function addNewOption(optiontype, counter){
     };
   } else if(optiontype === 'section'){
     return {
-
+      id : "cp" + counter.sc++,
+      name : ""
+    };
+  } else if(optiontype === 'stl'){
+    return {
+      id: "stl",
+      camera: {x:0, y:0, z:0},
+      position: {x:0, y:0, z:0},
+      scale: {x:1.0, y:1.0, z:1.0},
+      mindist: 20,
+      maxdist: 60,
+      type : "stl",
     };
   }
-  return "";
+  return null;
 }

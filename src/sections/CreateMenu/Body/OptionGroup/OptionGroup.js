@@ -13,24 +13,34 @@ const RenderBasedOnType = ({option, handleUpdate,
                             handleUpdatingTagOrder, handleClickDeleteTag,
                             handleClickAddTag}) => {
   if(option.type === 'checkbox'){
-    return( <CheckBox option={option} handleUpdate={handleUpdate} />)
+    return(<> 
+            <BasicInfo option={option} handleUpdate={handleUpdate}/>
+            <CheckBox option={option} handleUpdate={handleUpdate} />
+          </>
+          )
   } else if(option.type === 'dropdown'){
-    return( <Dropdown option={option} handleUpdate={handleUpdate}
-              handleUpdatingTagOrder = {handleUpdatingTagOrder}
-              handleClickDeleteTag = {handleClickDeleteTag}
-              handleClickAddTag = {handleClickAddTag}
-            />)
+    return(<> 
+            <BasicInfo option={option} handleUpdate={handleUpdate}/>
+              <Dropdown option={option} handleUpdate={handleUpdate}
+                handleUpdatingTagOrder = {handleUpdatingTagOrder}
+                handleClickDeleteTag = {handleClickDeleteTag}
+                handleClickAddTag = {handleClickAddTag}
+              />
+           </>)
   } else if(option.type === 'colorpicker'){
-    return( <ColorPicker option={option} handleUpdate={handleUpdate}
-              handleUpdatingTagOrder = {handleUpdatingTagOrder}
-              handleClickDeleteTag = {handleClickDeleteTag}
-              handleClickAddTag = {handleClickAddTag}
-            />)
+    return(<> 
+            <BasicInfo option={option} handleUpdate={handleUpdate}/>
+              <ColorPicker option={option} handleUpdate={handleUpdate}
+                handleUpdatingTagOrder = {handleUpdatingTagOrder}
+                handleClickDeleteTag = {handleClickDeleteTag}
+                handleClickAddTag = {handleClickAddTag}
+              />
+            </>)
   } else if(option.type === 'stl'){
     return( <STLWindow option={option} handleUpdate={handleUpdate} />)
   }
   // } else if(option.type === 'section'){
-  //   return( <Section option={option} handleUpdate={handleUpdate} />)
+    // return( <Section option={option} handleUpdate={handleUpdate} />)
   // } else if(option.type === 'model'){
   //   return( <Model option={option} handleUpdate={handleUpdate} />)
   // }
@@ -48,7 +58,6 @@ const OptionGroup = ({option, handleUpdate,
         handleClickDuplicateOption = {handleClickDuplicateOption}
       />
       <Container style={{paddingTop:"6px"}}>
-        <BasicInfo option={option} handleUpdate={handleUpdate}/>
         <RenderBasedOnType option = {option}
           handleUpdate = {handleUpdate}
           handleUpdatingTagOrder = {handleUpdatingTagOrder}

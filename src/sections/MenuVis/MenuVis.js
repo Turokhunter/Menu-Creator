@@ -4,7 +4,7 @@ import {MenuColumnSpacing, Menulabel, MenuH3, MenuSwatch, MenuLabel, MenuContain
 import colorData from "../../data/filament.json"
 import {getColors} from "../../components/getColors.js";
 
-const CheckBoxMenu =  ({option}) => {
+const CheckBoxMenu = ({option}) => {
   return (
     <Row>
       <div className="form-check">
@@ -17,7 +17,7 @@ const CheckBoxMenu =  ({option}) => {
   );
 }
 
-const DropdownMenu =  ({option}) => {
+const DropdownMenu = ({option}) => {
   return (
     <>
       <Row>
@@ -65,6 +65,8 @@ const RenderBasedOnType = ({option, filament}) => {
     return( <DropdownMenu option={option} />)
   } else if(option.type === 'colorpicker'){
     return( <ColorPickerMenu option={option} filament={filament} />)
+  } else {
+    return(<></>);
   }
 }
 

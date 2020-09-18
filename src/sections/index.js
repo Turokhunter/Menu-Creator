@@ -46,7 +46,7 @@ import PriceSetVis from './PriceSetVis';
 
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 0, dd: 0, cp: 0};
+  counter = {cb: 0, dd: 0, cp: 0, cs:0};
 
   state = {
     height : window.innerHeight - 70,
@@ -77,40 +77,34 @@ class Sections extends React.Component {
   }
 
   handleAddingNewOptions = (optiontype) => {
-    if(optiontype === 'checkbox' || optiontype === 'dropdown'
-      || optiontype === 'colorpicker' || optiontype === 'section'){
+    const newOption =  addNewOption(optiontype, this.counter);
+    if(newOption){
       const options = this.state.options.slice();
-      options.push(addNewOption(optiontype, this.counter));
+      options.push(newOption);
       this.setState({options : options,
         numVarients : this.determineNumberofVarients(options)});
-    }  else if(optiontype === 'stl'){
-      const newStl = {
-        camera: {x:0, y:0, z:0},
-        position: {x:0, y:0, z:0},
-        scale: {x:1.0, y:1.0, z:1.0},
-        mindist: 20,
-        maxdist: 60,
-        type : "stl",
-      };
-      this.setState({stl : newStl});
-    } else if(optiontype === 'model'){
-      const models = this.state.models.slice();
-      models.push();
-      this.setState({models : models});      
     } else {
       console.log("Option type "+ optiontype + " is not implemented for Add");
     }
-    
   }
 
-  handleUpdateingOptions = (idx, event) => {
+  handleUpdateingOptions = (idx, event, isDict) => {
     const options = this.state.options.slice();
     const {name, value, type, checked} = event.target
-    if (type === "checkbox") {
+    
+    if(type === "number"){
+      if(name.split(".").length === 2){
+        const [prop, val] = name.split(".");
+        options[idx][prop][val] = parseFloat(value);
+      } else {
+        options[idx][name] = parseFloat(value);
+      }
+    } else if (type === "checkbox") {
       options[idx][name] = checked;
-    } else {
+    }  else {
       options[idx][name] = value;
     }
+    console.log(options);
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)});
   }
@@ -148,6 +142,7 @@ class Sections extends React.Component {
     this.setState({options: newOptions,
                    numVarients : this.determineNumberofVarients(newOptions)});
   }
+
   handleUpdatingOptionOrder = (layout) => {
     layout.sort((a,b)=>{return a.y - b.y});
     const layoutOrder = layout.map(l => l.i);
@@ -159,6 +154,7 @@ class Sections extends React.Component {
     this.setState({options: newOptions,
                    numVarients : this.determineNumberofVarients(newOptions)});
   }
+
   handleClickDuplicateOption = (panel) => {
     const newPanel = JSON.parse(JSON.stringify(panel));
     if(newPanel.type === "checkbox"){

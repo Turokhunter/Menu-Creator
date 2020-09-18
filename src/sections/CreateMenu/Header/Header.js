@@ -68,7 +68,6 @@ const Header = ({handleAdd, importJson}) => {
     <MyDropdown title="STL" onSelect={(value)=>(handleAdd(value))} variant="outline-primary">
       <Dropdown.Item  eventKey="stl" >STL Setup</Dropdown.Item >
       <Dropdown.Item  eventKey="section" >Section</Dropdown.Item >
-      <Dropdown.Item  eventKey="model" >Model</Dropdown.Item >
     </MyDropdown>{' '}
     <ImportModal importJson={importJson}/>
     </>

@@ -19,6 +19,10 @@ const Body = ({options, handleUpdate,
       hSize = 5;
     } else if(option.type === "colorpicker"){
       hSize = 10;
+    } else if(option.type === "stl"){
+      hSize = 6;
+    } else if(option.type === "section"){
+      hSize = 10;
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
