@@ -1,153 +1,54 @@
 import React from 'react';
 import {Form, Col, InputGroup} from 'react-bootstrap'
 
+const  MultiParameterInput = ({option, handleUpdate, propertyName, parameterList}) => {
+  const capPropertyName = propertyName.charAt(0).toUpperCase() + propertyName.slice(1);
+  return (
+    <Form.Row>
+      {parameterList.map((parameter, index)=>
+        <Col sm={index === 0 ? 5 : undefined} >
+          <Form.Group >
+            <InputGroup >
+              <InputGroup.Prepend>
+                <InputGroup.Text >{index === 0 && capPropertyName} {parameter}:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <Form.Control
+                value= {option[propertyName][parameter]}
+                name= {propertyName + "." + parameter}
+                type= "number"
+                onChange = {handleUpdate}
+              />
+            </InputGroup>
+          </Form.Group>
+        </Col>
+      )}
+  </Form.Row>
+  );
+}
+
+
 const STLWindow = ({option, handleUpdate}) => {
+  const xyzList = ["x","y","z"];
   return (
      <Form>
-       <Form.Row className="aalign-items-center">
-            <Col sm={6}>
-              <Form.Group >
-                <InputGroup >
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="camera">Camera x:</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={option.camera.x}
-                    name= "camera.x"
-                    type= "number"
-                    onChange = {handleUpdate}
-                  />
-                </InputGroup>
-              </Form.Group>
-            </Col>
-            <Col sm={3}>
-              <Form.Group >
-                <InputGroup >
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="camera">y:</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={option.camera.y}
-                    name= "camera.y"
-                    type= "number"
-                    onChange = {handleUpdate}
-                  />
-                </InputGroup>
-              </Form.Group>
-            </Col>
-            <Col sm={3}>
-              <Form.Group > 
-                <InputGroup >
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="camera">z:</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={option.camera.z}
-                    name= "camera.z"
-                    type= "number"
-                    onChange = {handleUpdate}
-                  />
-                </InputGroup>
-              </Form.Group>
-            </Col>
-        </Form.Row>
-
-        <Form.Row>
-          <Col sm={5}>
-            <Form.Group >
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="position">Position x:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  value={option.position.x}
-                  name= "position.x"
-                  type= "number"
-                  onChange = {handleUpdate}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Col>
-          <Col sm={3}>
-            <Form.Group >
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="position">y:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  value={option.position.y}
-                  name= "position.y"
-                  type= "number"
-                  onChange = {handleUpdate}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Col>
-          <Col sm={3}>
-            <Form.Group >
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="position">z:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  value={option.position.z}
-                  name= "position.z"
-                  type= "number"
-                  onChange = {handleUpdate}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Col>
-        </Form.Row>
-
-        <Form.Row>
-          <Col sm={5}>
-            <Form.Group >
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="scale">Scale x:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  value={option.scale.x}
-                  name= "scale.x"
-                  type= "number"
-                  onChange = {handleUpdate}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Col>
-          <Col sm={3}>
-          <Form.Group >
-            
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="scale">y:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                value={option.scale.y}
-                name= "scale.y"
-                type= "number"
-                onChange = {handleUpdate}
-              />
-            </InputGroup>
-          </Form.Group>
-          </Col>
-          <Col sm={3}>
-          <Form.Group >          
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="scale">z:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                value={option.scale.z}
-                name= "scale.z"
-                type= "number"
-                onChange = {handleUpdate}
-              />
-            </InputGroup>
-          </Form.Group>
-          </Col>
-        </Form.Row>
+      <MultiParameterInput 
+        option={option} 
+        handleUpdate={handleUpdate} 
+        propertyName="camera" 
+        parameterList= {xyzList}
+      />
+      <MultiParameterInput 
+        option={option} 
+        handleUpdate={handleUpdate} 
+        propertyName="position" 
+        parameterList= {xyzList}
+      />
+      <MultiParameterInput 
+        option={option} 
+        handleUpdate={handleUpdate} 
+        propertyName="scale" 
+        parameterList= {xyzList}
+      />
 
         <Form.Row>
           <Form.Group as={Col}>

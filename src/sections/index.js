@@ -46,7 +46,7 @@ import PriceSetVis from './PriceSetVis';
 
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 0, dd: 0, cp: 0, cs:0};
+  counter = {cb: 0, dd: 0, cp: 0, sc:0};
 
   state = {
     height : window.innerHeight - 70,
@@ -54,7 +54,19 @@ class Sections extends React.Component {
     stl: {},
     models: [],
     numVarients : 0,
-    options : []
+    options : [
+      {
+        id : "sc" + this.counter.sc++,
+        section : "",
+        type : "section",
+        colorid : "",
+        hasCostTier : false,
+        costTier: {Standard: 1.00, Premium: 2.00, "Ultra Premium":3.00},
+        colorInclusion :"all",
+        items : [],
+        multiSelect : false
+      }
+  ]
   }
 
   determineNumberofVarients = (options) => {

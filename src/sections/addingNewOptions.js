@@ -30,8 +30,15 @@ export function addNewOption(optiontype, counter){
     };
   } else if(optiontype === 'section'){
     return {
-      id : "cp" + counter.sc++,
-      name : ""
+      id : "sc" + counter.sc++,
+      section : "",
+      type : "section",
+      colorid : "",
+      hasCostTier : false,
+      costTier: {Standard: 1.00, Premium: 2.00, "Ultra Premium":3.00},
+      colorInclusion :"all",
+      items : [],
+      multiSelect : false
     };
   } else if(optiontype === 'stl'){
     return {
