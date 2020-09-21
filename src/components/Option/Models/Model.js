@@ -1,8 +1,8 @@
 import React from 'react';
-import {ModelStyle} from './style';
-import {Draggable} from 'react-beautiful-dnd';
-import {Form, Col, InputGroup, Row} from 'react-bootstrap'
-import {MyModelHeader, MyModelH5, MyModelMenuButton, MyForm} from "./style";
+import { ModelStyle } from './style';
+import { Draggable } from 'react-beautiful-dnd';
+import { Form, Col, InputGroup, Row } from 'react-bootstrap'
+import { MyModelHeader, MyModelH5, MyModelMenuButton, MyForm } from "./style";
 import { GrClose } from 'react-icons/gr';
 import { FiCopy } from 'react-icons/fi';
 
@@ -25,7 +25,7 @@ export default class Model extends React.Component{
               </Col>
               <Col>
                 {' '}
-                <MyModelMenuButton variant="light" onClick={(e) => this.props.handleDupModel(model)} >
+                <MyModelMenuButton variant="light" onClick={(e) => this.props.handleClickDupModel(model)} >
                   <FiCopy />
                 </MyModelMenuButton>
                 {' '}

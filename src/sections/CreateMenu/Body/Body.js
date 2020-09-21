@@ -7,7 +7,8 @@ const Body = ({options, handleUpdate,
                handleClickAddTag, handleClickDeleteOption,
                handleUpdatingOptionOrder, handleClickDuplicateOption,
                reorderModels, handleClickAddModel,
-               handleDeleteModel, handleUpdatingModel}) => {
+               handleDeleteModel, handleUpdatingModel,
+               handleClickDupModel}) => {
   //Create layout variable
   const layout = []
   var currPos = 0;
@@ -50,7 +51,8 @@ const Body = ({options, handleUpdate,
               reorderModels = {(e) => reorderModels(index, e)}
               handleClickAddModel = {(e) => handleClickAddModel(index, e)}
               handleDeleteModel = {(e) => handleDeleteModel(index, e)}
-              handleUpdatingModel = {(modelId, e) => handleUpdatingModel(index,modelId, e)}
+              handleUpdatingModel = {(modelId, e) => handleUpdatingModel(index, modelId, e)}
+              handleClickDupModel = {(model) => handleClickDupModel(index, model)}
              />
           </div>
         ))}

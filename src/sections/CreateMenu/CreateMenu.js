@@ -20,7 +20,8 @@ const CreateMenu = ({data,
                      reorderModels,
                      handleClickAddModel,
                      handleDeleteModel,
-                     handleUpdatingModel
+                     handleUpdatingModel,
+                     handleClickDupModel
                     }) => {
    const { height } = useWindowDimensions();
   return (
@@ -42,6 +43,7 @@ const CreateMenu = ({data,
           handleClickAddModel = {handleClickAddModel}
           handleDeleteModel = {handleDeleteModel}
           handleUpdatingModel = {handleUpdatingModel}
+          handleClickDupModel = {handleClickDupModel}
         />
       </BodySizing>
       <FootSizing>

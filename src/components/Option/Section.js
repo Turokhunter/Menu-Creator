@@ -286,6 +286,7 @@ class Section extends React.Component {
           reorderModels = {this.props.reorderModels}
           handleClickDupModel = {this.props.handleClickDupModel}
           handleDeleteModel = {this.props.handleDeleteModel}
+          handleClickDupModel = {this.props.handleClickDupModel}
         />
       </>
     )

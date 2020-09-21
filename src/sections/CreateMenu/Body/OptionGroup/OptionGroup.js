@@ -13,7 +13,8 @@ import {Container} from 'react-bootstrap';
 const RenderBasedOnType = ({option, handleUpdate,
                             handleUpdatingTagOrder, handleClickDeleteTag,
                             handleClickAddTag, reorderModels, handleClickAddModel,
-                            handleDeleteModel, handleUpdatingModel}) => {
+                            handleDeleteModel, handleUpdatingModel,
+                            handleClickDupModel}) => {
   if(option.type === 'checkbox'){
     return(<> 
             <BasicInfo option={option} handleUpdate={handleUpdate}/>
@@ -46,6 +47,7 @@ const RenderBasedOnType = ({option, handleUpdate,
             handleClickAddModel={handleClickAddModel}
             handleDeleteModel={handleDeleteModel}
             handleUpdatingModel={handleUpdatingModel} 
+            handleClickDupModel = {handleClickDupModel}
             />)
   } 
 }
@@ -55,7 +57,8 @@ const OptionGroup = ({option, handleUpdate,
                       handleClickAddTag, handleClickDeleteOption,
                       handleClickDuplicateOption,
                       reorderModels, handleClickAddModel,
-                      handleDeleteModel, handleUpdatingModel}) => {
+                      handleDeleteModel, handleUpdatingModel,
+                      handleClickDupModel}) => {
 
   return (
     <div className="panel">
@@ -73,6 +76,7 @@ const OptionGroup = ({option, handleUpdate,
           handleClickAddModel = {handleClickAddModel}
           handleDeleteModel = {handleDeleteModel}
           handleUpdatingModel = {handleUpdatingModel}
+          handleClickDupModel = {handleClickDupModel}
          />
        </Container>
     </div>

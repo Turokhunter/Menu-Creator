@@ -275,6 +275,18 @@ class Sections extends React.Component {
                    numVarients : this.determineNumberofVarients(options)});
   }
 
+  handleClickDupModel = (idx, model) =>{
+    const newModel = JSON.parse(JSON.stringify(model));
+    var id = "md" + this.counter.md++;
+    newModel.id = id;
+    const options = this.state.options.slice();
+    options[idx].modelSection.models[id] = newModel;
+    options[idx].modelSection.modelOrder.push(id);
+
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)});
+  }
+
   render(){
     const height = window.innerHeight - this.state.height - 70;
     const width = window.innerWidth - 505;
@@ -297,6 +309,7 @@ class Sections extends React.Component {
           handleClickAddModel = {this.handleClickAddModel}
           handleDeleteModel = {this.handleDeleteModel}
           handleUpdatingModel = {this.handleUpdatingModel}
+          handleClickDupModel = {this.handleClickDupModel}
         />
       </LeftPanel>
       <RightPanel>
