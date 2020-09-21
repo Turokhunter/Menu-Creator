@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Column from './column';
 import {ColumnContainer} from './style';

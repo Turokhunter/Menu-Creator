@@ -12,7 +12,8 @@ import {Container} from 'react-bootstrap';
 
 const RenderBasedOnType = ({option, handleUpdate,
                             handleUpdatingTagOrder, handleClickDeleteTag,
-                            handleClickAddTag}) => {
+                            handleClickAddTag, reorderModels, handleClickAddModel,
+                            handleDeleteModel, handleUpdatingModel}) => {
   if(option.type === 'checkbox'){
     return(<> 
             <BasicInfo option={option} handleUpdate={handleUpdate}/>
@@ -40,14 +41,21 @@ const RenderBasedOnType = ({option, handleUpdate,
   } else if(option.type === 'stl'){
     return( <STLWindow option={option} handleUpdate={handleUpdate} />)
   } else if(option.type === 'section'){
-    return( <Section option={option} handleUpdate={handleUpdate} />)
+    return( <Section option={option} handleUpdate={handleUpdate}
+            reorderModels={reorderModels}
+            handleClickAddModel={handleClickAddModel}
+            handleDeleteModel={handleDeleteModel}
+            handleUpdatingModel={handleUpdatingModel} 
+            />)
   } 
 }
 
 const OptionGroup = ({option, handleUpdate,
                       handleUpdatingTagOrder, handleClickDeleteTag,
                       handleClickAddTag, handleClickDeleteOption,
-                      handleClickDuplicateOption}) => {
+                      handleClickDuplicateOption,
+                      reorderModels, handleClickAddModel,
+                      handleDeleteModel, handleUpdatingModel}) => {
 
   return (
     <div className="panel">
@@ -61,6 +69,10 @@ const OptionGroup = ({option, handleUpdate,
           handleUpdatingTagOrder = {handleUpdatingTagOrder}
           handleClickDeleteTag = {handleClickDeleteTag}
           handleClickAddTag = {handleClickAddTag}
+          reorderModels = {reorderModels}
+          handleClickAddModel = {handleClickAddModel}
+          handleDeleteModel = {handleDeleteModel}
+          handleUpdatingModel = {handleUpdatingModel}
          />
        </Container>
     </div>

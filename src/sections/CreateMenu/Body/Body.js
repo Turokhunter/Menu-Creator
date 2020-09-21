@@ -5,7 +5,9 @@ import OptionGroup from './OptionGroup'
 const Body = ({options, handleUpdate,
                handleUpdatingTagOrder, handleClickDeleteTag,
                handleClickAddTag, handleClickDeleteOption,
-               handleUpdatingOptionOrder, handleClickDuplicateOption}) => {
+               handleUpdatingOptionOrder, handleClickDuplicateOption,
+               reorderModels, handleClickAddModel,
+               handleDeleteModel, handleUpdatingModel}) => {
   //Create layout variable
   const layout = []
   var currPos = 0;
@@ -22,7 +24,7 @@ const Body = ({options, handleUpdate,
     } else if(option.type === "stl"){
       hSize = 6;
     } else if(option.type === "section"){
-      hSize = 10;
+      hSize = 13 + option.modelSection.modelOrder.length*5.5;
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
@@ -45,6 +47,10 @@ const Body = ({options, handleUpdate,
               handleClickAddTag = {(e) => handleClickAddTag(index, e)}
               handleClickDeleteOption = {handleClickDeleteOption}
               handleClickDuplicateOption = {handleClickDuplicateOption}
+              reorderModels = {(e) => reorderModels(index, e)}
+              handleClickAddModel = {(e) => handleClickAddModel(index, e)}
+              handleDeleteModel = {(e) => handleDeleteModel(index, e)}
+              handleUpdatingModel = {(modelId, e) => handleUpdatingModel(index,modelId, e)}
              />
           </div>
         ))}

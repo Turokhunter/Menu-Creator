@@ -7,46 +7,10 @@ import {addNewOption} from './addingNewOptions';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
 
-// {
-//   id : "cb" + this.counter.cb++,
-//   name : "Fully Assembled",
-//   type : "checkbox",
-//   priceDiff : false,
-//   selected : false
-// },{
-//   id : "dd" + this.counter.dd++,
-//     name : "Holder",
-//     type : "dropdown",
-//     priceDiff : false,
-//     selected : "",
-//     items : [{id:"dd0t1", name:"One Holder"},{id:"dd0t2", name:"Two Holder"}]
-// },{
-//   id : "cp" + this.counter.cp++,
-//   name : "Color",
-//   type : "colorpicker",
-//   priceDiff : false,
-//   colorId : "",
-//   colorInclusion:"all",
-//   items : [{id: "atm-neongreen", name: "Atomic Trans Neon Green"},
-//           {id: "hb-green", name: "HatchBox Green"},
-//           {id: "hb-gold", name: "HatchBox Gold"},
-//           {id: "pru-opalgreen", name: "Prusa Opal Green"},
-//           {id: "hb-blue", name: "HatchBox Blue"},
-//           {id: "php-oceanblue", name: "Push Ocean Blue"}]
-// },{
-//   id : "cp" + this.counter.cp++,
-//   name : "Color2",
-//   type : "colorpicker",
-//   priceDiff : false,
-//   colorId : "",
-//   colorInclusion:"all",
-//   items : []
-// }
-
 
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 0, dd: 0, cp: 0, sc:0};
+  counter = {cb: 0, dd: 0, cp: 0, sc:0, md: 0};
 
   state = {
     height : window.innerHeight - 70,
@@ -63,7 +27,29 @@ class Sections extends React.Component {
         hasCostTier : false,
         costTier: {Standard: 1.00, Premium: 2.00, "Ultra Premium":3.00},
         colorInclusion :"all",
-        items : [],
+        items: [],
+        group: false,
+        groupName : "",
+        selected : false,
+        modelSection : {
+          models:{ 
+            "md0":{
+              id: "md" + this.counter.md++,
+              name: "test",
+              filename: "",
+              show: false,
+              colorId:""            
+            },
+            "md1":{
+              id: "md" + this.counter.md++,
+              name: "test 2",
+              filename: "",
+              show: false,
+              colorId:""            
+            }
+          }, 
+          modelOrder:["md0", "md1"]
+        },
         multiSelect : false
       }
   ]
@@ -224,11 +210,70 @@ class Sections extends React.Component {
       this.setState({height: window.innerHeight-70});
     }
   }
-
   updateHeight = (size)=>{
     this.setState({height: size});
   }
   
+  reorderModels = (optionIdx, result)=>{
+    const {destination, source, draggableId} = result;
+    if(!destination){
+      return;
+    }
+    if(destination.droppableId === source.drop 
+      && destination.index === source.index){
+        return;
+    }
+    const options = this.state.options.slice();
+
+    const newModelOrder = Array.from(options[optionIdx].modelSection.modelOrder);
+    newModelOrder.splice(source.index, 1);
+    newModelOrder.splice(destination.index, 0, draggableId);
+    options[optionIdx].modelSection.modelOrder = newModelOrder;
+
+    this.setState({options : options});
+  }
+
+  handleClickAddModel = (idx, event) => {
+    const options = this.state.options.slice();
+    var id = "md" + this.counter.md++;
+    options[idx].modelSection.models[id] = {
+        id: id,
+        name: "",
+        filename: "",
+        show: true,
+        colorId:""    
+    };
+    options[idx].modelSection.modelOrder.push(id);
+
+    this.setState({options : options,
+      numVarients : this.determineNumberofVarients(options)})
+  }
+
+  handleDeleteModel = (idx, modelId) => {
+    const options = this.state.options.slice();
+    //delete dict
+    delete options[idx].modelSection.models[modelId];
+    //remove from order
+    const newModelOrder = options[idx].modelSection.modelOrder;
+    newModelOrder.splice(newModelOrder.indexOf(modelId), 1);
+    options[idx].modelSection.modelOrder = newModelOrder;
+
+    this.setState({options : options,
+      numVarients : this.determineNumberofVarients(options)})
+  }
+
+  handleUpdatingModel = (idx, modelId, event) => {
+    const options = this.state.options.slice();
+    const {name, value, type, checked} = event.target
+  
+    if (type === "checkbox") {
+      options[idx].modelSection.models[modelId][name] = checked;
+    }  else {
+      options[idx].modelSection.models[modelId][name] = value;
+    }
+    this.setState({options : options,
+                   numVarients : this.determineNumberofVarients(options)});
+  }
 
   render(){
     const height = window.innerHeight - this.state.height - 70;
@@ -248,6 +293,10 @@ class Sections extends React.Component {
           handleClickDuplicateOption = {this.handleClickDuplicateOption}
           handleSetPrice = {this.handleSetPrice}
           importJson = {this.importJson}
+          reorderModels = {this.reorderModels}
+          handleClickAddModel = {this.handleClickAddModel}
+          handleDeleteModel = {this.handleDeleteModel}
+          handleUpdatingModel = {this.handleUpdatingModel}
         />
       </LeftPanel>
       <RightPanel>

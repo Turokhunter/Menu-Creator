@@ -17,6 +17,10 @@ const CreateMenu = ({data,
                      handleClickDuplicateOption,
                      handleSetPrice,
                      importJson,
+                     reorderModels,
+                     handleClickAddModel,
+                     handleDeleteModel,
+                     handleUpdatingModel
                     }) => {
    const { height } = useWindowDimensions();
   return (
@@ -34,6 +38,10 @@ const CreateMenu = ({data,
           handleClickDeleteOption = {handleClickDeleteOption}
           handleUpdatingOptionOrder = {handleUpdatingOptionOrder}
           handleClickDuplicateOption = {handleClickDuplicateOption}
+          reorderModels = {reorderModels}
+          handleClickAddModel = {handleClickAddModel}
+          handleDeleteModel = {handleDeleteModel}
+          handleUpdatingModel = {handleUpdatingModel}
         />
       </BodySizing>
       <FootSizing>

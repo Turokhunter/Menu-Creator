@@ -6,6 +6,7 @@ import {AddAndDelete, DeleteIcon, MyRadioPos, Tag, RadioLabel} from "./style";
 import {getColors} from "../getColors";
 import colorData from "../../data/filament.json"
 import Autosuggest from 'react-autosuggest';
+import Models from "./Models/Models"
 
 const getSuggestionValue = suggestion => suggestion.name;
 
@@ -18,7 +19,6 @@ const renderSuggestion = suggestion => (
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
-
 
 class Section extends React.Component {
   constructor(props){
@@ -280,27 +280,13 @@ class Section extends React.Component {
             onChange={tags => this.props.handleUpdatingTagOrder(tags)}
           />
         </AddAndDelete>
-
-        <Form>
-          <Form.Row>
-            <Form.Group as={Col}>
-              <InputGroup>
-                <Form.Control
-                  value={this.props.option.section}
-                  name = "section"
-                  type="text"
-                  placeholder="Model Name"
-                  onChange = {this.props.handleUpdate}
-                />
-                <InputGroup.Append>
-                  <Button onClick={this.handleClickAddAllColor} variant="info">Add</Button>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-
-        </Form>
-
+        <Button variant="info" onClick={this.props.handleClickAddModel}> Add Model</Button>
+        <Models option={this.props.option}
+          handleUpdatingModel = {this.props.handleUpdatingModel}
+          reorderModels = {this.props.reorderModels}
+          handleClickDupModel = {this.props.handleClickDupModel}
+          handleDeleteModel = {this.props.handleDeleteModel}
+        />
       </>
     )
   };
