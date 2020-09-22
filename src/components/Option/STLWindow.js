@@ -57,7 +57,6 @@ const STLWindow = ({option, handleUpdate}) => {
                 <InputGroup.Text id="minDist">Min Dist:</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                value={option.minDist}
                 name= "mindist"
                 type= "number"
                 onChange = {handleUpdate}
@@ -70,7 +69,6 @@ const STLWindow = ({option, handleUpdate}) => {
                 <InputGroup.Text id="maxDist">Max Dist:</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                value={option.maxDist}
                 name= "maxdist"
                 type= "number"
                 onChange = {handleUpdate}

@@ -1,12 +1,16 @@
 import React from 'react';
-import {Form, Col, InputGroup} from 'react-bootstrap'
+import {Form, Col, InputGroup, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import LineEdit from './LineEdit';
+
+
 
 const BasicInfo = ({option, handleUpdate}) => {
   return (
      <Form>
         <Form.Row>
           <Form.Group as={Col}>
-            <InputGroup>
+          <LineEdit propName={"name"} propVale={option.name} label={"Name"} placeholder={"Name"}/>
+            {/* <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text id="nameLabel">Name:</InputGroup.Text>
               </InputGroup.Prepend>
@@ -17,7 +21,7 @@ const BasicInfo = ({option, handleUpdate}) => {
                 placeholder="Name"
                 onChange = {handleUpdate}
               />
-            </InputGroup>
+            </InputGroup> */}
           </Form.Group>
         </Form.Row>
 
@@ -25,8 +29,19 @@ const BasicInfo = ({option, handleUpdate}) => {
         <Form.Group as={Col}>
           <InputGroup>
             <InputGroup.Prepend>
-              <InputGroup.Text id="priceDiffLabel">Price Difference:</InputGroup.Text>
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 200 }}
+                overlay={
+                  <Tooltip id="button-tooltip">
+                    Choose if option changes price.
+                  </Tooltip>
+                }
+              >
+                <InputGroup.Text id="priceDiffLabel">Price Difference:</InputGroup.Text>
+              </OverlayTrigger>
             </InputGroup.Prepend>
+            
             <InputGroup.Checkbox
               name ="priceDiff"
               aria-label="option 1"

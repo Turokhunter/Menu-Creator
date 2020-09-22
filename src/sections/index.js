@@ -64,10 +64,20 @@ class Sections extends React.Component {
           return sum * ((option.items.length === 0) ? 1 : option.items.length);
         } else if(option.type === "checkbox"){
           return sum * 2;
-        } else {
+        }  else {
           console.log("Type not implemented for Counting")
           return sum;
         }
+      } else if(option.type === 'section'){
+          if(option.multiSelect && option.hasCostTier){
+            return sum * 4 * option.modelSection.modelOrder.length;
+          } else if(option.multiSelect ) {
+            return sum * 2 * option.modelSection.modelOrder.length;
+          } else if(option.hasCostTier ) {
+            return sum * 3;
+          } else {
+            return sum;
+          }
       }
       return sum;
     }, 1);
@@ -195,21 +205,25 @@ class Sections extends React.Component {
     this.setState({mapping: newMapping});
     this.setState({height: window.innerHeight/2})
   }
+
   exportJson = (columns) => {
     createJsonFile(this.state, columns);
   }
+
   importJson = (textArea)=>{
     const newState = populateOptions(textArea);
     this.setState({options: newState.options,
                     mapping: newState.mapping});
   }
-  changeHeight=(direction)=>{
+
+  changeHeight = (direction)=>{
     if(direction ==="up"){
       this.setState({height: 50});
     } else {
       this.setState({height: window.innerHeight-70});
     }
   }
+
   updateHeight = (size)=>{
     this.setState({height: size});
   }

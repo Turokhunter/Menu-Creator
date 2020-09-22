@@ -74,29 +74,37 @@ export function populateOptions(importFile){
   return newState;
 }
 
+function mapVariant(arr1, arr2, id, lst){
+  if(arr1.length){
+    arr1.forEach((el)=>{
+      lst.forEach((val) => {
+        const stand = [...el];
+        if(val === ""){
+          stand.push(val);
+        } else {
+          stand.push(id + "=" + val);
+        }
+        arr2.push(stand);
+      })
+    });
+  } else {
+    lst.forEach((val) => {
+      if(val === ""){
+        arr2.push([val]);
+      } else {
+        arr2.push([id + "=" + val]);
+      }
+    })
+  }
+}  
+
 export function createMapping(options){
     var newMapping = {};
     var arr1 = [], arr2 = [];
     options.forEach((option)=>{
         if(option.priceDiff === true){
           if(option.type === "colorpicker"){
-            if(arr1.length){
-              arr1.forEach((el)=>{
-                const stand = [...el];
-                stand.push(option.id + "=Stand");
-                arr2.push(stand);
-                const prem = [...el];
-                prem.push(option.id + "=Prem");
-                arr2.push(prem);
-                const ultperm = [...el];
-                ultperm.push(option.id + "=UltPrem")
-                arr2.push(ultperm);
-              });
-            } else {
-              arr2.push([option.id + "=Stand"]);
-              arr2.push([option.id + "=Prem"]);
-              arr2.push([option.id + "=UltPrem"]);
-            }
+            mapVariant(arr1, arr2, option.id, ["Stand", "Prem", "UltPrem"]);
           } else if(option.type === "dropdown"){
             if(arr1.length){
               arr1.forEach((el)=>{
@@ -112,15 +120,31 @@ export function createMapping(options){
               });
             }
           } else if(option.type === "checkbox"){
-            if(arr1.length){
-              arr1.forEach((el)=>{
-                arr2.push([...el].push(option.id + "=true"));
-                arr2.push([...el].push(option.id + "=false"));
-              });
-            } else {
-              arr2.push([option.id + "=true"]);
-              arr2.push([option.id + "=false"]);
-            }
+            mapVariant(arr1, arr2, option.id, ["true", "false"]);
+          }
+          arr1 = [...arr2];
+          arr2 = [];
+        } else if(option.type === "section"){
+          if (option.multiSelect && option.hasCostTier){
+            option.modelSection.modelOrder.forEach( (modelId) =>{
+              mapVariant(arr1, arr2, modelId, ["", "Stand", "Prem", "UltPrem"]);
+              arr1 = [...arr2];
+              arr2 = [];
+            });
+            let temp = arr1;
+            arr1 = arr2;
+            arr2 = temp; 
+          } else if(option.multiSelect) {
+            option.modelSection.modelOrder.forEach( (modelId) =>{
+              mapVariant(arr1, arr2, modelId, ["", "Stand"]);
+              arr1 = [...arr2];
+              arr2 = [];
+            });
+            let temp = arr1;
+            arr1 = arr2;
+            arr2 = temp;            
+          } else if(option.hasCostTier) {
+            mapVariant(arr1, arr2, option.id, ["Stand", "Prem", "UltPrem"]);
           }
           arr1 = [...arr2];
           arr2 = [];
@@ -129,8 +153,8 @@ export function createMapping(options){
 
     arr1.forEach((lst) =>{
       const easyRead = generateEasyRead(lst, options);
-      const newLst = lst.join("&");
-      newMapping[newLst] = {id:newLst, easyRead: easyRead.join("&")};
+      const newLst = lst.filter(Boolean).join("&");
+      newMapping[newLst] = {id:newLst, easyRead: easyRead.filter(Boolean).join("&")};
     });
     return newMapping;
 }
