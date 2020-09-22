@@ -21,31 +21,35 @@ class Sections extends React.Component {
     options : [
       {
         id : "sc" + this.counter.sc++,
-        section : "",
+        section : "Body",
         type : "section",
         colorid : "",
         hasCostTier : false,
-        costTier: {Standard: 1.00, Premium: 2.00, "Ultra Premium":3.00},
+        costTier: {Stand: 1.00, Prem: 2.00, UltPrem:3.00},
         colorInclusion :"all",
         items: [],
-        group: false,
-        groupName : "",
         selected : false,
         modelSection : {
           models:{ 
             "md0":{
               id: "md" + this.counter.md++,
-              name: "test",
-              filename: "",
-              show: false,
-              colorId:""            
+              name: "Body",
+              filename: "LitRoc-Standard.stl",
+              show: true,
+              colorId: "",
+              inGroup: false,
+              selected: false,
+              group: ""          
             },
             "md1":{
               id: "md" + this.counter.md++,
-              name: "test 2",
-              filename: "",
-              show: false,
-              colorId:""            
+              name: "Bottom Plate",
+              filename: "LitRoc-BottomPlate.stl",
+              show: true,
+              colorId: "",
+              inGroup: false,
+              selected: false,
+              group: ""           
             }
           }, 
           modelOrder:["md0", "md1"]
@@ -255,7 +259,10 @@ class Sections extends React.Component {
         name: "",
         filename: "",
         show: true,
-        colorId:""    
+        colorId:"",
+        inGroup: false,
+        selected: false,
+        group:""     
     };
     options[idx].modelSection.modelOrder.push(id);
 

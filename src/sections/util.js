@@ -164,6 +164,7 @@ export function createJsonFile(state, columns){
   var newMapping = {};
   var newOptions = [];
   var csvVarient = [];
+  var stl = {sections:[], models:[]};
   for(const [key, column] of Object.entries(columns)){
     if(key === "unassigned"){
       continue;
@@ -199,11 +200,53 @@ export function createJsonFile(state, columns){
       newOptions.push(option);
     } else if(option.type === "checkbox"){
       newOptions.push(option);
+    } else if(option.type === "stl"){
+      stl["camera"] = option.camera;
+      stl["position"] = option.position;
+      stl["scale"] = option.scale;
+      stl["mindist"] = option.mindist;
+      stl["maxdist"] = option.maxdist;
+    } else if(option.type === "section"){
+      let newSection = {...option};
+      if(option.colorInclusion === "all"){
+        //do nothing
+      } else if (option.colorInclusion === "include"){
+        var color = [];
+        option.items.forEach((item)=>{
+          color.push(item.id);
+        });
+        newSection["includeColor"] = color;
+      } else if (option.colorInclusion === "exclude"){
+        var color = [];
+        option.items.forEach((item)=>{
+          color.push(item.id);
+        });
+        newSection["excludeColor"] = color;
+      }
+      delete newSection.colorInclusion;
+      delete newSection.items;
+      delete newSection.type;
+      delete newSection.modelSection;
+      //add section
+      stl.sections.push(newSection);
+      //add model
+      option.modelSection.modelOrder.forEach((modelId)=>{
+        const newModel = option.modelSection.models[modelId];
+        if(newModel.group === ""){
+          delete newModel.group;
+        }
+        newModel["colorId"] = option.colorId;
+        newModel["section"] = option.id;
+        stl.models.push(newModel);
+      })
     }
   });
-
-  const jsonFile = {mapping: newMapping,
-                    options: newOptions}
+  let jsonFile = {mapping: newMapping,
+                  options: newOptions};
+  if(stl.sections.length){
+      jsonFile["stl"] = stl;
+  } 
+  
   var jsonse = JSON.stringify(jsonFile, null, 2);
 
 

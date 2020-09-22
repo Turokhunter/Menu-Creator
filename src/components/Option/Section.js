@@ -112,7 +112,7 @@ class Section extends React.Component {
       suggestionHighlighted: 'active'
     };
     const choices = this.updateSelectchoice(this.props.option, this.state.filament);
-    const parameterList = [["Stand", "Standard"],["Prem", "Premium"],["UltPrem", "Ultra Premium"]];
+    const parameterList = ["Stand", "Prem", "UltPrem"];
     return (
       <>
         <Form>
@@ -156,13 +156,13 @@ class Section extends React.Component {
             {parameterList.map((parameter)=>
               <Col>
                 <Form.Group >
-                <LineEdit propName={"costTier." + parameter[1]}
-                      PropValue ={this.props.option.costTier[parameter[1]]} 
-                      label={parameter[0]+":"} 
+                <LineEdit propName={"costTier." + parameter}
+                      PropValue ={this.props.option.costTier[parameter]} 
+                      label={parameter+":"} 
                       placeholder={""}
                       handleUpdate={this.props.handleUpdate}
                       type={"Number"}
-                      toolTip={"Visual show price for" + parameter[1] }
+                      toolTip={"Visual show price for" + parameter }
                       />
                 </Form.Group>
               </Col>

@@ -102,8 +102,8 @@ export default class Model extends React.Component{
             </Form.Group>
             <Form.Group as={Col}>
               <CheckedGroup 
-                propName={"group"} 
-                propVale={model.group} 
+                propName={"inGroup"} 
+                propVale={model.isGroup} 
                 label={"Group:"} 
                 handleUpdate={this.props.handleUpdatingModel}
                 toolTip={"Is this model part of Group. Group allow the user to \
@@ -126,15 +126,15 @@ export default class Model extends React.Component{
               <Form.Group as={Col}>
                 <InputGroup>
                   <InputGroup.Prepend>
-                    <InputGroup.Text style={{backgroundColor:"#bfdcd1"}}  id="groupName">Group Name:</InputGroup.Text>
+                    <InputGroup.Text style={{backgroundColor:"#bfdcd1"}}  id="group">Group Name:</InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control
-                    value={model.groupName}
-                    name = "groupName"
+                    value={model.group}
+                    name = "group"
                     type="text"
                     placeholder="Groups model by name"
                     onChange = {this.props.handleUpdatingModel}
-                    disabled = {!model.group}
+                    disabled = {!model.inGroup}
                   />
                 </InputGroup>
               </Form.Group>

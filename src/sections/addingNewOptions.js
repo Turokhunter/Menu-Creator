@@ -34,14 +34,12 @@ export function addNewOption(optiontype, counter){
       section : "",
       type : "section",
       hasCostTier : false,
-      costTier: {Standard: 1.00, Premium: 2.00, "Ultra Premium":3.00},
+      costTier: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
       colorid : "",
       colorInclusion :"all",
       items : [],
       modelSection : {models:{}, modelOrder:[]},
       multiSelect : false,
-      group: false,
-      groupName : "",
       selected : false,
     };
   } else if(optiontype === 'stl'){
