@@ -1,8 +1,8 @@
 import React from 'react';
-import {InputGroup, Form, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {InputGroup, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 
-const LineEdit = ({propValue, propName, label, type,  placeholder, handleUpdate, toolTip}) => {
+const checked = ({propVale, propName, label, handleUpdate, toolTip}) => {
 
   return (
     <InputGroup>
@@ -19,15 +19,14 @@ const LineEdit = ({propValue, propName, label, type,  placeholder, handleUpdate,
           <InputGroup.Text id= {propName + "Label"}>{label}</InputGroup.Text>
         </OverlayTrigger>
       </InputGroup.Prepend>
-      <Form.Control
-        value={propValue}
-        name={propName}
-        type={type}
-        placeholder={placeholder}
-        onChange = {handleUpdate}
-      />
+      <InputGroup.Checkbox
+              name ={propName}
+              aria-label="option 1"
+              checked = {propVale}
+              onChange = {handleUpdate}
+        />
     </InputGroup>
   )
 }
 
-export default LineEdit;
+export default checked;

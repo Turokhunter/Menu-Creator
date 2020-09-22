@@ -156,7 +156,7 @@ class PriceSetVis extends React.Component{
       const mapping = this.props.mapping;
       if(Object.keys(mapping).length 
           && mapping[Object.keys(mapping)[0]].varient !== undefined){
-        var newColumns = { unassigned : {
+        let newColumns = { unassigned : {
                                         id: 'unassigned',
                                         title: 'Unassigned Variants',
                                         taskIds:[]
@@ -174,7 +174,7 @@ class PriceSetVis extends React.Component{
         this.setState({columns: newColumns,
                       columnOrder: columnOrder});
       } else {
-        var newColumns = {}
+        let newColumns = {}
         for(const [key, column] of Object.entries(prevState.columns)){
           if(key === "unassigned"){
             newColumns["unassigned"] =  {

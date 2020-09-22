@@ -285,6 +285,7 @@ class Sections extends React.Component {
     }  else {
       options[idx].modelSection.models[modelId][name] = value;
     }
+    console.log(options[idx].modelSection.models[modelId]);
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)});
   }

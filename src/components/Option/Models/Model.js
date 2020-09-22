@@ -1,12 +1,41 @@
 import React from 'react';
 import { ModelStyle } from './style';
 import { Draggable } from 'react-beautiful-dnd';
-import { Form, Col, InputGroup, Row } from 'react-bootstrap'
+import { Form, Col, InputGroup, Row, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { MyModelHeader, MyModelH5, MyModelMenuButton, MyForm } from "./style";
 import { GrClose } from 'react-icons/gr';
 import { FiCopy } from 'react-icons/fi';
+import LineEdit from '../LineEdit';
+import Checked from '../Checked';
 
 
+
+const CheckedGroup = ({propVale, propName, label, handleUpdate, toolTip}) => {
+
+  return (
+    <InputGroup>
+      <InputGroup.Prepend>
+      <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 200 }}
+                overlay={
+                  <Tooltip id="button-tooltip">
+                    {toolTip}
+                  </Tooltip>
+                }
+              >
+          <InputGroup.Text style={{backgroundColor:"#bfdcd1"}}  id= {propName + "Label"}>{label}</InputGroup.Text>
+        </OverlayTrigger>
+      </InputGroup.Prepend>
+      <InputGroup.Checkbox
+              name ={propName}
+              aria-label="option 1"
+              checked = {propVale}
+              onChange = {handleUpdate}
+        />
+    </InputGroup>
+  )
+}
 export default class Model extends React.Component{
   render(){
     const model = this.props.model;
@@ -38,76 +67,59 @@ export default class Model extends React.Component{
           <MyForm>
             <Form.Row>
               <Form.Group as={Col}>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="nameLabel">Name:</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={model.name}
-                    name = "name"
-                    type="text"
-                    placeholder="Name"
-                    onChange = {this.props.handleUpdatingModel}
-                  />
-                </InputGroup>
+              <LineEdit propName={"name"} 
+                      propValue={model.name} 
+                      label={"Name:"} 
+                      placeholder={"Name"}
+                      handleUpdate={this.props.handleUpdatingModel}
+                      type={"text"}
+                      toolTip={"Name of the Model"}
+                      />
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col}>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="nameLabel">Filename:</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={model.filename}
-                    name = "filename"
-                    type="text"
-                    placeholder="name of the STL"
-                    onChange = {this.props.handleUpdatingModel}
-                  />
-                </InputGroup>
+                <LineEdit propName={"filename"} 
+                      propValue={model.filename} 
+                      label={"Filename:"} 
+                      placeholder={"Name of the STL"}
+                      handleUpdate={this.props.handleUpdatingModel}
+                      type={"text"}
+                      toolTip={"Name of the Model"}
+                      />
               </Form.Group>
             </Form.Row>
 
           <Form.Row>
             <Form.Group as={Col}>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="show">Show:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <InputGroup.Checkbox
-                  name ="show"
-                  aria-label="option 1"
-                  checked = {model.show}
-                  onChange = {this.props.handleUpdatingModel}
-                />
-              </InputGroup>
+            <Checked 
+                propName={"show"} 
+                propVale={model.show} 
+                label={"Show:"} 
+                handleUpdate={this.props.handleUpdatingModel}
+                toolTip={"Should the model be shown"}
+              />
             </Form.Group>
             <Form.Group as={Col}>
-              <InputGroup>
-                <InputGroup.Prepend >
-                  <InputGroup.Text style={{backgroundColor:"#bfdcd1"}} id="group">Group:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <InputGroup.Checkbox
-                  name ="group"
-                  aria-label="option 1"
-                  checked = {model.group}
-                  onChange = {this.props.handleUpdatingModel}
-                />
-              </InputGroup>
+              <CheckedGroup 
+                propName={"group"} 
+                propVale={model.group} 
+                label={"Group:"} 
+                handleUpdate={this.props.handleUpdatingModel}
+                toolTip={"Is this model part of Group. Group allow the user to \
+                choose between a set of models. If Multiselect is on, they can \
+                add all models with same group."}
+              />
             </Form.Group>
             <Form.Group as={Col}>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text style={{backgroundColor:"#bfdcd1"}} id="selected">Selected:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <InputGroup.Checkbox
-                  name ="selected"
-                  aria-label="option 1"
-                  checked = {model.selected}
-                  onChange = {this.props.handleUpdatingModel}
-                />
-              </InputGroup>
+            <CheckedGroup 
+                propName={"selected"} 
+                propVale={model.selected} 
+                label={"Selected:"} 
+                handleUpdate={this.props.handleUpdatingModel}
+                toolTip={"Is this model selected at the start. Note: \
+                If mutlselect is not on, only one model should be select per group."}
+              />
             </Form.Group>
           </Form.Row>
           <Form.Row>

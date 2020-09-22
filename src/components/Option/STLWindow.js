@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Col, InputGroup} from 'react-bootstrap'
+import LineEdit from './LineEdit'
 
 const  MultiParameterInput = ({option, handleUpdate, propertyName, parameterList}) => {
   const capPropertyName = propertyName.charAt(0).toUpperCase() + propertyName.slice(1);
@@ -52,31 +53,26 @@ const STLWindow = ({option, handleUpdate}) => {
 
         <Form.Row>
           <Form.Group as={Col}>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="minDist">Min Dist:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                name= "mindist"
-                type= "number"
-                onChange = {handleUpdate}
-              />
-            </InputGroup>
+          <LineEdit propName={"mindist"} 
+                      propValue={option.mindist}
+                      label={"Min Dist"} 
+                      placeholder={""}
+                      handleUpdate={handleUpdate}
+                      type={"Number"}
+                      toolTip={"Closet the user can zoom"}
+                      />
             </Form.Group>
             <Form.Group as={Col}>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="maxDist">Max Dist:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                name= "maxdist"
-                type= "number"
-                onChange = {handleUpdate}
-              />
-            </InputGroup>
+            <LineEdit propName={"maxdist"} 
+                      propValue={option.maxdist}
+                      label={"Max Dist"} 
+                      placeholder={""}
+                      handleUpdate={handleUpdate}
+                      type={"Number"}
+                      toolTip={"Farthest the user can zoom"}
+                      />
           </Form.Group>
         </Form.Row>
-
     </Form>
   )
 }

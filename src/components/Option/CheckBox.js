@@ -1,22 +1,19 @@
 import React from 'react';
-import {Form, Col, InputGroup} from 'react-bootstrap'
+import {Form, Col} from 'react-bootstrap'
+import Checked from './Checked';
 
 const CheckBox = ({option, handleUpdate}) => {
   return (
      <Form>
        <Form.Row>
          <Form.Group as={Col}>
-           <InputGroup>
-             <InputGroup.Prepend>
-               <InputGroup.Text id="prceDiffLabel">Checked:</InputGroup.Text>
-             </InputGroup.Prepend>
-             <InputGroup.Checkbox
-               name ="selected"
-               aria-label="option 1"
-               checked = {option.selected}
-               onChange = {handleUpdate}
-             />
-           </InputGroup>
+         <Checked 
+            propName={"selected"} 
+            propVale={option.selected} 
+            label={"Checked"} 
+            handleUpdate={handleUpdate}
+            toolTip={"Is it checked or unchecked by default."}
+          />
          </Form.Group>
        </Form.Row>
      </Form>
