@@ -119,7 +119,7 @@ class Section extends React.Component {
           <Form.Row>
             <Form.Group as={Col}>
             <LineEdit propName={"section"} 
-                      propVale={this.props.option.section} 
+                      propValue={this.props.option.section} 
                       label={"Section"} 
                       placeholder={"Section Name"}
                       handleUpdate={this.props.handleUpdate}
@@ -133,7 +133,7 @@ class Section extends React.Component {
             <Form.Group as={Col}>
               <Checked 
                 propName={"hasCostTier"} 
-                propVale={this.props.option.hasCostTier} 
+                propValue={this.props.option.hasCostTier} 
                 label={"Has Cost Tier"} 
                 handleUpdate={this.props.handleUpdate}
                 toolTip={"Choose if changing the option affect price."}
@@ -143,7 +143,7 @@ class Section extends React.Component {
             <Form.Group as={Col}>
             <Checked 
                 propName={"multiSelect"} 
-                propVale={this.props.option.multiSelect} 
+                propValue={this.props.option.multiSelect} 
                 label={"MultiSelect"} 
                 handleUpdate={this.props.handleUpdate}
                 toolTip={"Set true if more then one option can be selected. \
@@ -157,12 +157,11 @@ class Section extends React.Component {
               <Col>
                 <Form.Group >
                 <LineEdit propName={"costTier." + parameter}
-                      PropValue ={this.props.option.costTier[parameter]} 
+                      propValue ={this.props.option.costTier[parameter]} 
                       label={parameter+":"} 
-                      placeholder={""}
                       handleUpdate={this.props.handleUpdate}
                       type={"Number"}
-                      toolTip={"Visual show price for" + parameter }
+                      toolTip={"Visual show price for " + parameter }
                       />
                 </Form.Group>
               </Col>

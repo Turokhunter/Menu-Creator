@@ -28,7 +28,6 @@ class Sections extends React.Component {
         costTier: {Stand: 1.00, Prem: 2.00, UltPrem:3.00},
         colorInclusion :"all",
         items: [],
-        selected : false,
         modelSection : {
           models:{ 
             "md0":{
@@ -215,7 +214,7 @@ class Sections extends React.Component {
   }
 
   importJson = (textArea)=>{
-    const newState = populateOptions(textArea);
+    const newState = populateOptions(textArea, this.counter);
     this.setState({options: newState.options,
                     mapping: newState.mapping});
   }

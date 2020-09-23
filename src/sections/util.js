@@ -23,7 +23,27 @@ function generateEasyRead(lst, options){
   return easyRead;
 }
 
-export function populateOptions(importFile){
+function fromJson2SystemColor(option, newOption, colors){
+  newOption.items = [];
+  if(option.includeColor !== undefined){
+    option.includeColor.forEach((color)=>{
+      newOption.items.push({id: colors[color].id, name: colors[color].name});
+    });
+    newOption.colorInclusion = "include";
+    
+    delete newOption.includeColor;
+  } else if(option.excludeColor !== undefined){
+    option.excludeColor.forEach((color)=>{
+      newOption.items.push({id: colors[color].id, name: colors[color].name});
+    });
+    newOption.colorInclusion = "exclude";
+    delete newOption.excludeColor;
+  } else {//has to be all
+    newOption.colorInclusion = "all";
+  }
+}
+//TODO::Find max counter for each type
+export function populateOptions(importFile, counter){
   const importedObject = JSON.parse(importFile);
   var filaments = colorData.filament;
   var colors = {};
@@ -36,32 +56,48 @@ export function populateOptions(importFile){
                  };
   importedObject.options.forEach((option)=>{
     if(option.type === "colorpicker"){
-      let newOption  = {...option};
-      newOption.items = [];
-      if(option.includeColor !== undefined){
-        option.includeColor.forEach((color)=>{
-          newOption.items.push({id: colors[color].id, name: colors[color].name});
-        });
-        newOption.colorInclusion = "include";
-        
-        delete newOption.includeColor;
-      } else if(option.excludeColor !== undefined){
-        option.excludeColor.forEach((color)=>{
-          newOption.items.push({id: colors[color].id, name: colors[color].name});
-        });
-        newOption.colorInclusion = "exclude";
-        delete newOption.excludeColor;
-      } else {//has to be all
-        newOption.colorInclusion = "all";
-      }
-      
+      let newOption  = {...option};      
+      fromJson2SystemColor(option, newOption, colors);
+      counter.cp = Math.max(counter.cp, parseInt(option.id.replace("cp","")) + 1);      
       newState.options.push(newOption);
     } else if(option.type === "dropdown"){
+      counter.dd = Math.max(counter.dd, parseInt(option.id.replace("dd","")) + 1);      
       newState.options.push(option);
     } else if(option.type === "checkbox"){
+      counter.cb = Math.max(counter.cb, parseInt(option.id.replace("cb","")) + 1);      
       newState.options.push(option);
     }
   });
+
+  if(importedObject.stl){
+    let newSTL = {};
+    newSTL["camera"] = importedObject.stl.camera;
+    newSTL["position"] = importedObject.stl.position;
+    newSTL["scale"] = importedObject.stl.scale;
+    newSTL["mindist"] = importedObject.stl.mindist;
+    newSTL["maxdist"] = importedObject.stl.maxdist;
+    newSTL["type"] = "stl";
+    newSTL["id"] = "stl";
+    newState.options.push(newSTL);
+    var sectionLookup = {};
+    importedObject.stl.sections.forEach( (section) => {
+      let newSection  = {...section};
+      fromJson2SystemColor(section, newSection, colors);
+      newSection["modelSection"] = {models:{}, modelOrder:[]};
+      sectionLookup[newSection.id] = newState.options.length;
+      counter.sc = Math.max(counter.sc, parseInt(newSection.id.replace("sc","")) + 1);      
+      newState.options.push(newSection);
+    });
+
+    importedObject.stl.models.forEach((model) =>{
+      const newModel = {...model};
+      const sectionId = newModel.section;
+      delete newModel.section;
+      newState.options[sectionLookup[sectionId]].modelSection.models[model.id] = newModel;
+      newState.options[sectionLookup[sectionId]].modelSection.modelOrder.push(model.id);
+      counter.md = Math.max(counter.md, parseInt(model.id.replace("md","")) + 1);      
+    });
+  }
 
   var newMapping = {};
   for(const [key, element] of Object.entries(importedObject.mapping)){
@@ -127,7 +163,7 @@ export function createMapping(options){
         } else if(option.type === "section"){
           if (option.multiSelect && option.hasCostTier){
             option.modelSection.modelOrder.forEach( (modelId) =>{
-              mapVariant(arr1, arr2, modelId, ["", "Stand", "Prem", "UltPrem"]);
+              mapVariant(arr1, arr2, modelId, ["false", "Stand", "Prem", "UltPrem"]);
               arr1 = [...arr2];
               arr2 = [];
             });
@@ -136,7 +172,7 @@ export function createMapping(options){
             arr2 = temp; 
           } else if(option.multiSelect) {
             option.modelSection.modelOrder.forEach( (modelId) =>{
-              mapVariant(arr1, arr2, modelId, ["", "Stand"]);
+              mapVariant(arr1, arr2, modelId, ["false", "Stand"]);
               arr1 = [...arr2];
               arr2 = [];
             });
@@ -225,7 +261,6 @@ export function createJsonFile(state, columns){
       }
       delete newSection.colorInclusion;
       delete newSection.items;
-      delete newSection.type;
       delete newSection.modelSection;
       //add section
       stl.sections.push(newSection);

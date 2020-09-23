@@ -3,7 +3,6 @@ import {InputGroup, Form, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 
 const LineEdit = ({propValue, propName, label, type,  placeholder, handleUpdate, toolTip}) => {
-
   return (
     <InputGroup>
       <InputGroup.Prepend>
@@ -23,7 +22,7 @@ const LineEdit = ({propValue, propName, label, type,  placeholder, handleUpdate,
         value={propValue}
         name={propName}
         type={type}
-        placeholder={placeholder}
+        placeholder={placeholder === undefined ? propValue : placeholder}
         onChange = {handleUpdate}
       />
     </InputGroup>

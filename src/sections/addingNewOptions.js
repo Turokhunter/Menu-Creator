@@ -39,8 +39,7 @@ export function addNewOption(optiontype, counter){
       colorInclusion :"all",
       items : [],
       modelSection : {models:{}, modelOrder:[]},
-      multiSelect : false,
-      selected : false,
+      multiSelect : false
     };
   } else if(optiontype === 'stl'){
     return {
