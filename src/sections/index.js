@@ -36,9 +36,9 @@ class Sections extends React.Component {
               filename: "LitRoc-Standard.stl",
               show: true,
               colorId: "",
-              inGroup: false,
-              selected: false,
-              group: ""          
+              inGroup: true,
+              selected: true,
+              group: "Nozzle"          
             },
             "md1":{
               id: "md" + this.counter.md++,
@@ -46,9 +46,9 @@ class Sections extends React.Component {
               filename: "LitRoc-BottomPlate.stl",
               show: true,
               colorId: "",
-              inGroup: false,
+              inGroup: true,
               selected: false,
-              group: ""           
+              group: "Nozzle"           
             }
           }, 
           modelOrder:["md0", "md1"]
@@ -174,6 +174,21 @@ class Sections extends React.Component {
       newPanel.id = "dd" + this.counter.dd++;
     } else if(newPanel.type === "colorpicker"){
       newPanel.id = "cp" + this.counter.cp++;
+    } else if(newPanel.type === "section"){
+      newPanel.id = "sc" + this.counter.sc++;
+      let newModelOrder = [];
+      newPanel.modelSection.modelOrder.forEach((modelId) =>{
+        var newModelId = "md" + this.counter.md++;
+        newPanel.modelSection.models[modelId].id = newModelId;
+        newPanel.modelSection.models[newModelId] = newPanel.modelSection.models[modelId];
+        delete newPanel.modelSection.models[modelId];
+        newModelOrder.push(newModelId);
+      });
+      newPanel.modelSection.modelOrder = newModelOrder;
+      console.log(newPanel);
+    } else if(newPanel.type === "stl"){
+      console.log("Can't duplicate this version.");
+      return;
     } else {
       console.log("Duplicate is not implement for this type");
     }

@@ -9,7 +9,7 @@ const CheckBox = ({option, handleUpdate}) => {
          <Form.Group as={Col}>
          <Checked 
             propName={"selected"} 
-            propVale={option.selected} 
+            propValue={option.selected} 
             label={"Checked"} 
             handleUpdate={handleUpdate}
             toolTip={"Is it checked or unchecked by default."}

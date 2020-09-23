@@ -10,7 +10,7 @@ import Checked from '../Checked';
 
 
 
-const CheckedGroup = ({propVale, propName, label, handleUpdate, toolTip}) => {
+const CheckedGroup = ({propValue, propName, label, handleUpdate, toolTip}) => {
 
   return (
     <InputGroup>
@@ -30,7 +30,7 @@ const CheckedGroup = ({propVale, propName, label, handleUpdate, toolTip}) => {
       <InputGroup.Checkbox
               name ={propName}
               aria-label="option 1"
-              checked = {propVale}
+              checked = {propValue}
               onChange = {handleUpdate}
         />
     </InputGroup>
@@ -94,7 +94,7 @@ export default class Model extends React.Component{
             <Form.Group as={Col}>
             <Checked 
                 propName={"show"} 
-                propVale={model.show} 
+                propValue={model.show} 
                 label={"Show:"} 
                 handleUpdate={this.props.handleUpdatingModel}
                 toolTip={"Should the model be shown"}
@@ -103,7 +103,7 @@ export default class Model extends React.Component{
             <Form.Group as={Col}>
               <CheckedGroup 
                 propName={"inGroup"} 
-                propVale={model.isGroup} 
+                propValue={model.inGroup} 
                 label={"Group:"} 
                 handleUpdate={this.props.handleUpdatingModel}
                 toolTip={"Is this model part of Group. Group allow the user to \
@@ -114,7 +114,7 @@ export default class Model extends React.Component{
             <Form.Group as={Col}>
             <CheckedGroup 
                 propName={"selected"} 
-                propVale={model.selected} 
+                propValue={model.selected} 
                 label={"Selected:"} 
                 handleUpdate={this.props.handleUpdatingModel}
                 toolTip={"Is this model selected at the start. Note: \

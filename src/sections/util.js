@@ -1,3 +1,4 @@
+import { getColors } from "../components/getColors";
 import colorData from "../data/filament.json"
 
 function generateEasyRead(lst, options){
@@ -197,19 +198,23 @@ export function createMapping(options){
 
 export function createJsonFile(state, columns){
   var FileSaver = require('file-saver');
+  var filaments = colorData.filament;
   var newMapping = {};
   var newOptions = [];
   var csvVarient = [];
   var stl = {sections:[], models:[]};
+  var colorPickerVarient = ["Colorpicker"];
   for(const [key, column] of Object.entries(columns)){
     if(key === "unassigned"){
       continue;
     }
     column.taskIds.forEach((id)=>{
       newMapping[id] = column.title;
-      csvVarient.push(column.title);
+      colorPickerVarient.push(column.title);
     });
   }
+  csvVarient.push(colorPickerVarient.join(",") + "\n");
+
 
   state.options.forEach((option)=>{
     if(option.type === "colorpicker"){
@@ -218,7 +223,7 @@ export function createJsonFile(state, columns){
         //do nothing
       } else if (option.colorInclusion === "include"){
         var color = [];
-        option.items.forEach((item)=>{
+        option.items.forEach((item) =>{
           color.push(item.id);
         });
         newOption["includeColor"] = color;
@@ -229,10 +234,23 @@ export function createJsonFile(state, columns){
         });
         newOption["excludeColor"] = color;
       }
+      var selectedFilament = getColors(option, filaments);
+      var colorVarient = [option.name];
+      selectedFilament.forEach((filament)=> {
+        colorVarient.push(filament.name);
+      });
+      csvVarient.push(colorVarient.join(",") + "\n");
+
       delete newOption.colorInclusion;
       delete newOption.items;
       newOptions.push(newOption);
     } else if(option.type === "dropdown"){
+      var dropdownVarient = [option.name];
+      option.items.forEach((item)=> {
+        dropdownVarient.push(item.name);
+      });
+      csvVarient.push(dropdownVarient.join(",") + "\n");
+
       newOptions.push(option);
     } else if(option.type === "checkbox"){
       newOptions.push(option);
@@ -288,6 +306,6 @@ export function createJsonFile(state, columns){
   var blob = new Blob([jsonse], {type: "application/json"});
   FileSaver.saveAs(blob, "file.json");
 
-  var csvblob = new Blob([csvVarient.join(",")], {type: "text/plain;charset=utf-8"});
+  var csvblob = new Blob([csvVarient], {type: "text/plain;charset=utf-8"});
   FileSaver.saveAs(csvblob, "Varients.csv");
 }

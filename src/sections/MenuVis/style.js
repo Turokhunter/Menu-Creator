@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Container} from 'react-bootstrap';
+import {Container, Dropdown, Row, Col} from 'react-bootstrap';
 
 export const MenuContainer = styled(Container)`
   padding-top: 40px;
@@ -30,6 +30,15 @@ export const MenuSwatch = styled.img `
   }
 `;
 
+export const STLMenuSwatch = styled.img `
+  width: 42px;
+  height: 32px;
+  position: relative;
+  left: -6px;
+  border-radius: 2px;
+  border: 1px solid #a7a7a7;
+`;
+
 export const MenuH3 = styled.h3 `
   margin: 0px;
   color: #363636;
@@ -37,6 +46,14 @@ export const MenuH3 = styled.h3 `
   font-weight: 600;
   line-height: 1.125;
   font-family: "Work Sans","HelveticaNeue","Helvetica Neue",sans-serif;
+`;
+
+export const SubSectionText = styled.p `
+  margin: 0px;
+  font-size: 16px;
+  font-family: "Work Sans","HelveticaNeue","Helvetica Neue",sans-serif;
+  color: #3d4246;
+  line-height: 1.5;
 `;
 
 export const MenuColumnSpacing = styled.div `
@@ -73,4 +90,34 @@ export const Menulabel = styled.label `
 `;
 export const FootSizing = styled.div `
 
+`;
+
+export const MySubsectionRow = styled(Row)`
+  margin-left: 20px;
+`;
+
+export const MyRow = styled(Row)`
+  ${props => props.type === 'section'
+    ? `background-color : lightgray;`
+    : `background-color : white;`}
+`;
+
+export const MyDropdownToggle = styled(Dropdown.Toggle)`
+  width: 208px;
+  height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border-color: lightgray;
+`;
+
+export const TextWrap = styled.span`
+  overflow: hidden;
+  width: 125px;
+`;
+
+export const MyCol = styled(Col)`
+  padding:12px;
 `;
