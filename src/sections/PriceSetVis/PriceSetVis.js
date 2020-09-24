@@ -67,14 +67,57 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
+
+  groupVariants = (prices, grouping) => {
+    let newColumns = { unassigned : {
+      id: 'unassigned',
+      title: 'Unassigned Variants',
+      taskIds:[]
+      }};
+    var columnOrder = ["unassigned"];
+    var idx = 0;
+    var groupMap = {};
+    for(const [key, column] of Object.entries(this.props.mapping)){
+      if(groupMap[grouping[idx]] === undefined){//doesn't exist
+        var title = "";
+        if(prices[idx] === 0){
+          title = "Base";
+        } else {
+          title = "Addon: $" + prices[idx];
+        }
+        const newColumn = {
+        id: title,
+        title: title,
+        taskIds:[key]
+        };
+
+        newColumns[title] = newColumn;
+        groupMap[grouping[idx]] = title;
+        columnOrder.push(title);
+      } else {
+        newColumns[groupMap[grouping[idx]]].taskIds.push(key);
+      }
+      idx++;
+    }
+
+
+    this.setState({columns: newColumns,
+    columnOrder: columnOrder});
+  }
+
   generateVarient = (type) =>{
     if(type === 'onetoone'){
       this.genereteOnetoOne();
-    } else if(type === 'priceDiff'){
-      this.props.generatePriceBuckets();
+    } else if(type === 'price'){
+      var results = this.props.combineSamePrices();
+      this.groupVariants(results[0], results[1]);
+    } else if(type === 'priceBuckets'){
+      var results = this.props.generatePriceBuckets();
+      console.log(results);
+      this.groupVariants(results[1], results[2]);
     }
   }
-  genereteOnetoOne= () =>{
+  genereteOnetoOne = () =>{
     const unassigned = this.state.columns.unassigned;
     if(unassigned.taskIds.length){
       const newColumnOrder = this.state.columnOrder.slice();
@@ -85,9 +128,9 @@ class PriceSetVis extends React.Component{
           ...this.state.columns,          
         },
       };
-      unassigned.taskIds.forEach((taskId)=>{
+      unassigned.taskIds.forEach((taskId) => {
         var res = this.state.tasks[taskId].content.split("&");        
-        const listName = res.map((item)=>{
+        const listName = res.map((item) => {
           const name = item.split("=")[1];
           return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
         });

@@ -53,7 +53,8 @@ class Header extends React.Component {
         </VariantAdd>
         <MyDropdown title="Auto Populate Variant" onSelect={(value)=>(this.props.generateVarient(value))} variant="outline-primary">
           <Dropdown.Item  eventKey="onetoone" >For Each Remaining</Dropdown.Item >
-          <Dropdown.Item  eventKey="priceDiff">By Price</Dropdown.Item >
+          <Dropdown.Item  eventKey="price">By Price</Dropdown.Item >
+          <Dropdown.Item  eventKey="priceBuckets">By Price Bucket</Dropdown.Item >
         </MyDropdown>{' '}
         <MyExport onClick={this.props.exportJson}>
           Export

@@ -29,7 +29,7 @@ class MeanShift{
       }
     }
     var groupAssignment = this._pointGrouper(shiftedPoints);
-    return [shiftedPoints, groupAssignment];
+    return [points, shiftedPoints, groupAssignment];
   }
 
   _shift_points(point, points, kernel_bandwidth){

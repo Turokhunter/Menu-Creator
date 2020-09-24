@@ -145,7 +145,7 @@ class Sections extends React.Component {
     } else {
       if(tagInfo.tagName.includes("$")){
         var tagName = tagInfo.tagName.split("$")
-        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagName[0], price: tagName[1]});
+        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagName[0], price: parseFloat(tagName[1])});
       } else {
         options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
       }
@@ -339,12 +339,79 @@ class Sections extends React.Component {
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)});
   }
+  mapOptionstoId(options){
+    var mapOption = {}
+    options.forEach((option)=>{
+      mapOption[option.id] = option;
+      if(option.type === 'section'){
+        option.modelSection.modelOrder.forEach((modelId) =>{
+          var model =  option.modelSection.models[modelId];
+          mapOption[model.id] = model;
+        })
+      }
+    })
+    return mapOption;
+  }
 
+  calculatePriceofVariant = (mapping, optionMap) => {
+    var prices = [];
+    for( const[key, value] of Object.entries(mapping)){
+      var lstOptions = value.id.split("&");
+      const sum = lstOptions.reduce((currSum, priceSet)=>{
+        let [id, set] = priceSet.split("=");
+        if(optionMap[id].type === 'checkbox') {
+          if(set === "true"){
+            return currSum + optionMap[id].price;
+          }
+          return currSum;
+        } else if(optionMap[id].type === 'dropdown'){
+          for(var j = 0; j < optionMap[id].items.length; j++){
+            if(optionMap[id].items[j].id === set){
+              return currSum + optionMap[id].items[j].price;
+            }
+          }
+          return currSum;
+        } else if(optionMap[id].type === 'section'){
+          if(set ==='Stand'){
+            return currSum;
+          }
+          return currSum + optionMap[id].costTier[set];
+        } else {
+          if(set === "false"){
+            return currSum;
+          } else if(set ==='Stand' && optionMap[id].type ==='colorpicker'){
+            return currSum;
+          }
+          return currSum + optionMap[id].price[set];
+        }
+      }, 0);
+      prices.push(sum);
+    }
+    return prices;
+  }
+  
   generatePriceBuckets = () => {
-    console.log(this.state.mapping);
+    if(Object.entries(this.state.mapping).length === 0){
+      return;
+    }
+    const optionMap = this.mapOptionstoId(this.state.options);
+    const prices = this.calculatePriceofVariant(this.state.mapping, optionMap);
+
     var meanShift = new MeanShift();
-    var points = [5,5,5,5,5,8,8,8,8,9,12,12,12,12,13];
-    var results = meanShift.cluster(points, 1);
+    var results = meanShift.cluster(prices, .5);
+    return results;
+  }
+
+  combineSamePrices = () => {
+    if(Object.entries(this.state.mapping).length === 0){
+      return;
+    }
+    const optionMap = this.mapOptionstoId(this.state.options);
+    const prices = this.calculatePriceofVariant(this.state.mapping, optionMap);
+
+    var meanShift = new MeanShift();
+    var results = meanShift._pointGrouper(prices);
+    return [prices, results];
   }
 
   render(){
@@ -386,6 +453,7 @@ class Sections extends React.Component {
               exportJson={this.exportJson} 
               changeHeight={this.changeHeight}
               generatePriceBuckets={this.generatePriceBuckets}
+              combineSamePrices={this.combineSamePrices}
               height={height}
               />
           </SplitPane>
