@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Button} from 'react-bootstrap';
+import {Button, DropdownButton} from 'react-bootstrap';
 
 export const Text = styled.div`
   padding-left:5px;
@@ -30,4 +30,9 @@ export const MyMenuButton = styled(Button)`
 
 export const MyExport = styled(Button)`
   margin-left:10px;
+`;
+
+export const MyDropdown = styled(DropdownButton)`
+  display: inline-block;
+  position: relative;
 `;

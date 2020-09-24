@@ -67,6 +67,13 @@ class PriceSetVis extends React.Component{
     };
     this.setState(newState);
   }
+  generateVarient = (type) =>{
+    if(type === 'onetoone'){
+      this.genereteOnetoOne();
+    } else if(type === 'priceDiff'){
+      this.props.generatePriceBuckets();
+    }
+  }
   genereteOnetoOne= () =>{
     const unassigned = this.state.columns.unassigned;
     if(unassigned.taskIds.length){
@@ -192,6 +199,7 @@ class PriceSetVis extends React.Component{
       }
     }
   }
+  
   render(){
     return (
       <>
@@ -199,7 +207,7 @@ class PriceSetVis extends React.Component{
           <Header addColumns={this.addColumns} 
                   exportJson={this.exportJson} 
                   changeHeight={this.props.changeHeight}
-                  genereteOnetoOne={this.genereteOnetoOne}
+                  generateVarient={this.generateVarient}
                   />
         </HeaderSizing>
         <BodySizing height={this.props.height+"px"}>

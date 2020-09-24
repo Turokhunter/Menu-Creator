@@ -31,6 +31,17 @@ const BasicInfo = ({option, handleUpdate}) => {
             toolTip={"Choose if changing the option affect price."}
           />
         </Form.Group>
+        {option.type === 'checkbox' &&(
+          <Form.Group as={Col}>
+            <LineEdit propName={"price"}
+                      propValue ={option.price} 
+                      label={"Addon cost:"} 
+                      handleUpdate={handleUpdate}
+                      type={"Number"}
+                      toolTip={"only set if using auto populate variant"}
+                      />
+          </Form.Group>
+          )}
       </Form.Row>
     </Form>
   )

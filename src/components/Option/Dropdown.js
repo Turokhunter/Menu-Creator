@@ -72,7 +72,7 @@ class Dropdown extends React.Component {
                   src={deleteBtn}
                   onClick={() => this.props.handleClickDeleteTag(tag)}
                 />
-                {tag.name}
+                {tag.name}{tag.price && "$" + tag.price}
               </Tag>
             )}
             onChange={tags => this.props.handleUpdatingTagOrder(tags)}

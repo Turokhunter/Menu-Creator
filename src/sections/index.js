@@ -6,6 +6,7 @@ import {createMapping, createJsonFile, populateOptions} from './util';
 import {addNewOption} from './addingNewOptions';
 import MenuVis from './MenuVis';
 import PriceSetVis from './PriceSetVis';
+import MeanShift from './MeanShift';
 
 
 class Sections extends React.Component {
@@ -36,6 +37,7 @@ class Sections extends React.Component {
               filename: "LitRoc-Standard.stl",
               show: true,
               colorId: "",
+              price:{Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
               inGroup: true,
               selected: true,
               group: "Nozzle"          
@@ -46,6 +48,7 @@ class Sections extends React.Component {
               filename: "LitRoc-BottomPlate.stl",
               show: true,
               colorId: "",
+              price:{Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
               inGroup: true,
               selected: false,
               group: "Nozzle"           
@@ -140,7 +143,13 @@ class Sections extends React.Component {
     if(options[idx].type === "colorpicker"){
       options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
     } else {
-      options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
+      if(tagInfo.tagName.includes("$")){
+        var tagName = tagInfo.tagName.split("$")
+        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagName[0], price: tagName[1]});
+      } else {
+        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
+      }
+      
     }
 
     this.setState({options : options,
@@ -273,6 +282,7 @@ class Sections extends React.Component {
         name: "",
         filename: "",
         show: true,
+        price:{Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
         colorId:"",
         inGroup: false,
         selected: false,
@@ -300,8 +310,15 @@ class Sections extends React.Component {
   handleUpdatingModel = (idx, modelId, event) => {
     const options = this.state.options.slice();
     const {name, value, type, checked} = event.target
-  
-    if (type === "checkbox") {
+    console.log(name);
+    if(type === "number"){
+      if(name.split(".").length === 2){
+        const [prop, val] = name.split(".");
+        options[idx].modelSection.models[modelId][prop][val] = parseFloat(value);
+      } else {
+        options[idx].modelSection.models[modelId][name] = parseFloat(value);
+      }
+    } else if (type === "checkbox") {
       options[idx].modelSection.models[modelId][name] = checked;
     }  else {
       options[idx].modelSection.models[modelId][name] = value;
@@ -321,6 +338,13 @@ class Sections extends React.Component {
 
     this.setState({options : options,
                    numVarients : this.determineNumberofVarients(options)});
+  }
+
+  generatePriceBuckets = () => {
+    console.log(this.state.mapping);
+    var meanShift = new MeanShift();
+    var points = [5,5,5,5,5,8,8,8,8,9,12,12,12,12,13];
+    var results = meanShift.cluster(points, 1);
   }
 
   render(){
@@ -361,6 +385,7 @@ class Sections extends React.Component {
               mapping={this.state.mapping} 
               exportJson={this.exportJson} 
               changeHeight={this.changeHeight}
+              generatePriceBuckets={this.generatePriceBuckets}
               height={height}
               />
           </SplitPane>

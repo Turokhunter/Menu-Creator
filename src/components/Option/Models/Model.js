@@ -39,6 +39,7 @@ const CheckedGroup = ({propValue, propName, label, handleUpdate, toolTip}) => {
 export default class Model extends React.Component{
   render(){
     const model = this.props.model;
+    const parameterList = [["Stand", "Stand"], ["Prem", "Prem"],["UltPrem","UltP"]];
     return (
       <Draggable draggableId={model.id} index={this.props.index}>
         {provided => (
@@ -89,7 +90,21 @@ export default class Model extends React.Component{
                       />
               </Form.Group>
             </Form.Row>
-
+          <Form.Row>
+            {parameterList.map((parameter)=>
+              <Col>
+                <Form.Group >
+                <LineEdit propName={"price." + parameter[0]}
+                      propValue ={model.price[parameter[0]]} 
+                      label={parameter[1] + ":"} 
+                      handleUpdate={this.props.handleUpdatingModel}
+                      type={"Number"}
+                      toolTip={"Price setting for " + parameter[0] }
+                      />
+                </Form.Group>
+              </Col>
+            )}
+          </Form.Row>
           <Form.Row>
             <Form.Group as={Col}>
             <Checked 

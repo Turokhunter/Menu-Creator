@@ -1,11 +1,12 @@
 import React from 'react';
-import {Button, InputGroup, FormControl} from 'react-bootstrap'
+import {Button, InputGroup, FormControl, Dropdown} from 'react-bootstrap'
 import {Text, 
         VariantAdd,
         LeftSideHeader,
         RightSideHeader,
         MyMenuButton,
-        MyExport} from './sytle'
+        MyExport,
+        MyDropdown} from './sytle'
 import {MdExpandLess, MdExpandMore} from 'react-icons/md';
 
 
@@ -50,9 +51,10 @@ class Header extends React.Component {
             </InputGroup.Append>
           </InputGroup>
         </VariantAdd>
-        <MyExport onClick={this.props.genereteOnetoOne}>
-          Create Variant for Each
-        </MyExport>
+        <MyDropdown title="Auto Populate Variant" onSelect={(value)=>(this.props.generateVarient(value))} variant="outline-primary">
+          <Dropdown.Item  eventKey="onetoone" >For Each Remaining</Dropdown.Item >
+          <Dropdown.Item  eventKey="priceDiff">By Price</Dropdown.Item >
+        </MyDropdown>{' '}
         <MyExport onClick={this.props.exportJson}>
           Export
         </MyExport>  

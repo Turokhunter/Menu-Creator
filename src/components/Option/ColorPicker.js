@@ -6,6 +6,7 @@ import {AddAndDelete, DeleteIcon, MyRadioPos, Tag, RadioLabel} from "./style";
 import {getColors} from "../getColors";
 import colorData from "../../data/filament.json"
 import Autosuggest from 'react-autosuggest';
+import LineEdit from './LineEdit';
 
 const getSuggestionValue = suggestion => suggestion.name;
 
@@ -112,6 +113,26 @@ class ColorPicker extends React.Component {
     return (
       <>
         <Form>
+          <Form.Row>
+            <Form.Group as={Col}>
+                <LineEdit propName={"price.Prem"}
+                          propValue ={this.props.option.price.Prem} 
+                          label={"Prem:"} 
+                          handleUpdate={this.props.handleUpdate}
+                          type={"Number"}
+                          toolTip={"only set if using auto populate variant"}
+                          />
+              </Form.Group>
+              <Form.Group as={Col}>
+              <LineEdit propName={"price.UltPrem"}
+                        propValue ={this.props.option.price.UltPrem} 
+                        label={"UltPrem:"} 
+                        handleUpdate={this.props.handleUpdate}
+                        type={"Number"}
+                        toolTip={"only set if using auto populate variant"}
+                        />
+            </Form.Group>
+            </Form.Row>
           <Form.Row>
             <Form.Group as={Col} md="8">
               <InputGroup>

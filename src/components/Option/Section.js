@@ -166,7 +166,7 @@ class Section extends React.Component {
                 </Form.Group>
               </Col>
             )}
-        </Form.Row>
+          </Form.Row>
 
           <Form.Row>
             <Form.Group as={Col} md="8">

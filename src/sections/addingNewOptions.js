@@ -5,6 +5,7 @@ export function addNewOption(optiontype, counter){
       name : "",
       type : "checkbox",
       priceDiff : false,
+      price: 1,
       selected : false
     };
   } else if(optiontype === 'dropdown'){
@@ -24,6 +25,7 @@ export function addNewOption(optiontype, counter){
       priceDiff : false,
       colorId : "",
       colorInclusion:"all",
+      price : {Prem: 1.00, UltPrem: 2.00},
       items : []
       //Optional: includeColor : []
       //Optional: excludeColor : []
