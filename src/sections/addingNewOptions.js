@@ -9,7 +9,7 @@ export function addNewOption(optiontype, counter){
       selected : false
     };
   } else if(optiontype === 'dropdown'){
-    return {
+  return {
       id : "dd" + counter.dd++,
       name : "",
       type : "dropdown",
@@ -36,7 +36,7 @@ export function addNewOption(optiontype, counter){
       section : "",
       type : "section",
       hasCostTier : false,
-      costTier: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
+      costTier: {Stand: 0.00, Prem: 2.00, UltPrem: 3.00},
       colorid : "",
       colorInclusion :"all",
       items : [],

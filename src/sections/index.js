@@ -26,7 +26,7 @@ class Sections extends React.Component {
         type : "section",
         colorId : "",
         hasCostTier : false,
-        costTier: {Stand: 1.00, Prem: 2.00, UltPrem:3.00},
+        costTier: {Stand: 0.00, Prem: 2.00, UltPrem:3.00},
         colorInclusion :"all",
         items: [],
         modelSection : {
@@ -37,7 +37,7 @@ class Sections extends React.Component {
               filename: "LitRoc-Standard.stl",
               show: true,
               colorId: "",
-              price:{Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
+              price: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
               inGroup: true,
               selected: true,
               group: "Nozzle"          
@@ -48,7 +48,7 @@ class Sections extends React.Component {
               filename: "LitRoc-BottomPlate.stl",
               show: true,
               colorId: "",
-              price:{Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
+              price: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
               inGroup: true,
               selected: false,
               group: "Nozzle"           

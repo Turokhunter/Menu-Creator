@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Col, Button, InputGroup} from 'react-bootstrap';
 import deleteBtn from '../img/delete.png';
 import {DraggableArea} from 'react-draggable-tags';
-import {AddAndDelete, DeleteIcon, MyRadioPos, Tag, RadioLabel} from "./style";
+import {AddAndDelete, DeleteIcon, MyRadioPos, Tag, RadioLabel, ShoworHide} from "./style";
 import {getColors} from "../getColors";
 import colorData from "../../data/filament.json"
 import Autosuggest from 'react-autosuggest';
@@ -109,6 +109,7 @@ class ColorChoices extends React.Component {
       suggestionHighlighted: 'active'
     };
     const choices = this.updateSelectchoice(this.props.option, this.state.filament);
+    const show = (this.props.option.colorInclusion === 'all' ? false : true);
     return (
       <>
         <Form>
@@ -176,40 +177,42 @@ class ColorChoices extends React.Component {
             </Form.Group>
           </Form.Row>
         </Form>
-        <InputGroup>
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            onSuggestionSelected ={this.onSuggestionSelected}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-            theme={theme}
-          />
-          <InputGroup.Append>
-            <Button onClick={this.handleClickAddAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Add All</Button>
-          </InputGroup.Append>
-          <InputGroup.Append>
-            <Button onClick={this.handleClickClearAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Clear All</Button>
-          </InputGroup.Append>
-        </InputGroup>
-
-        <AddAndDelete>
-          <DraggableArea
-            tags={this.props.option.items}
-            render={({tag, index}) => (
-              <Tag>
-                <DeleteIcon
-                  src={deleteBtn}
-                  onClick={() => this.props.handleClickDeleteTag(tag)}
-                />
-                {tag.name}
-              </Tag>
-            )}
-            onChange={tags => this.props.handleUpdatingTagOrder(tags)}
-          />
-        </AddAndDelete>
+        <ShoworHide show={show}>
+          <InputGroup>
+            <Autosuggest
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              onSuggestionSelected ={this.onSuggestionSelected}
+              getSuggestionValue={getSuggestionValue}
+              renderSuggestion={renderSuggestion}
+              inputProps={inputProps}
+              theme={theme}
+            />
+            <InputGroup.Append>
+              <Button onClick={this.handleClickAddAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Add All</Button>
+            </InputGroup.Append>
+            <InputGroup.Append>
+              <Button onClick={this.handleClickClearAllColor} variant="info" disabled={this.props.option.colorInclusion === "all"}>Clear All</Button>
+            </InputGroup.Append>
+          </InputGroup>
+                    
+          <AddAndDelete>
+            <DraggableArea
+              tags={this.props.option.items}
+              render={({tag, index}) => (
+                <Tag>
+                  <DeleteIcon
+                    src={deleteBtn}
+                    onClick={() => this.props.handleClickDeleteTag(tag)}
+                  />
+                  {tag.name}
+                </Tag>
+              )}
+              onChange={tags => this.props.handleUpdatingTagOrder(tags)}
+            />
+          </AddAndDelete>
+        </ShoworHide>         
       </>
     )
   };

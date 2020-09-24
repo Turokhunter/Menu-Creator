@@ -91,7 +91,7 @@ export default class Model extends React.Component{
               </Form.Group>
             </Form.Row>
           <Form.Row>
-            {parameterList.map((index, parameter)=>
+            {parameterList.map((parameter, index)=>
               <Col key={index}>
                 <Form.Group >
                 <LineEdit propName={"price." + parameter[0]}

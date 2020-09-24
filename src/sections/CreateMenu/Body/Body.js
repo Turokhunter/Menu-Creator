@@ -21,11 +21,20 @@ const Body = ({options, handleUpdate,
     } else if(option.type ==="checkbox"){
       hSize = 5;
     } else if(option.type === "colorpicker"){
-      hSize = 11.2;
+      if(option.colorInclusion === 'all'){
+        hSize = 7.2;
+      } else {
+        hSize = 11.2;
+      }
     } else if(option.type === "stl"){
       hSize = 6;
     } else if(option.type === "section"){
-      hSize = 13 + option.modelSection.modelOrder.length*6.75;
+      if(option.colorInclusion === 'all'){
+        hSize = 9;
+      } else {
+        hSize = 13;
+      }
+      hSize += option.modelSection.modelOrder.length*6.75;
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;

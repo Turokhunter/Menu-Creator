@@ -61,3 +61,9 @@ export const DeleteIcon = styled.img `
     -webkit-user-select: none;
     -ms-user-select: none;
 `;
+
+export const ShoworHide = styled.div `
+    ${props => props.show === true
+    ? `display : block;`
+    : `display : none;`}
+`;
