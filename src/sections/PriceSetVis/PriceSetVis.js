@@ -77,7 +77,7 @@ class PriceSetVis extends React.Component{
     var columnOrder = ["unassigned"];
     var idx = 0;
     var groupMap = {};
-    for(const [key, column] of Object.entries(this.props.mapping)){
+    for(const [key] of Object.entries(this.props.mapping)){
       if(groupMap[grouping[idx]] === undefined){//doesn't exist
         var title = "";
         if(prices[idx] === 0){
@@ -109,10 +109,10 @@ class PriceSetVis extends React.Component{
     if(type === 'onetoone'){
       this.genereteOnetoOne();
     } else if(type === 'price'){
-      var results = this.props.combineSamePrices();
+      let results = this.props.combineSamePrices();
       this.groupVariants(results[0], results[1]);
     } else if(type === 'priceBuckets'){
-      var results = this.props.generatePriceBuckets();
+      let results = this.props.generatePriceBuckets();
       console.log(results);
       this.groupVariants(results[1], results[2]);
     }

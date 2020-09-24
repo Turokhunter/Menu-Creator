@@ -24,7 +24,7 @@ class Sections extends React.Component {
         id : "sc" + this.counter.sc++,
         section : "Body",
         type : "section",
-        colorid : "",
+        colorId : "",
         hasCostTier : false,
         costTier: {Stand: 1.00, Prem: 2.00, UltPrem:3.00},
         colorInclusion :"all",
@@ -211,7 +211,7 @@ class Sections extends React.Component {
     for(var i = 0; i < this.state.options.length; i++){
       var option = this.state.options[i];
       if(option.selected === "" || option.colorId === ""){
-        alert("Option " + option.name + " does not have default selected.");
+        alert("Option " + (option.name ? option.name : option.section) + " does not have default selected.");
         return;
       }
     };
@@ -219,7 +219,7 @@ class Sections extends React.Component {
     const newMapping = createMapping(this.state.options);
     if(Object.keys(newMapping).length === Object.keys(this.state.mapping).length){
       var match = true;
-      for(const [key, column] of Object.entries(this.state.mapping)){
+      for(const [key] of Object.entries(this.state.mapping)){
         if(newMapping.hasOwnProperty(key) === false){
           match = false;
           break;

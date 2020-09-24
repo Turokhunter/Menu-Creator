@@ -153,8 +153,8 @@ class Section extends React.Component {
           </Form.Row>
 
           <Form.Row>
-            {parameterList.map((parameter)=>
-              <Col>
+            {parameterList.map((parameter, index)=>
+              <Col key={index}>
                 <Form.Group >
                 <LineEdit propName={"costTier." + parameter}
                       propValue ={this.props.option.costTier[parameter]} 

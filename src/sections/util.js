@@ -222,13 +222,13 @@ export function createJsonFile(state, columns){
       if(option.colorInclusion === "all"){
         //do nothing
       } else if (option.colorInclusion === "include"){
-        var color = [];
+        let color = [];
         option.items.forEach((item) =>{
           color.push(item.id);
         });
         newOption["includeColor"] = color;
       } else if (option.colorInclusion === "exclude"){
-        var color = [];
+        let color = [];
         option.items.forEach((item)=>{
           color.push(item.id);
         });
@@ -271,7 +271,7 @@ export function createJsonFile(state, columns){
         });
         newSection["includeColor"] = color;
       } else if (option.colorInclusion === "exclude"){
-        var color = [];
+        let color = [];
         option.items.forEach((item)=>{
           color.push(item.id);
         });

@@ -7,12 +7,10 @@ class MeanShift{
   cluster(points, kernel_bandwidth){
     var shiftedPoints = points.slice();
     var maxMinDist = 1;
-    var iterationNumber = 0;
     var numPoints = shiftedPoints.length;
     var stillShift = new Array(points.length).fill(true);    
     while (maxMinDist > this.minDistance){
       maxMinDist = 0;
-      iterationNumber++;
       for(var i = 0; i < numPoints; i++){
         if (stillShift[i] === false){
           continue;

@@ -74,7 +74,7 @@ const ColorDropdown = ({colors, selectedColor})=>{
 
       <Dropdown.Menu>
         {colors.map((color) => (
-          <Dropdown.Item eventKey={color.id}>
+          <Dropdown.Item key={color.id} eventKey={color.id}>
             <STLMenuSwatch src={color.zoom}/>
             {color.name}
           </Dropdown.Item>
@@ -91,7 +91,7 @@ const STLColorSubsection = ({modelGrp, section, selectedFilament, selectedColor}
       <>
         <div key={`inline-$checkbox`} className="mb-3">
             {modelGrp.map((model)=>(
-              <Form.Check inline label={model.name} 
+              <Form.Check key={model.id} inline label={model.name} 
                           type="checkbox" 
                           id={`inline-$checkbox-`+ model.id} 
                           checked={model.selected}
@@ -132,7 +132,7 @@ const STLColorSubsection = ({modelGrp, section, selectedFilament, selectedColor}
         <>
           <div key={`inline-$radio`} className="mb-3">
           {modelGrp.map((model)=>(
-            <Form.Check inline label={model.name} 
+            <Form.Check inline readOnly label={model.name} key={model.id}
                         type="radio" 
                         id={`inline-$radio-`+ model.id} 
                         checked={model.selected}
@@ -190,8 +190,9 @@ const SectionMenu = ({option, filament}) => {
         </MyCol>
       </MyRow>
 
-      {numModels > 1 && modelGroups.map((modelGrp) =>(
+      {numModels > 1 && modelGroups.map((modelGrp, index) =>(
         <STLColorSubsection 
+          key={index}
           modelGrp={modelGrp} 
           section={option}
           selectedFilament={selectedFilament}
