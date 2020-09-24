@@ -140,7 +140,7 @@ class Sections extends React.Component {
 
   handleClickAddTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
-    if(options[idx].type === "colorpicker"){
+    if(options[idx].type === "colorpicker" || options[idx].type === "section"){
       options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
     } else {
       if(tagInfo.tagName.includes("$")){

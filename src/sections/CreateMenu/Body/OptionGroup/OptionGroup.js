@@ -44,6 +44,9 @@ const RenderBasedOnType = ({option, handleUpdate,
   } else if(option.type === 'section'){
     return( <Section option={option} handleUpdate={handleUpdate}
             reorderModels={reorderModels}
+            handleUpdatingTagOrder = {handleUpdatingTagOrder}
+            handleClickDeleteTag = {handleClickDeleteTag}
+            handleClickAddTag = {handleClickAddTag}
             handleClickAddModel={handleClickAddModel}
             handleDeleteModel={handleDeleteModel}
             handleUpdatingModel={handleUpdatingModel} 

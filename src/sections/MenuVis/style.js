@@ -4,7 +4,6 @@ import {Container, Dropdown, Row, Col} from 'react-bootstrap';
 export const MenuContainer = styled(Container)`
   padding-top: 40px;
   width: 560px;
-  overflow:hidden;
 `;
 
 export const MenuLabel = styled.label `
