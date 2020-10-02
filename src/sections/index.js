@@ -12,55 +12,21 @@ import MeanShift from './MeanShift';
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
   counter = {cb: 0, dd: 0, cp: 0, sc:0, md: 0};
-
+  storage = window.localStorage;
+  
   state = {
     height : window.innerHeight - 70,
     mapping : {},
-    stl: {},
-    models: [],
     numVarients : 0,
-    options : [
-      {
-        id : "sc" + this.counter.sc++,
-        section : "Body",
-        type : "section",
-        colorId : "",
-        hasCostTier : false,
-        costTier: {Stand: 0.00, Prem: 2.00, UltPrem:3.00},
-        colorInclusion :"all",
-        items: [],
-        modelSection : {
-          models:{ 
-            "md0":{
-              id: "md" + this.counter.md++,
-              name: "Body",
-              filename: "LitRoc-Standard.stl",
-              show: true,
-              colorId: "",
-              price: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
-              inGroup: true,
-              selected: true,
-              group: "Nozzle"          
-            },
-            "md1":{
-              id: "md" + this.counter.md++,
-              name: "Bottom Plate",
-              filename: "LitRoc-BottomPlate.stl",
-              show: true,
-              colorId: "",
-              price: {Stand: 1.00, Prem: 2.00, UltPrem: 3.00},
-              inGroup: true,
-              selected: false,
-              group: "Nozzle"           
-            }
-          }, 
-          modelOrder:["md0", "md1"]
-        },
-        multiSelect : false
-      }
-  ]
+    options : localStorage.getItem('options') !== null ? this.updateCounter(JSON.parse(localStorage.getItem('options')), this.counter) : []
   }
 
+  updateOptions(options){
+    this.storage.setItem("options", JSON.stringify(options));
+    this.setState({options : options,
+      numVarients : this.determineNumberofVarients(options)});
+  }
+  
   determineNumberofVarients = (options) => {
     var res = options.reduce((sum, option) => {
       if(option.priceDiff){
@@ -76,9 +42,9 @@ class Sections extends React.Component {
         }
       } else if(option.type === 'section'){
           if(option.multiSelect && option.hasCostTier){
-            return sum * 4 * option.modelSection.modelOrder.length;
+            return sum * Math.pow(4, option.modelSection.modelOrder.length);
           } else if(option.multiSelect ) {
-            return sum * 2 * option.modelSection.modelOrder.length;
+            return sum * Math.pow(2, option.modelSection.modelOrder.length);
           } else if(option.hasCostTier ) {
             return sum * 3;
           } else {
@@ -95,8 +61,7 @@ class Sections extends React.Component {
     if(newOption){
       const options = this.state.options.slice();
       options.push(newOption);
-      this.setState({options : options,
-        numVarients : this.determineNumberofVarients(options)});
+      this.updateOptions(options);
     } else {
       console.log("Option type "+ optiontype + " is not implemented for Add");
     }
@@ -119,23 +84,20 @@ class Sections extends React.Component {
       options[idx][name] = value;
     }
     console.log(options);
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)});
+    this.updateOptions(options);
   }
 
   handleUpdatingTagOrder = (idx, tags) => {
     const options = this.state.options.slice();
     options[idx].items = tags;
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)});
+    this.updateOptions(options);
   }
 
   handleClickDeleteTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
     const tags = options[idx].items.filter(t => tagInfo.id !== t.id);
     options[idx].items = tags;
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)})
+    this.updateOptions(options);
   }
 
   handleClickAddTag = (idx, tagInfo) => {
@@ -151,16 +113,13 @@ class Sections extends React.Component {
       }
       
     }
-
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)})
+    this.updateOptions(options);
   }
 
   handleClickDeleteOption = (panelInfo) => {
     const options = this.state.options.slice();
     const newOptions = options.filter(t => panelInfo.id !== t.id);
-    this.setState({options: newOptions,
-                   numVarients : this.determineNumberofVarients(newOptions)});
+    this.updateOptions(newOptions);
   }
 
   handleUpdatingOptionOrder = (layout) => {
@@ -171,8 +130,7 @@ class Sections extends React.Component {
                                         var A = a["id"], B = b["id"]
                                         return layoutOrder.indexOf(A) - layoutOrder.indexOf(B)
                                       });
-    this.setState({options: newOptions,
-                   numVarients : this.determineNumberofVarients(newOptions)});
+    this.updateOptions(newOptions);
   }
 
   handleClickDuplicateOption = (panel) => {
@@ -203,7 +161,7 @@ class Sections extends React.Component {
     }
     const options = this.state.options.slice();
     options.push(newPanel);
-    this.setState({options: options});
+    this.updateOptions(options);
   }
 
   handleSetPrice = () => {
@@ -226,9 +184,12 @@ class Sections extends React.Component {
         }
       }
       if(match){
+        console.log("match");
         return;
       }
     }
+    console.log("Generated ", Object.entries(newMapping).length," mappings.");
+    console.log(newMapping);
     this.setState({mapping: newMapping});
     this.setState({height: window.innerHeight/2})
   }
@@ -289,9 +250,7 @@ class Sections extends React.Component {
         group:""     
     };
     options[idx].modelSection.modelOrder.push(id);
-
-    this.setState({options : options,
-      numVarients : this.determineNumberofVarients(options)})
+    this.updateOptions(options);
   }
 
   handleDeleteModel = (idx, modelId) => {
@@ -303,14 +262,12 @@ class Sections extends React.Component {
     newModelOrder.splice(newModelOrder.indexOf(modelId), 1);
     options[idx].modelSection.modelOrder = newModelOrder;
 
-    this.setState({options : options,
-      numVarients : this.determineNumberofVarients(options)})
+    this.updateOptions(options);
   }
 
   handleUpdatingModel = (idx, modelId, event) => {
     const options = this.state.options.slice();
     const {name, value, type, checked} = event.target
-    console.log(name);
     if(type === "number"){
       if(name.split(".").length === 2){
         const [prop, val] = name.split(".");
@@ -324,8 +281,7 @@ class Sections extends React.Component {
       options[idx].modelSection.models[modelId][name] = value;
     }
     console.log(options[idx].modelSection.models[modelId]);
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)});
+    this.updateOptions(options);
   }
 
   handleClickDupModel = (idx, model) =>{
@@ -336,8 +292,26 @@ class Sections extends React.Component {
     options[idx].modelSection.models[id] = newModel;
     options[idx].modelSection.modelOrder.push(id);
 
-    this.setState({options : options,
-                   numVarients : this.determineNumberofVarients(options)});
+    this.updateOptions(options);
+  }
+  updateCounter(options, counter){
+    options.forEach((option)=>{
+      if(option.type ==='colorpicker'){
+        counter.cp = Math.max(counter.cp, parseInt(option.id.replace("cp","")) + 1);
+      } else if(option.type === "dropdown"){
+        counter.dd = Math.max(counter.dd, parseInt(option.id.replace("dd","")) + 1);      
+      } else if(option.type === "checkbox"){
+        counter.cb = Math.max(counter.cb, parseInt(option.id.replace("cb","")) + 1);      
+      } else if(option.type === "section"){
+        console.log(option);
+        counter.sc = Math.max(counter.sc, parseInt(option.id.replace("sc","")) + 1);      
+        option.modelSection.modelOrder.forEach((modelId)=>{
+          let model = option.modelSection.models[modelId];
+          counter.md = Math.max(counter.md, parseInt(model.id.replace("md","")) + 1);      
+        });
+      }
+    });
+    return options;
   }
   mapOptionstoId(options){
     var mapOption = {}
@@ -387,6 +361,7 @@ class Sections extends React.Component {
       }, 0);
       prices.push(sum);
     }
+    console.log("There are ",prices.length," price buckets");
     return prices;
   }
   

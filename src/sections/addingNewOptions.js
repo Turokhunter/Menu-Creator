@@ -5,7 +5,7 @@ export function addNewOption(optiontype, counter){
       name : "",
       type : "checkbox",
       priceDiff : false,
-      price: 1,
+      price: 0,
       selected : false
     };
   } else if(optiontype === 'dropdown'){
@@ -25,7 +25,7 @@ export function addNewOption(optiontype, counter){
       priceDiff : false,
       colorId : "",
       colorInclusion:"all",
-      price : {Prem: 1.00, UltPrem: 2.00},
+      price : {Prem: 0.00, UltPrem: 0.00},
       items : []
       //Optional: includeColor : []
       //Optional: excludeColor : []
@@ -36,7 +36,7 @@ export function addNewOption(optiontype, counter){
       section : "",
       type : "section",
       hasCostTier : false,
-      costTier: {Stand: 0.00, Prem: 2.00, UltPrem: 3.00},
+      costTier: {Stand: 0.00, Prem: 0.00, UltPrem: 0.00},
       colorid : "",
       colorInclusion :"all",
       items : [],

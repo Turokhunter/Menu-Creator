@@ -83,7 +83,7 @@ class PriceSetVis extends React.Component{
         if(prices[idx] === 0){
           title = "Base";
         } else {
-          title = "Addon: $" + prices[idx];
+          title = "Add-on: +$" + prices[idx];
         }
         const newColumn = {
         id: title,
@@ -229,7 +229,7 @@ class PriceSetVis extends React.Component{
           if(key === "unassigned"){
             newColumns["unassigned"] =  {
               ...prevState.columns.unassigned,
-              taskIds : lstTasks
+              taskIds : lstTasks.length > 100 ? [] : lstTasks
             }
           } else {
             newColumns[key] = {
@@ -241,9 +241,11 @@ class PriceSetVis extends React.Component{
         this.setState({columns: newColumns});
       }
     }
+    console.log("Finished adding Tasks");
   }
   
   render(){
+    console.log("Rendering Columns");
     return (
       <>
         <HeaderSizing>
