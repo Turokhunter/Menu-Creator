@@ -78,7 +78,7 @@ class PriceSetVis extends React.Component{
     var idx = 0;
     var groupMap = {};
     for(const [key] of Object.entries(this.props.mapping)){
-      if(groupMap[grouping[idx]] === undefined){//doesn't exist
+      if(!(grouping[idx] in groupMap)){//doesn't exist
         var title = "";
         if(prices[idx] === 0){
           title = "Base";
@@ -99,8 +99,8 @@ class PriceSetVis extends React.Component{
       }
       idx++;
     }
-
-
+    // var prices = Object.entries(groupMap).map(([key, value])=>{return value});
+    // console.log(prices.sort());
     this.setState({columns: newColumns,
     columnOrder: columnOrder});
   }
@@ -113,7 +113,6 @@ class PriceSetVis extends React.Component{
       this.groupVariants(results[0], results[1]);
     } else if(type === 'priceBuckets'){
       let results = this.props.generatePriceBuckets();
-      console.log(results);
       this.groupVariants(results[1], results[2]);
     }
   }
@@ -253,6 +252,7 @@ class PriceSetVis extends React.Component{
                   exportJson={this.exportJson} 
                   changeHeight={this.props.changeHeight}
                   generateVarient={this.generateVarient}
+                  numColumns={Object.entries(this.state.columns).length}
                   />
         </HeaderSizing>
         <BodySizing height={this.props.height+"px"}>

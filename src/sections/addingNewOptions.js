@@ -53,6 +53,12 @@ export function addNewOption(optiontype, counter){
       maxdist: 60,
       type : "stl",
     };
+  } else if(optiontype === 'preset'){
+    return {
+      id: "ps" + counter.ps++,
+      name: "",
+      type : "preset",
+    }
   }
   return null;
 }

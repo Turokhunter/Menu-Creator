@@ -7,6 +7,7 @@ import Dropdown from '../../../../components/Option/Dropdown.js'
 import ColorPicker from '../../../../components/Option/ColorPicker.js'
 import STLWindow from '../../../../components/Option/STLWindow.js'
 import Section from '../../../../components/Option/Section.js'
+import Preset from '../../../../components/Option/Preset.js'
 import {Container} from 'react-bootstrap';
 
 
@@ -52,7 +53,9 @@ const RenderBasedOnType = ({option, handleUpdate,
             handleUpdatingModel={handleUpdatingModel} 
             handleClickDupModel = {handleClickDupModel}
             />)
-  } 
+  } else if(option.type === 'preset'){    
+    return(<Preset option={option} handleUpdate={handleUpdate}/>)
+  }
 }
 
 const OptionGroup = ({option, handleUpdate,

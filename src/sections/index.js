@@ -11,7 +11,7 @@ import MeanShift from './MeanShift';
 
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = {cb: 0, dd: 0, cp: 0, sc:0, md: 0};
+  counter = {cb: 0, dd: 0, cp: 0, sc:0, md: 0, ps:0};
   storage = window.localStorage;
   
   state = {
@@ -60,6 +60,25 @@ class Sections extends React.Component {
     const newOption =  addNewOption(optiontype, this.counter);
     if(newOption){
       const options = this.state.options.slice();
+      if(newOption.type === "preset"){
+        options.forEach((option) => {
+          if(option.type === 'colorpicker'){
+            newOption[option.id] = '';
+          } else if(option.type === 'dropdown'){
+            newOption[option.id] = '';
+          } else if(option.type === 'checkbox'){
+            newOption[option.id] = '';
+          } else if(option.type === 'section'){
+            newOption[option.id] = '';
+          }
+        })
+      } else {
+        options.forEach((option) => {
+          if(option.type === 'preset'){
+            newOption[newOption.id] = '';
+          }
+        });
+      }
       options.push(newOption);
       this.updateOptions(options);
     } else {

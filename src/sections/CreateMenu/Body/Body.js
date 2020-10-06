@@ -30,11 +30,11 @@ const Body = ({options, handleUpdate,
       hSize = 6;
     } else if(option.type === "section"){
       if(option.colorInclusion === 'all'){
-        hSize = 9;
+        hSize = 8.5;
       } else {
-        hSize = 13;
+        hSize = 12.5;
       }
-      hSize += option.modelSection.modelOrder.length*6.75;
+      hSize += option.modelSection.modelOrder.length*7;
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;

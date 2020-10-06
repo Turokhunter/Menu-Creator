@@ -66,8 +66,9 @@ const Header = ({handleAdd, importJson}) => {
       Color Picker
     </Button>{' '}
     <MyDropdown title="STL" onSelect={(value)=>(handleAdd(value))} variant="outline-primary">
-      <Dropdown.Item  eventKey="stl" >STL Setup</Dropdown.Item >
-      <Dropdown.Item  eventKey="section" >Section</Dropdown.Item >
+      <Dropdown.Item eventKey="stl" >STL Setup</Dropdown.Item >
+      <Dropdown.Item eventKey="section" >Section</Dropdown.Item >
+      <Dropdown.Item eventKey="preset" >Preset</Dropdown.Item >
     </MyDropdown>{' '}
     <ImportModal importJson={importJson}/>
     </>

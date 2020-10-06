@@ -59,6 +59,7 @@ class Header extends React.Component {
         <MyExport onClick={this.props.exportJson}>
           Export
         </MyExport>  
+        {' '}{this.props.numColumns} variants
       </LeftSideHeader>
       <RightSideHeader>
         <MyMenuButton onClick={(e)=>this.props.changeHeight("down")} variant="light">
