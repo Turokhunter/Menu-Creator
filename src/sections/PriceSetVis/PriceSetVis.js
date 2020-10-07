@@ -101,6 +101,7 @@ class PriceSetVis extends React.Component{
     }
     // var prices = Object.entries(groupMap).map(([key, value])=>{return value});
     // console.log(prices.sort());
+    console.log("columnons generated");
     this.setState({columns: newColumns,
     columnOrder: columnOrder});
   }
@@ -244,7 +245,6 @@ class PriceSetVis extends React.Component{
   }
   
   render(){
-    console.log("Rendering Columns");
     return (
       <>
         <HeaderSizing>
@@ -256,7 +256,7 @@ class PriceSetVis extends React.Component{
                   />
         </HeaderSizing>
         <BodySizing height={this.props.height+"px"}>
-          <PriceVis tasks={this.state.tasks}
+          {this.state.columnOrder.length < 150 ? (<PriceVis tasks={this.state.tasks}
                     columns={this.state.columns}
                     columnOrder={this.state.columnOrder}
                     updateColumns = {this.updateColumns}
@@ -264,7 +264,7 @@ class PriceSetVis extends React.Component{
                     deleteColumn ={this.deleteColumn}
                     updateColumnName = {this.updateColumnName}
                     updateColumnOrder = {this.updateColumnOrder}
-                    />
+                    />):(<> </>)}
         </BodySizing>
       </>
     )

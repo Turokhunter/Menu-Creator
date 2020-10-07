@@ -208,7 +208,6 @@ class Sections extends React.Component {
       }
     }
     console.log("Generated ", Object.entries(newMapping).length," mappings.");
-    console.log(newMapping);
     this.setState({mapping: newMapping});
     this.setState({height: window.innerHeight/2})
   }
@@ -322,7 +321,6 @@ class Sections extends React.Component {
       } else if(option.type === "checkbox"){
         counter.cb = Math.max(counter.cb, parseInt(option.id.replace("cb","")) + 1);      
       } else if(option.type === "section"){
-        console.log(option);
         counter.sc = Math.max(counter.sc, parseInt(option.id.replace("sc","")) + 1);      
         option.modelSection.modelOrder.forEach((modelId)=>{
           let model = option.modelSection.models[modelId];
@@ -403,8 +401,19 @@ class Sections extends React.Component {
     const optionMap = this.mapOptionstoId(this.state.options);
     const prices = this.calculatePriceofVariant(this.state.mapping, optionMap);
 
-    var meanShift = new MeanShift();
-    var results = meanShift._pointGrouper(prices);
+    var results = [];
+    var groupMap = {};
+    var count = 0;
+    for(let i = 0; i < prices.length; i++){
+      if(prices[i] in groupMap){
+        results.push(groupMap[prices[i]]);
+      } else {
+        results.push(count);
+        groupMap[prices[i]] = count;
+        count++;
+      }
+    }
+    console.log("Grouping achieved.");
     return [prices, results];
   }
 

@@ -165,7 +165,7 @@ export function createMapping(options){
           arr1 = [...arr2];
           arr2 = [];
         } else if(option.type === "section"){
-          if (option.multiSelect && option.hasCostTier){
+          if (option.multiSelect === true && option.hasCostTier === true){
             option.modelSection.modelOrder.forEach( (modelId) =>{
               mapVariant(arr1, arr2, modelId, ["false", "Stand", "Prem", "UltPrem"]);
               arr1 = [...arr2];
@@ -174,7 +174,9 @@ export function createMapping(options){
             let temp = arr1;
             arr1 = arr2;
             arr2 = temp; 
-          } else if(option.multiSelect) {
+            arr1 = [...arr2];
+            arr2 = [];
+          } else if(option.multiSelect === true) {
             option.modelSection.modelOrder.forEach( (modelId) =>{
               mapVariant(arr1, arr2, modelId, ["false", "Stand"]);
               arr1 = [...arr2];
@@ -182,15 +184,17 @@ export function createMapping(options){
             });
             let temp = arr1;
             arr1 = arr2;
-            arr2 = temp;            
-          } else if(option.hasCostTier) {
+            arr2 = temp;  
+            arr1 = [...arr2];
+            arr2 = [];          
+          } else if(option.hasCostTier === true) {
             mapVariant(arr1, arr2, option.id, ["Stand", "Prem", "UltPrem"]);
+            arr1 = [...arr2];
+            arr2 = [];
           }
-          arr1 = [...arr2];
-          arr2 = [];
+          
         }
     });
-
     arr1.forEach((lst) =>{
       const easyRead = generateEasyRead(lst, options);
       const newLst = lst.filter(Boolean).join("&");
@@ -342,11 +346,13 @@ export function createJsonFile(state, columns){
       })
     }
   });
-  let jsonFile = {mapping: newMapping,
-                  options: newOptions};
+  let jsonFile = {options: newOptions};
   if(stl.sections.length){
       jsonFile["stl"] = stl;
   } 
+  if( state.numVarients < 20000){
+    jsonFile["mapping"] = newMapping;
+  }
   if(Object.entries(hashMap).length > 0){
     jsonFile["hashMap"] = hashMap;
   }

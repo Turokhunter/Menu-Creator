@@ -68,12 +68,12 @@ class PriceVis extends React.Component {
               const column = this.props.columns[columnId];
               const tasks = column.taskIds.map(taskId => this.props.tasks[taskId]);
 
-              return <Column key={column.id} 
+              return (index < 100 ? (<Column key={column.id} 
                             column={column} 
                             tasks={tasks}
                             index={index}  
                             deleteColumn={this.props.deleteColumn} 
-                            updateColumnName={this.props.updateColumnName}/>;
+                            updateColumnName={this.props.updateColumnName}/>) : (<></>));
               })}
               {provided.placeholder}
             </ColumnContainer>
