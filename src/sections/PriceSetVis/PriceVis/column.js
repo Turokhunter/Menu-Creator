@@ -16,7 +16,15 @@ export default class Column extends React.Component {
         ref={provided.innerRef}
         >
           <OverFlowText {...provided.dragHandleProps}>
-            {this.props.column.id !== 'unassigned'
+            
+            {this.props.column.taskIds.length}
+            {this.props.column.id !== 'unassigned' &&
+              <ColCloseButton variant="light" onClick={(e)=>this.props.deleteColumn(this.props.column.id)} >
+                <GrClose />
+              </ColCloseButton>
+            }
+          </OverFlowText>
+          {this.props.column.id !== 'unassigned'
               ? <EditableLabel 
                   text={this.props.column.title} 
                   labelClassName="VariantTitle" 
@@ -24,13 +32,6 @@ export default class Column extends React.Component {
                   onFocusOut={(name)=>this.props.updateColumnName(name, this.props.column.id)}/>
               : <Title>{this.props.column.title}</Title>
             }
-            
-            {this.props.column.id !== 'unassigned' &&
-              <ColCloseButton variant="light" onClick={(e)=>this.props.deleteColumn(this.props.column.id)} >
-                <GrClose />
-              </ColCloseButton>
-            }
-          </OverFlowText>
           <Droppable droppableId={this.props.column.id} type="task">
             {(provided, snapshot) => (
               <TaskList

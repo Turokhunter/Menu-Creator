@@ -255,7 +255,7 @@ class PriceSetVis extends React.Component{
                   numColumns={Object.entries(this.state.columns).length}
                   />
         </HeaderSizing>
-        <BodySizing height={this.props.height+"px"}>
+        <BodySizing height={this.props.height + "px"}>
           {this.state.columnOrder.length < 150 ? (<PriceVis tasks={this.state.tasks}
                     columns={this.state.columns}
                     columnOrder={this.state.columnOrder}
