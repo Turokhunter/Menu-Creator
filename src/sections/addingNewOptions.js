@@ -57,7 +57,9 @@ export function addNewOption(optiontype, counter){
     return {
       id: "ps" + counter.ps++,
       name: "",
+      filename: "",
       type : "preset",
+      optionSelection: {},
     }
   }
   return null;

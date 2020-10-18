@@ -11,7 +11,7 @@ import Preset from '../../../../components/Option/Preset.js'
 import {Container} from 'react-bootstrap';
 
 
-const RenderBasedOnType = ({option, handleUpdate,
+const RenderBasedOnType = ({option, options, handleUpdate,
                             handleUpdatingTagOrder, handleClickDeleteTag,
                             handleClickAddTag, reorderModels, handleClickAddModel,
                             handleDeleteModel, handleUpdatingModel,
@@ -54,11 +54,11 @@ const RenderBasedOnType = ({option, handleUpdate,
             handleClickDupModel = {handleClickDupModel}
             />)
   } else if(option.type === 'preset'){    
-    return(<Preset option={option} handleUpdate={handleUpdate}/>)
+    return(<Preset option={option} options={options} handleUpdate={handleUpdate}/>)
   }
 }
 
-const OptionGroup = ({option, handleUpdate,
+const OptionGroup = ({option, options, handleUpdate,
                       handleUpdatingTagOrder, handleClickDeleteTag,
                       handleClickAddTag, handleClickDeleteOption,
                       handleClickDuplicateOption,
@@ -75,6 +75,7 @@ const OptionGroup = ({option, handleUpdate,
       <Container style={{paddingTop:"6px"}}>
         <RenderBasedOnType option = {option}
           handleUpdate = {handleUpdate}
+          options = {options}
           handleUpdatingTagOrder = {handleUpdatingTagOrder}
           handleClickDeleteTag = {handleClickDeleteTag}
           handleClickAddTag = {handleClickAddTag}

@@ -241,7 +241,6 @@ class PriceSetVis extends React.Component{
         this.setState({columns: newColumns});
       }
     }
-    console.log("Finished adding Tasks");
   }
   
   render(){

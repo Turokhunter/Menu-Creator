@@ -2,7 +2,7 @@ import React from 'react';
 import {InputGroup, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 
-const checked = ({propValue, propName, label, handleUpdate, toolTip}) => {
+const checked = ({propValue, propName, label, handleUpdate, toolTip, disabled}) => {
 
   return (
     <InputGroup>
@@ -24,6 +24,7 @@ const checked = ({propValue, propName, label, handleUpdate, toolTip}) => {
               aria-label="option 1"
               checked = {propValue}
               onChange = {handleUpdate}
+              disabled = {disabled}
         />
     </InputGroup>
   )

@@ -35,6 +35,8 @@ const Body = ({options, handleUpdate,
         hSize = 12.5;
       }
       hSize += option.modelSection.modelOrder.length*7;
+    } else if(option.type === 'preset'){
+      hSize = 15;
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
@@ -51,6 +53,7 @@ const Body = ({options, handleUpdate,
        {layout.map((row, index) =>(
           <div key={row.i}>
             <OptionGroup option={options[index]}
+              options = {options}
               handleUpdate={(e) => handleUpdate(index, e)}
               handleUpdatingTagOrder = {(e) => handleUpdatingTagOrder(index, e)}
               handleClickDeleteTag = {(e) => handleClickDeleteTag(index, e)}
