@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import {Button} from 'react-bootstrap'
+import {Button, Row, DropdownButton} from 'react-bootstrap'
 
 export const AddAndDelete = styled.div `
     border: 1px solid #E9E9E9;
@@ -47,6 +47,11 @@ export const Tag = styled.div `
     background: rgba(255, 255, 255, 0.7);
 `;
 
+export const PresetTag = styled(Tag)`
+  border-color : black;
+  padding: 8px 20px 0px 8px;
+`;
+
 export const DeleteIcon = styled.img `
     position: absolute;
     top: -1px;
@@ -62,8 +67,26 @@ export const DeleteIcon = styled.img `
     -ms-user-select: none;
 `;
 
+export const PresetDeleteIcon = styled(DeleteIcon)`
+  width: 20px;
+  height: 20px;
+`;
+
+export const PresetRow = styled(Row)`
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: -10px;
+`;
+
 export const ShoworHide = styled.div `
     ${props => props.show === true
     ? `display : block;`
     : `display : none;`}
+`;
+
+export const MyDropdown = styled(DropdownButton)`
+  display: inline-block;
+  position: relative;
 `;

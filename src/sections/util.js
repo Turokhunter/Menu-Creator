@@ -1,4 +1,5 @@
 import { getColors } from "../components/getColors";
+import Preset from "../components/Option/Preset";
 import colorData from "../data/filament.json"
 
 function generateEasyRead(lst, options){
@@ -27,6 +28,7 @@ function generateEasyRead(lst, options){
 function fromJson2SystemColor(option, newOption, colors){
   newOption.items = [];
   if(option.includeColor !== undefined){
+    console.log(option);
     option.includeColor.forEach((color)=>{
       newOption.items.push({id: colors[color].id, name: colors[color].name});
     });
@@ -209,6 +211,7 @@ export function createJsonFile(state, columns){
   var filaments = colorData.filament;
   var newMapping = {};
   var newOptions = [];
+  var newPresets = [];
   var csvVarient = {};
   var hashMap = {};
   var stl = {sections:[], models:[]};
@@ -304,6 +307,8 @@ export function createJsonFile(state, columns){
       csvVarient[option.name] = dropdownVarient.join(",");
 
       newOptions.push(option);
+    } else if(option.type === "preset"){
+      newPresets.push(option);
     } else if(option.type === "checkbox"){
       newOptions.push(option);
     } else if(option.type === "stl"){
@@ -356,6 +361,9 @@ export function createJsonFile(state, columns){
   if(Object.entries(hashMap).length > 0){
     jsonFile["hashMap"] = hashMap;
   }
+  if(newPresets.length){
+    jsonFile["presets"] = newPresets;
+} 
   
   jsonFile["variant"]  = csvVarient;
 

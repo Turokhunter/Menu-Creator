@@ -15,7 +15,8 @@ const RenderBasedOnType = ({option, options, handleUpdate,
                             handleUpdatingTagOrder, handleClickDeleteTag,
                             handleClickAddTag, reorderModels, handleClickAddModel,
                             handleDeleteModel, handleUpdatingModel,
-                            handleClickDupModel}) => {
+                            handleClickDupModel, handleAddPresetOption,
+                            handleDeletePresetOption, handleUpdatePresetOption}) => {
   if(option.type === 'checkbox'){
     return(<> 
             <BasicInfo option={option} handleUpdate={handleUpdate}/>
@@ -54,7 +55,13 @@ const RenderBasedOnType = ({option, options, handleUpdate,
             handleClickDupModel = {handleClickDupModel}
             />)
   } else if(option.type === 'preset'){    
-    return(<Preset option={option} options={options} handleUpdate={handleUpdate}/>)
+    return(<Preset option={option} 
+              options={options} 
+              handleUpdate={handleUpdate}
+              handleAddPresetOption = {handleAddPresetOption}
+              handleDeletePresetOption = {handleDeletePresetOption} 
+              handleUpdatePresetOption = {handleUpdatePresetOption}
+            />)
   }
 }
 
@@ -64,7 +71,8 @@ const OptionGroup = ({option, options, handleUpdate,
                       handleClickDuplicateOption,
                       reorderModels, handleClickAddModel,
                       handleDeleteModel, handleUpdatingModel,
-                      handleClickDupModel}) => {
+                      handleClickDupModel, handleAddPresetOption,
+                      handleDeletePresetOption, handleUpdatePresetOption}) => {
 
   return (
     <div className="panel">
@@ -84,6 +92,9 @@ const OptionGroup = ({option, options, handleUpdate,
           handleDeleteModel = {handleDeleteModel}
           handleUpdatingModel = {handleUpdatingModel}
           handleClickDupModel = {handleClickDupModel}
+          handleAddPresetOption = {handleAddPresetOption}
+          handleDeletePresetOption = {handleDeletePresetOption} 
+          handleUpdatePresetOption = {handleUpdatePresetOption}
          />
        </Container>
     </div>

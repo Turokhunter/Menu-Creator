@@ -59,7 +59,7 @@ export function addNewOption(optiontype, counter){
       name: "",
       filename: "",
       type : "preset",
-      optionSelection: {},
+      optionSelection: [],
     }
   }
   return null;

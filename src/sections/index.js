@@ -57,28 +57,9 @@ class Sections extends React.Component {
   }
 
   handleAddingNewOptions = (optiontype) => {
-    const newOption =  addNewOption(optiontype, this.counter);
+    const newOption = addNewOption(optiontype, this.counter);
     if(newOption){
       const options = this.state.options.slice();
-      if(newOption.type === "preset"){
-        options.forEach((option) => {
-          if(option.type === 'colorpicker'){
-            newOption[option.id] = '';
-          } else if(option.type === 'dropdown'){
-            newOption[option.id] = '';
-          } else if(option.type === 'checkbox'){
-            newOption[option.id] = '';
-          } else if(option.type === 'section'){
-            newOption[option.id] = '';
-          }
-        })
-      } else {
-        options.forEach((option) => {
-          if(option.type === 'preset'){
-            newOption[newOption.id] = '';
-          }
-        });
-      }
       options.push(newOption);
       this.updateOptions(options);
     } else {
@@ -160,6 +141,8 @@ class Sections extends React.Component {
       newPanel.id = "dd" + this.counter.dd++;
     } else if(newPanel.type === "colorpicker"){
       newPanel.id = "cp" + this.counter.cp++;
+    } else if(newPanel.type === "preset"){
+      newPanel.id = "ps" + this.counter.ps++;
     } else if(newPanel.type === "section"){
       newPanel.id = "sc" + this.counter.sc++;
       let newModelOrder = [];
@@ -234,6 +217,52 @@ class Sections extends React.Component {
     this.setState({height: size});
   }
   
+  handleAddPresetOption = (idx, modifyId, type, groupName) => {
+    const options = this.state.options.slice();
+    var newPresetOption = {id: modifyId, type: type};
+    if(type === 'checkbox'){
+      newPresetOption["selected"] = false;
+    } else {
+      newPresetOption["selected"] = "";
+      if(type === 'group' || type === 'multiSelect'){
+        newPresetOption["groupName"] = groupName;
+      }
+      if(type === 'multiSelect') {
+        newPresetOption["selected"] = {};
+      }
+    }
+    
+    options[idx]["optionSelection"].push(newPresetOption);
+    this.updateOptions(options);
+  }
+
+  handleDeletePresetOption = (idx, modifyId) => {
+    const options = this.state.options.slice();
+    options[idx]["optionSelection"] = options.[idx]["optionSelection"].filter(t => modifyId !== t.id);
+    this.updateOptions(options);
+  }
+
+  handleUpdatePresetOption = (idx, modifyId, type, newValue, modelId) => {
+    console.log(idx, modifyId, type, newValue, modelId);
+    const options = this.state.options.slice();
+    for(let i = 0 ; i < options[idx]["optionSelection"].length; i++){
+      let currOption = options[idx]["optionSelection"][i];
+      if(currOption.id === modifyId && currOption.type === type){
+        if(type === 'multiSelect'){
+          if(newValue === true){
+            options[idx]["optionSelection"][i].selected[modelId] = true;
+          } else {
+            delete options[idx]["optionSelection"][i].selected[modelId];
+          }
+        } else {
+          options[idx]["optionSelection"][i].selected = newValue;
+        }
+        break;
+      }
+    }
+    this.updateOptions(options);
+  }
+
   reorderModels = (optionIdx, result)=>{
     const {destination, source, draggableId} = result;
     if(!destination){
@@ -320,6 +349,8 @@ class Sections extends React.Component {
         counter.dd = Math.max(counter.dd, parseInt(option.id.replace("dd","")) + 1);      
       } else if(option.type === "checkbox"){
         counter.cb = Math.max(counter.cb, parseInt(option.id.replace("cb","")) + 1);      
+      } else if(option.type === "preset"){
+        counter.cb = Math.max(counter.ps, parseInt(option.id.replace("ps","")) + 1);      
       } else if(option.type === "section"){
         counter.sc = Math.max(counter.sc, parseInt(option.id.replace("sc","")) + 1);      
         option.modelSection.modelOrder.forEach((modelId)=>{
@@ -440,6 +471,9 @@ class Sections extends React.Component {
           handleDeleteModel = {this.handleDeleteModel}
           handleUpdatingModel = {this.handleUpdatingModel}
           handleClickDupModel = {this.handleClickDupModel}
+          handleAddPresetOption = {this.handleAddPresetOption}
+          handleDeletePresetOption = {this.handleDeletePresetOption}
+          handleUpdatePresetOption = {this.handleUpdatePresetOption}
         />
       </LeftPanel>
       <RightPanel>

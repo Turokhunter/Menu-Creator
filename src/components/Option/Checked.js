@@ -16,7 +16,7 @@ const checked = ({propValue, propName, label, handleUpdate, toolTip, disabled}) 
                   </Tooltip>
                 }
               >
-          <InputGroup.Text id= {propName + "Label"}>{label}</InputGroup.Text>
+          <InputGroup.Text id={propName + "Label"}>{label}</InputGroup.Text>
         </OverlayTrigger>
       </InputGroup.Prepend>
       <InputGroup.Checkbox

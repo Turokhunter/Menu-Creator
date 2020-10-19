@@ -8,7 +8,8 @@ const Body = ({options, handleUpdate,
                handleUpdatingOptionOrder, handleClickDuplicateOption,
                reorderModels, handleClickAddModel,
                handleDeleteModel, handleUpdatingModel,
-               handleClickDupModel}) => {
+               handleClickDupModel, handleAddPresetOption,
+               handleDeletePresetOption, handleUpdatePresetOption}) => {
   //Create layout variable
   const layout = []
   var currPos = 0;
@@ -36,7 +37,16 @@ const Body = ({options, handleUpdate,
       }
       hSize += option.modelSection.modelOrder.length*7;
     } else if(option.type === 'preset'){
-      hSize = 15;
+      hSize = 4.7;
+      console.log(option);
+      for(let j = 0; j < option.optionSelection.length; j++){
+        let presetOption = option.optionSelection[j];
+        if(presetOption.type === 'MultiSelect'){
+          hSize += (Object.entries(presetOption).length - 1) % 3;
+        } else {
+          hSize += 1.1;
+        }
+      }
     }
     layout.push({i:option.id, x:0, y:currPos, w:1, h:hSize});
     currPos += hSize;
@@ -65,6 +75,9 @@ const Body = ({options, handleUpdate,
               handleDeleteModel = {(e) => handleDeleteModel(index, e)}
               handleUpdatingModel = {(modelId, e) => handleUpdatingModel(index, modelId, e)}
               handleClickDupModel = {(model) => handleClickDupModel(index, model)}
+              handleAddPresetOption = {(modifyId, type, groupName) => handleAddPresetOption(index, modifyId, type, groupName)}
+              handleDeletePresetOption = {(modifyId) => handleDeletePresetOption(index, modifyId)}
+              handleUpdatePresetOption = {(modifyId, type, value, modelId) => handleUpdatePresetOption(index, modifyId, type, value, modelId)}
              />
           </div>
         ))}

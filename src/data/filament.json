@@ -170,6 +170,15 @@
       "src": "protopasta-protonpurple.jpg",
       "zoom": "protopasta-protonpurple-zoom.png",
       "opacity": 1
+    },
+    {
+      "id":"pru-mspink",
+      "color":"#D54F7E",
+      "name":"Prusa Ms Pink",
+      "tier":"Premium",
+      "src": "prusa-mspink.jpg",
+      "zoom": "prusa-mspink-zoom.png",
+      "opacity": 1
     }
   ]
 }
