@@ -83,7 +83,7 @@ class Sections extends React.Component {
     }  else {
       options[idx][name] = value;
     }
-    console.log(options);
+    // console.log(options);
     this.updateOptions(options);
   }
 

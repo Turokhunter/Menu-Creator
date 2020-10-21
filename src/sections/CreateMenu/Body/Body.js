@@ -38,7 +38,6 @@ const Body = ({options, handleUpdate,
       hSize += option.modelSection.modelOrder.length*7;
     } else if(option.type === 'preset'){
       hSize = 4.7;
-      console.log(option);
       for(let j = 0; j < option.optionSelection.length; j++){
         let presetOption = option.optionSelection[j];
         if(presetOption.type === 'MultiSelect'){

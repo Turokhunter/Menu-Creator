@@ -163,9 +163,7 @@ const Preset = ({option, options, handleUpdate, handleAddPresetOption,
       }
     }
   }
-  console.log(option.optionSelection);
   var presetOptions = generatePresetOptions(options, option.optionSelection);
-  console.log(option.optionSelection);
   return (
      <Form>
        <Form.Row>

@@ -28,7 +28,6 @@ function generateEasyRead(lst, options){
 function fromJson2SystemColor(option, newOption, colors){
   newOption.items = [];
   if(option.includeColor !== undefined){
-    console.log(option);
     option.includeColor.forEach((color)=>{
       newOption.items.push({id: colors[color].id, name: colors[color].name});
     });
@@ -77,11 +76,14 @@ export function populateOptions(importFile, counter){
       counter.sc = Math.max(counter.sc, parseInt(newSection.id.replace("sc","")) + 1);      
       newState.options.push(newSection);
     });
-
+    
     importedObject.stl.models.forEach((model) =>{
       const newModel = {...model};
       const sectionId = newModel.section;
       delete newModel.section;
+      if(sectionId === 'Supplementary'){
+        return;
+      }
       newState.options[sectionLookup[sectionId]].modelSection.models[model.id] = newModel;
       newState.options[sectionLookup[sectionId]].modelSection.modelOrder.push(model.id);
       counter.md = Math.max(counter.md, parseInt(model.id.replace("md","")) + 1);      
@@ -106,12 +108,15 @@ export function populateOptions(importFile, counter){
 
 
   var newMapping = {};
-  for(const [key, element] of Object.entries(importedObject.mapping)){
-    var lstElements = key.split("&");
-    const easyRead = generateEasyRead(lstElements, newState.options);
-    newMapping[key] = {id:key, easyRead: easyRead.join("&"), varient: element};
+  if(importedObject.mapping !== undefined){
+    for(const [key, element] of Object.entries(importedObject.mapping)){
+      var lstElements = key.split("&");
+      const easyRead = generateEasyRead(lstElements, newState.options);
+      newMapping[key] = {id:key, easyRead: easyRead.join("&"), varient: element};
+    }
   }
 
+  console.log(newState);
   newState.mapping = newMapping;
   return newState;
 }
