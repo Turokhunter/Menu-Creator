@@ -105,6 +105,12 @@ export function populateOptions(importFile, counter){
     }
   });
 
+  if(importedObject.presets){
+    importedObject.presets.forEach((preset)=>{
+      counter.ps = Math.max(counter.ps, parseInt(preset.id.replace("ps","")) + 1);      
+      newState.options.push(preset);
+    });
+  }
 
 
   var newMapping = {};

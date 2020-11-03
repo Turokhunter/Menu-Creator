@@ -7,7 +7,7 @@ const  MultiParameterInput = ({option, handleUpdate, propertyName, parameterList
   return (
     <Form.Row>
       {parameterList.map((parameter, index)=>
-        <Col sm={index === 0 ? 5 : undefined} >
+        <Col key={index} sm={index === 0 ? 5 : undefined} >
           <Form.Group >
             <InputGroup >
               <InputGroup.Prepend>

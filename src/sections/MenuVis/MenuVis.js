@@ -95,6 +95,7 @@ const STLColorSubsection = ({modelGrp, section, selectedFilament, selectedColor}
                           type="checkbox" 
                           id={`inline-$checkbox-`+ model.id} 
                           checked={model.selected}
+                          readOnly={true}
               />
             ))}
         </div>

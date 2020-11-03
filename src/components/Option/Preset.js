@@ -140,7 +140,7 @@ const generatePresetOptions = (options, optionSelected) =>{
   return presetOptions;
 }
 const getName = (optionMap, option) => {
-  if(option.groupName !== undefined){
+ if(option.groupName !== undefined){
     return option.groupName;
   } else if(optionMap[option.id].name === undefined){
     return optionMap[option.id].section;
@@ -195,7 +195,7 @@ const Preset = ({option, options, handleUpdate, handleAddPresetOption,
         
         <MyDropdown title="Apply Preset to:"  variant="outline-primary" drop={"up"}>
           {presetOptions.map(presetOption =>(
-            <Dropdown.Item onSelect={(e) => handleAddPresetOption(presetOption.id, presetOption.type, presetOption.groupName)}  >
+            <Dropdown.Item key={presetOption.id} onSelect={(e) => handleAddPresetOption(presetOption.id, presetOption.type, presetOption.groupName)}  >
               {presetOption.id + ":" + 
                getName(optionMap, presetOption)
               + " " + presetOption.type}
@@ -205,7 +205,7 @@ const Preset = ({option, options, handleUpdate, handleAddPresetOption,
 
       </Form.Row>
       {option.optionSelection.map(currSelect =>(
-        <PresetTag>
+        <PresetTag key={currSelect.id}>
           <PresetRow>
            <PresetDeleteIcon
             src={deleteBtn}

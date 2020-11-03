@@ -18,7 +18,7 @@ class Sections extends React.Component {
     height : window.innerHeight - 70,
     mapping : {},
     numVarients : 0,
-    options : localStorage.getItem('options') !== null ? this.updateCounter(JSON.parse(localStorage.getItem('options')), this.counter) : []
+    options : []//localStorage.getItem('options') !== null ? this.updateCounter(JSON.parse(localStorage.getItem('options')), this.counter) : []
   }
 
   updateOptions(options){
@@ -118,7 +118,12 @@ class Sections extends React.Component {
 
   handleClickDeleteOption = (panelInfo) => {
     const options = this.state.options.slice();
-    const newOptions = options.filter(t => panelInfo.id !== t.id);
+    options.forEach((option)=>{
+      if(option.type === 'preset'){
+        option.optionSelection = option.optionSelection.filter( t => panelInfo.id !== t.id);
+      }
+    });
+    const newOptions = options.filter(t => panelInfo.id !== t.id);    
     this.updateOptions(newOptions);
   }
 
