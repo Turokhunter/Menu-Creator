@@ -102,18 +102,19 @@ class Sections extends React.Component {
 
   handleClickAddTag = (idx, tagInfo) => {
     const options = this.state.options.slice();
+    if(options[idx].items.filter(e => e.name === tagInfo.tagName).length > 0){
+      return;
+    }
+
     if(options[idx].type === "colorpicker" || options[idx].type === "section"){
       options[idx]["items"].push({id: tagInfo.tagId, name: tagInfo.tagName});
     } else {
-      if(tagInfo.tagName.includes("$")){
-        var tagName = tagInfo.tagName.split("$")
-        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagName[0], price: parseFloat(tagName[1])});
-      } else {
-        options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId, name: tagInfo.tagName});
-      }
-      
+      options[idx]["items"].push({id: options[idx].id + "t" + tagInfo.tagId,
+                                    name: tagInfo.tagName,
+                                    price: parseFloat(tagInfo.price)});
     }
     this.updateOptions(options);
+    
   }
 
   handleClickDeleteOption = (panelInfo) => {
@@ -178,6 +179,14 @@ class Sections extends React.Component {
       if(option.selected === "" || option.colorId === ""){
         alert("Option " + (option.name ? option.name : option.section) + " does not have default selected.");
         return;
+      }
+      if(option.priceDiff === true && option.type === 'dropdown'){
+        for(const item of option.items){
+          if(item.price === undefined || typeof item.price !== 'number'){
+            alert("Option:" + option.name + " item: " +  item.name + " is missing a price")
+            return;
+          }
+        }
       }
     };
 

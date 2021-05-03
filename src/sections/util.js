@@ -122,7 +122,6 @@ export function populateOptions(importFile, counter){
     }
   }
 
-  console.log(newState);
   newState.mapping = newMapping;
   return newState;
 }

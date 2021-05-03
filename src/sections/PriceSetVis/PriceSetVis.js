@@ -213,13 +213,17 @@ class PriceSetVis extends React.Component{
                                         }};
         var columnOrder = ["unassigned"];
         for(const [key, column] of Object.entries(this.props.mapping)){
-          const newColumn = {
-            id: column.easyRead,
-            title: column.varient,
-            taskIds:[key]
-          };
-          newColumns[column.easyRead] = newColumn;
-          columnOrder.push(column.easyRead);
+          if(newColumns.hasOwnProperty(column.varient)){
+            newColumns[column.varient].taskIds.push(key);
+          } else {
+            const newColumn = {
+              id: column.varient,
+              title: column.varient,
+              taskIds:[key]
+            };
+            newColumns[column.varient] = newColumn;
+            columnOrder.push(column.varient);
+          }
         }
         this.setState({columns: newColumns,
                       columnOrder: columnOrder});

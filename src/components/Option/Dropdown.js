@@ -8,10 +8,25 @@ class Dropdown extends React.Component {
   constructor(props){
     super(props);
     this.tagName = "";
+    this.price = "0";
     this.tagId = 0;
     if(props.option.items.length !== 0){
       this.tagId = props.option.items.reduce(function(a,b){
-        return Math.max(a.id, b.id);
+        var aId, bId;
+        if(typeof a === 'number'){
+           aId = a;
+        } else {
+          const atsplit = a.id.split("t");
+          aId = parseInt(atsplit[atsplit.length - 1]);
+        }
+        
+        if(typeof b === 'number'){
+          bId = b;
+        } else {
+          const btsplit = b.id.split("t");
+          bId = parseInt(btsplit[btsplit.length - 1]);
+        }
+        return Math.max(aId, bId);
       }) + 1;
     }
   }
@@ -19,11 +34,20 @@ class Dropdown extends React.Component {
   setTagText = text =>{
     this.tagName = text;
   }
+  setTagPrice = price => {
+    this.price = price;
+  }
 
   handleClickAddTag = () => {
-    this.props.handleClickAddTag({tagId: this.tagId, tagName:this.tagName.value});
+    if(this.tagName.value === ""){
+      return;
+    } else if(this.price.value === ""){
+      this.price.value = 0;
+    }
+    this.props.handleClickAddTag({tagId: this.tagId, tagName:this.tagName.value, price: this.price.value});
     this.tagId += 1;
     this.tagName.value = "";
+    this.price.value = ""
   }
 
   handleEnterAddTag = (e) => {
@@ -54,10 +78,15 @@ class Dropdown extends React.Component {
           </Form.Row>
         </Form>
         <InputGroup>
-          <FormControl
+          <FormControl style={{width:"60%"}}
             placeholder="Tag"
             onKeyDown={this.handleEnterAddTag}
             ref={this.setTagText}
+          />
+          <FormControl 
+            placeholder="Price"
+            onKeyDown={this.handleEnterAddTag}
+            ref={this.setTagPrice}
           />
           <InputGroup.Append>
             <Button onClick={this.handleClickAddTag} variant="info">Add</Button>
@@ -72,7 +101,7 @@ class Dropdown extends React.Component {
                   src={deleteBtn}
                   onClick={() => this.props.handleClickDeleteTag(tag)}
                 />
-                {tag.name}{tag.price && "$" + tag.price}
+                <b>{tag.price !== undefined && "$" + tag.price}</b>{' '}{tag.name}
               </Tag>
             )}
             onChange={tags => this.props.handleUpdatingTagOrder(tags)}

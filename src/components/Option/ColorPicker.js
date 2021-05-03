@@ -5,6 +5,7 @@ import ColorChoices from './ColorChoices';
 
 
 
+
 const ColorPicker = ({option, handleUpdate, handleUpdatingTagOrder,
                       handleClickDeleteTag, handleClickAddTag }) => {
     return (
