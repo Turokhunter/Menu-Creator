@@ -12,7 +12,7 @@ import { getColors } from "../getColors";
 import { PresetTag, PresetDeleteIcon, PresetRow, MyDropdown } from "./style";
 import deleteBtn from "../img/delete.png";
 
-const RenderPresetOption = ({ option, selection, handleUpdate }) => {
+const RenderConnectOption = ({ type, option, selection, handleUpdate }) => {
   if (selection.type === "checkbox") {
     return (
       <Form.Group as={Col} md="6">
@@ -26,7 +26,7 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
             aria-label="option 1"
             checked={selection.selected}
             onChange={(e) =>
-              handleUpdate(selection.id, selection.type, e.target.checked)
+              handleUpdate(type, selection.id, selection.type, e.target.checked)
             }
           />
         </InputGroup>
@@ -43,7 +43,7 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
             as="select"
             name="selected"
             onChange={(e) =>
-              handleUpdate(selection.id, selection.type, e.target.value)
+              handleUpdate(type, selection.id, selection.type, e.target.value)
             }
             value={selection.selected}
           >
@@ -72,7 +72,7 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
             as="select"
             name="selected"
             onChange={(e) =>
-              handleUpdate(selection.id, selection.type, e.target.value)
+              handleUpdate(type, selection.id, selection.type, e.target.value)
             }
             value={selection.selected}
           >
@@ -102,7 +102,7 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
             as="select"
             name="selected"
             onChange={(e) =>
-              handleUpdate(selection.id, selection.type, e.target.value)
+              handleUpdate(type, selection.id, selection.type, e.target.value)
             }
             value={selection.selected}
           >
@@ -137,6 +137,7 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
                 checked={item[1].id in selection.selected}
                 onChange={(e) =>
                   handleUpdate(
+                    type,
                     selection.id,
                     selection.type,
                     e.target.checked,
@@ -157,7 +158,6 @@ const RenderPresetOption = ({ option, selection, handleUpdate }) => {
 
 const generatePresetOptions = (options, optionSelected) => {
   var presetOptions = [];
-
   for (let i = 0; i < options.length; i++) {
     let option = options[i];
     if (option.type === "checkbox") {
@@ -216,13 +216,13 @@ const getName = (optionMap, option) => {
   }
 };
 
-const Preset = ({
+const Connect = ({
   option,
   options,
   handleUpdate,
-  handleAddPresetOption,
-  handleDeletePresetOption,
-  handleUpdatePresetOption,
+  handleAddConnectOption,
+  handleDeleteConnectOption,
+  handleUpdateConnectOption,
 }) => {
   var optionMap = {};
   for (let i = 0; i < options.length; i++) {
@@ -236,47 +236,18 @@ const Preset = ({
       }
     }
   }
-  var presetOptions = generatePresetOptions(options, option.optionSelection);
+  var fromOptions = generatePresetOptions(options, option.from);
+  var toOptions = generatePresetOptions(options, option.to);
   return (
     <Form>
       <Form.Row>
-        <Form.Group as={Col}>
-          <LineEdit
-            propName={"name"}
-            propValue={option.name}
-            label={"Name:"}
-            placeholder={"Name"}
-            handleUpdate={handleUpdate}
-            type={"text"}
-            toolTip={"Name of the Preset"}
-          />
-        </Form.Group>
-      </Form.Row>
-
-      <Form.Row>
-        <Form.Group as={Col}>
-          <LineEdit
-            propName={"filename"}
-            propValue={option.filename}
-            label={"Image:"}
-            placeholder={"Image name"}
-            handleUpdate={handleUpdate}
-            type={"text"}
-            toolTip={"Location of the Image file"}
-          />
-        </Form.Group>
-      </Form.Row>
-      <Form.Row>
-        <MyDropdown
-          title="Apply Preset to:"
-          variant="outline-primary"
-          drop={"up"}
-        >
-          {presetOptions.map((presetOption) => (
+        <MyDropdown title="Add From:" variant="outline-primary" drop={"up"}>
+          {fromOptions.map((presetOption) => (
             <Dropdown.Item
               key={presetOption.id}
               onSelect={(e) =>
-                handleAddPresetOption(
+                handleAddConnectOption(
+                  "from",
                   presetOption.id,
                   presetOption.type,
                   presetOption.groupName
@@ -292,22 +263,66 @@ const Preset = ({
           ))}
         </MyDropdown>
       </Form.Row>
-      {option.optionSelection.map((currSelect) => (
+      {option.from.map((currSelect) => (
         <PresetTag key={currSelect.id}>
           <PresetRow>
             <PresetDeleteIcon
               src={deleteBtn}
-              onClick={() => handleDeletePresetOption(currSelect.id)}
+              onClick={() => handleDeleteConnectOption("from", currSelect.id)}
             />
             <Col md="4">
               {currSelect.id + ":" + getName(optionMap, currSelect)}
             </Col>
 
-            <RenderPresetOption
+            <RenderConnectOption
+              type={"from"}
               selection={currSelect}
               option={optionMap[currSelect.id]}
-              handleUpdate={handleUpdatePresetOption}
+              handleUpdate={handleUpdateConnectOption}
             />
+          </PresetRow>
+        </PresetTag>
+      ))}
+      <Form.Row>
+        <MyDropdown title="Apply To:" variant="outline-primary" drop={"up"}>
+          {toOptions.map((presetOption) => (
+            <Dropdown.Item
+              key={presetOption.id}
+              onSelect={(e) =>
+                handleAddConnectOption(
+                  "to",
+                  presetOption.id,
+                  presetOption.type,
+                  presetOption.groupName
+                )
+              }
+            >
+              {presetOption.id +
+                ":" +
+                getName(optionMap, presetOption) +
+                " " +
+                presetOption.type}
+            </Dropdown.Item>
+          ))}
+        </MyDropdown>
+      </Form.Row>
+      {option.to.map((currSelect) => (
+        <PresetTag key={currSelect.id}>
+          <PresetRow>
+            <PresetDeleteIcon
+              src={deleteBtn}
+              onClick={() => handleDeleteConnectOption("to", currSelect.id)}
+            />
+            <Col style={{ paddingBottom: "10px" }}>
+              {currSelect.id + ":" + getName(optionMap, currSelect)}
+            </Col>
+
+            {/* <RenderConnectOption
+              type={"to"}
+              selection={currSelect}
+              option={optionMap[currSelect.id]}
+              handleUpdate={handleUpdateConnectOption}
+            /> */}
           </PresetRow>
         </PresetTag>
       ))}
@@ -315,4 +330,4 @@ const Preset = ({
   );
 };
 
-export default Preset;
+export default Connect;

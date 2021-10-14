@@ -10,7 +10,7 @@ import MeanShift from "./MeanShift";
 
 class Sections extends React.Component {
   //TODO:Deal with a file being loaded with exisiting counters
-  counter = { cb: 0, dd: 0, cp: 0, sc: 0, md: 0, ps: 0 };
+  counter = { cb: 0, dd: 0, cp: 0, sc: 0, md: 0, ps: 0, cn: 0 };
   storage = window.localStorage;
 
   state = {
@@ -160,6 +160,8 @@ class Sections extends React.Component {
       newPanel.id = "cp" + this.counter.cp++;
     } else if (newPanel.type === "preset") {
       newPanel.id = "ps" + this.counter.ps++;
+    } else if (newPanel.type === "connect") {
+      newPanel.id = "cn" + this.counter.cn++;
     } else if (newPanel.type === "section") {
       newPanel.id = "sc" + this.counter.sc++;
       let newModelOrder = [];
@@ -287,6 +289,61 @@ class Sections extends React.Component {
     this.updateOptions(options);
   };
 
+  handleAddConnectOption = (direction, idx, modifyId, type, groupName) => {
+    const options = this.state.options.slice();
+    var newPresetOption = { id: modifyId, type: type };
+    if (type === "checkbox") {
+      newPresetOption["selected"] = false;
+    } else {
+      newPresetOption["selected"] = "";
+      if (type === "group" || type === "multiSelect") {
+        newPresetOption["groupName"] = groupName;
+      }
+      if (type === "multiSelect") {
+        newPresetOption["selected"] = {};
+      }
+    }
+
+    options[idx][direction].push(newPresetOption);
+    this.updateOptions(options);
+  };
+
+  handleDeleteConnectOption = (direction, idx, modifyId) => {
+    const options = this.state.options.slice();
+    options[idx][direction] = options[idx][direction].filter(
+      (t) => modifyId !== t.id
+    );
+    this.updateOptions(options);
+  };
+
+  handleUpdateConnectOption = (
+    direction,
+    idx,
+    modifyId,
+    type,
+    newValue,
+    modelId
+  ) => {
+    console.log(idx, modifyId, type, newValue, modelId);
+    const options = this.state.options.slice();
+    for (let i = 0; i < options[idx][direction].length; i++) {
+      let currOption = options[idx][direction][i];
+      if (currOption.id === modifyId && currOption.type === type) {
+        if (type === "multiSelect") {
+          if (newValue === true) {
+            options[idx][direction][i].selected[modelId] = true;
+          } else {
+            delete options[idx][direction][i].selected[modelId];
+          }
+        } else {
+          options[idx][direction][i].selected = newValue;
+        }
+        break;
+      }
+    }
+    this.updateOptions(options);
+  };
+
   reorderModels = (optionIdx, result) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -388,9 +445,14 @@ class Sections extends React.Component {
           parseInt(option.id.replace("cb", "")) + 1
         );
       } else if (option.type === "preset") {
-        counter.cb = Math.max(
+        counter.ps = Math.max(
           counter.ps,
           parseInt(option.id.replace("ps", "")) + 1
+        );
+      } else if (option.type === "connect") {
+        counter.cn = Math.max(
+          counter.cn,
+          parseInt(option.id.replace("cn", "")) + 1
         );
       } else if (option.type === "section") {
         counter.sc = Math.max(
@@ -525,6 +587,9 @@ class Sections extends React.Component {
             handleAddPresetOption={this.handleAddPresetOption}
             handleDeletePresetOption={this.handleDeletePresetOption}
             handleUpdatePresetOption={this.handleUpdatePresetOption}
+            handleAddConnectOption={this.handleAddConnectOption}
+            handleDeleteConnectOption={this.handleDeleteConnectOption}
+            handleUpdateConnectOption={this.handleUpdateConnectOption}
           />
         </LeftPanel>
         <RightPanel>
