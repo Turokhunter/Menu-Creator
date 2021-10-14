@@ -145,13 +145,16 @@ export function populateOptions(importFile, counter) {
       newState.options.push(preset);
     });
   }
-
-  importedObject.stl.models.forEach((model) => {
-    handleConnect(newState, model.id, "color", model.connect, counter);
-  });
-  importedObject.options.forEach((option) => {
-    handleConnect(newState, option.id, option.type, option.connect, counter);
-  });
+  if (importedObject.stl) {
+    importedObject.stl.models.forEach((model) => {
+      handleConnect(newState, model.id, "color", model.connect, counter);
+    });
+  }
+  if (importedObject.options) {
+    importedObject.options.forEach((option) => {
+      handleConnect(newState, option.id, option.type, option.connect, counter);
+    });
+  }
 
   var newMapping = {};
   if (importedObject.mapping !== undefined) {
