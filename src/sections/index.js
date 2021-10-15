@@ -541,9 +541,6 @@ class Sections extends React.Component {
     const optionMap = this.mapOptionstoId(this.state.options);
     const prices = this.calculatePriceofVariant(this.state.mapping, optionMap);
 
-    prices.sort(function (a, b) {
-      return a - b;
-    });
     var results = [];
     var groupMap = {};
     var count = 0;
