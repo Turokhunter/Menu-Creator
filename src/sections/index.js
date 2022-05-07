@@ -17,7 +17,13 @@ class Sections extends React.Component {
     height: window.innerHeight - 70,
     mapping: {},
     numVarients: 0,
-    options: [], //localStorage.getItem('options') !== null ? this.updateCounter(JSON.parse(localStorage.getItem('options')), this.counter) : []
+    options:
+      /*[],*/ localStorage.getItem("options") !== null
+        ? this.updateCounter(
+            JSON.parse(localStorage.getItem("options")),
+            this.counter
+          )
+        : [],
   };
 
   updateOptions(options) {

@@ -29,7 +29,14 @@ function fromJson2SystemColor(option, newOption, colors) {
   newOption.items = [];
   if (option.includeColor !== undefined) {
     option.includeColor.forEach((color) => {
-      newOption.items.push({ id: colors[color].id, name: colors[color].name });
+      if (!(color in colors)) {
+        newOption.items.push({ id: color, name: color });
+      } else {
+        newOption.items.push({
+          id: colors[color].id,
+          name: colors[color].name,
+        });
+      }
     });
     newOption.colorInclusion = "include";
 
@@ -425,13 +432,15 @@ export function createJsonFile(state, columns) {
   state.options.forEach((option) => {
     if (option.type === "connect") {
       option.from.forEach((fromItem) => {
+        console.log(fromItem, newOptions);
         let selectedOpt = newOptions.find((item) => item.id === fromItem.id);
         if (selectedOpt === undefined) {
           selectedOpt = stl.models.find((item) => item.id === fromItem.id);
         }
+        console.log(selectedOpt);
         let connect = [];
         option.to.forEach((fOpt) => {
-          connect.push(fOpt.id);
+          connect.push({ id: fOpt.id, selected: fromItem.selected });
         });
         if (selectedOpt) selectedOpt.connect = connect;
       });

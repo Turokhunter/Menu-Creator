@@ -80,7 +80,6 @@ class PriceSetVis extends React.Component {
     var idx = 0;
     var groupMap = {};
     for (const [key] of Object.entries(this.props.mapping)) {
-      console.log(key);
       if (!(grouping[idx] in groupMap)) {
         //doesn't exist
         var title = "";
