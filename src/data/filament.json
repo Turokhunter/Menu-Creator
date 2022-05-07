@@ -1,184 +1,229 @@
 {
   "filament": [
     {
-      "id": "pp-black",
-      "color": "#252724",
-      "name": "Proto-Pasta Black",
-      "tier": "Standard",
-      "src": "pp-black.jpg",
-      "zoom": "pp-black-zoom.png",
-      "opacity": 1
+       "id": "pp-black",
+       "color": "#252724",
+       "name": "Black",
+       "tier": "Standard",
+       "src": "pp-black.jpg",
+       "zoom": "pp-black-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-galacticblack",
-      "color": "#4F4C46",
-      "name": "Proto-Pasta Galactic Black",
-      "tier": "Premium",
-      "src": "pp-galacticblack.png",
-      "zoom": "pp-galacticblack-zoom.png",
-      "opacity": 1
+       "id": "pp-galacticblack",
+       "color": "#4F4C46",
+       "name": "Galactic Black",
+       "tier": "Premium",
+       "src": "pp-galacticblack.jpg",
+       "zoom": "pp-galacticblack-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-silver",
-      "color": "#B5B7B1",
-      "name": "Proto-Pasta Silver",
-      "tier": "Premium",
-      "src": "pp-silver.jpg",
-      "zoom": "pp-silver-zoom.png",
-      "opacity": 1
+       "id": "pp-silver",
+       "color": "#B5B7B1",
+       "name": "Silver",
+       "tier": "Premium",
+       "src": "pp-silver.jpg",
+       "zoom": "pp-silver-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-white",
-      "color": "#E6E5DE",
-      "name": "Proto-Pasta White",
-      "tier": "Standard",
-      "src": "pp-white.jpg",
-      "zoom": "pp-white-zoom.png",
-      "opacity": 1
+       "id": "pp-clear",
+       "color": "#fafafa",
+       "name": "Translucent Ice",
+       "tier": "Premium",
+       "src": "pp-clear.jpg",
+       "zoom": "pp-clear-zoom.png",
+       "opacity": 0.85
     },
     {
-      "id": "atomic-clear",
-      "color": "#fafafa",
-      "name": "Atomic Clear",
-      "tier": "Premium",
-      "src": "atomic-clear.jpg",
-      "zoom": "atomic-clear-zoom.png",
-      "opacity": 1
+       "id": "pp-white",
+       "color": "#E6E5DE",
+       "name": "White",
+       "tier": "Standard",
+       "src": "pp-white.jpg",
+       "zoom": "pp-white-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-red",
-      "color": "#EF1021",
-      "name": "Proto-Pasta Red",
-      "tier": "Premium",
-      "src": "pp-red.jpg",
-      "zoom": "pp-red-zoom.png",
-      "opacity": 1
+       "id": "pp-red",
+       "color": "#EF1021",
+       "name": "Red",
+       "tier": "Premium",
+       "src": "pp-red.jpg",
+       "zoom": "pp-red-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-orange",
-      "color": "#FF7320",
-      "name": "Proto-Pasta Orange",
-      "tier": "Premium",
-      "src": "pp-orange.jpg",
-      "zoom": "pp-orange-zoom.png",
-      "opacity": 1
+       "id": "pp-metallicred",
+       "color": "#932A23",
+       "name": "Metallic Red",
+       "tier": "Premium",
+       "src": "pp-metallicred.jpg",
+       "zoom": "pp-metallicred-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "hb-yellow",
-      "color": "#FDE506",
-      "name": "HatchBox Yellow",
-      "tier": "Standard",
-      "src": "hatchbox-yellow.jpg",
-      "zoom": "hatchbox-yellow-zoom.png",
-      "opacity": 1
+       "id": "pp-translucentred",
+       "color": "#A0011E",
+       "name": "Translucent Red",
+       "tier": "Premium",
+       "src": "pp-translucentred.jpg",
+       "zoom": "pp-translucentred-zoom.png",
+       "opacity": 0.9
     },
     {
-      "id": "hb-gold",
-      "color": "#E8A932",
-      "name": "HatchBox Gold",
-      "tier": "Standard",
-      "src": "hatchbox-gold.jpg",
-      "zoom": "hatchbox-gold-zoom.png",
-      "opacity": 1
+       "id": "pru-mysticbrown",
+       "color": "#592F23",
+       "name": "Mystic Brown",
+       "tier": "Ultra Premium",
+       "src": "prusa-mysticbrown.jpg",
+       "zoom": "prusa-mysticbrown-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pru-mysticbrown",
-      "color": "#592F23",
-      "name": "Prusa Mystic Brown",
-      "tier": "Ultra Premium",
-      "src": "prusa-mysticbrown.jpg",
-      "zoom": "prusa-mysticbrown-zoom.png",
-      "opacity": 1
+       "id": "pp-orange",
+       "color": "#FF7320",
+       "name": "Orange",
+       "tier": "Premium",
+       "src": "pp-orange.jpg",
+       "zoom": "pp-orange-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "atm-neongreen",
-      "color": "#53F04D",
-      "name": "Atomic Trans Neon Green",
-      "tier": "Premium",
-      "src": "atomic-transneongreen.jpg",
-      "zoom": "atomic-transneongreen-zoom.png",
-      "opacity": 0.95
+       "id": "pp-metallictangerine",
+       "color": "#F07538",
+       "name": "Metallic Tangerine",
+       "tier": "Premium",
+       "src": "pp-metallictangerine.jpg",
+       "zoom": "pp-metallictangerine-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "hb-green",
-      "color": "#0FC069",
-      "name": "HatchBox Green",
-      "tier": "Standard",
-      "src": "hatchbox-green.jpg",
-      "zoom": "hatchbox-green-zoom.png",
-      "opacity": 1
+       "id": "pp-gold",
+       "color": "#F1B627",
+       "name": "Gold",
+       "tier": "Standard",
+       "src": "pp-gold.jpg",
+       "zoom": "pp-gold-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pru-opalgreen",
-      "color": "#085C4E",
-      "name": "Prusa Opal Green",
-      "tier": "Premium",
-      "src": "prusa-opalgreen.jpg",
-      "zoom": "prusa-opalgreen-zoom.png",
-      "opacity": 1
+       "id": "hb-yellow",
+       "color": "#FDE506",
+       "name": "Yellow",
+       "tier": "Standard",
+       "src": "hatchbox-yellow.jpg",
+       "zoom": "hatchbox-yellow-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pru-gentlemengrey",
-      "color": "#2D4C4D",
-      "name": "Prusa Gentlemen Grey",
-      "tier": "Premium",
-      "src": "prusa-gentlemensgrey.jpg",
-      "zoom": "prusa-gentlemansgrey-zoom.png",
-      "opacity": 1
+       "id": "atm-neongreen",
+       "color": "#53F04D",
+       "name": "Translucent Neon Green",
+       "tier": "Premium",
+       "src": "atomic-transneongreen.jpg",
+       "zoom": "atomic-transneongreen-zoom.png",
+       "opacity": 0.95
     },
     {
-      "id": "pp-blue",
-      "color": "#008CD6",
-      "name": "Proto-Pasta Blue",
-      "tier": "Premium",
-      "src": "pp-blue.jpg",
-      "zoom": "pp-blue-zoom.png",
-      "opacity": 1
+       "id": "hb-green",
+       "color": "#0FC069",
+       "name": "Green",
+       "tier": "Standard",
+       "src": "hatchbox-green.jpg",
+       "zoom": "hatchbox-green-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "hb-blue",
-      "color": "#011CAE",
-      "name": "HatchBox Blue",
-      "tier": "Standard",
-      "src": "hatchbox-blue.jpg",
-      "zoom": "hatchbox-blue-zoom.png",
-      "opacity": 1
+       "id": "pp-metallicgreen",
+       "color": "#188270",
+       "name": "Metallic Green",
+       "tier": "Standard",
+       "src": "pp-metallicgreen.jpg",
+       "zoom": "pp-metallicgreen-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pru-galaxypurple",
-      "color": "#412B7C",
-      "name": "Prusa Galaxy Purple",
-      "tier": "Premium",
-      "src": "prusa-galaxypurple.jpg",
-      "zoom": "prusa-galaxyspurple-zoom.png",
-      "opacity": 1
+       "id": "pp-mermaidstale",
+       "color": "#037AAA",
+       "name": "Mermaids Tale",
+       "tier": "Premium",
+       "src": "pp-mermaidstale.jpg",
+       "zoom": "pp-mermaidstale-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pp-protonpurple",
-      "color": "#964861",
-      "name": "Proto-Pasta Proton Purple",
-      "tier": "Ultra Premium",
-      "src": "pp-protonpurple.jpg",
-      "zoom": "pp-protonpurple-zoom.png",
-      "opacity": 1
+       "id": "pp-translucentteal",
+       "color": "#06B7D2",
+       "name": "Translucent Teal",
+       "tier": "Standard",
+       "src": "pp-translucentteal.jpg",
+       "zoom": "pp-translucentteal-zoom.png",
+       "opacity": 0.95
     },
     {
-      "id": "hb-pink",
-      "color": "#FF7478",
-      "name": "HatchBox Pink",
-      "tier": "Standard",
-      "src": "hatchbox-pink.jpg",
-      "zoom": "hatchbox-pink-zoom.png",
-      "opacity": 1
+       "id": "pp-oodblue",
+       "color": "#008CD6",
+       "name": "OOD Blue",
+       "tier": "Premium",
+       "src": "pp-oodblue.jpg",
+       "zoom": "pp-oodblue-zoom.png",
+       "opacity": 1
     },
     {
-      "id": "pru-mspink",
-      "color": "#D54F7E",
-      "name": "Prusa Ms Pink",
-      "tier": "Premium",
-      "src": "prusa-mspink.jpg",
-      "zoom": "prusa-mspink-zoom.png",
-      "opacity": 1
+       "id": "pp-darkblue",
+       "color": "#014EC8",
+       "name": "Dark Blue",
+       "tier": "Standard",
+       "src": "pp-darkblue.jpg",
+       "zoom": "pp-darkblue-zoom.png",
+       "opacity": 1
+    },
+    {
+       "id": "pru-gentlemengrey",
+       "color": "#2D4C4D",
+       "name": "Gentlemen Grey",
+       "tier": "Premium",
+       "src": "prusa-gentlemensgrey.jpg",
+       "zoom": "prusa-gentlemansgrey-zoom.png",
+       "opacity": 1
+    },
+    {
+       "id": "pp-galacticpurple",
+       "color": "#524879",
+       "name": "Galactic Purple",
+       "tier": "Premium",
+       "src": "pp-galacticpurple.jpg",
+       "zoom": "pp-galacticpurple-zoom.png",
+       "opacity": 1
+    },
+    {
+       "id": "pp-protonpurple",
+       "color": "#964861",
+       "name": "Proton Purple",
+       "tier": "Ultra Premium",
+       "src": "pp-protonpurple.jpg",
+       "zoom": "pp-protonpurple-zoom.png",
+       "opacity": 1
+    },
+    {
+       "id": "pp-translucentpink",
+       "color": "#F5796D",
+       "name": "Translucent Pink",
+       "tier": "Premium",
+       "src": "pp-translucentpink.jpg",
+       "zoom": "pp-translucentpink-zoom.png",
+       "opacity": 0.95
+    },
+    {
+       "id": "hb-pink",
+       "color": "#FF7478",
+       "name": "Pink",
+       "tier": "Standard",
+       "src": "hatchbox-pink.jpg",
+       "zoom": "hatchbox-pink-zoom.png",
+       "opacity": 1
     }
-  ]
+ ]
 }
