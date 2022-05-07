@@ -209,6 +209,8 @@ const generatePresetOptions = (options, optionSelected) => {
 const getName = (optionMap, option) => {
   if (option.groupName !== undefined) {
     return option.groupName;
+  } else if (!(option.id in optionMap)) {
+    return undefined;
   } else if (optionMap[option.id].name === undefined) {
     return optionMap[option.id].section;
   } else {

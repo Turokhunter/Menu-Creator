@@ -419,7 +419,7 @@ class Sections extends React.Component {
     } else {
       options[idx].modelSection.models[modelId][name] = value;
     }
-    console.log(options[idx].modelSection.models[modelId]);
+    // console.log(options[idx].modelSection.models[modelId]);
     this.updateOptions(options);
   };
 
